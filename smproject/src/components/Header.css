@@ -1,0 +1,13 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-left: 20px;
+}
+
+.user_icon{
+    size: 3px;
+    border-radius: 4px;
+    width: 10%;
+    height:10%
+}
