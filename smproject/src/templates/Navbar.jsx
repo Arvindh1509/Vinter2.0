@@ -1,10 +1,9 @@
-import { AppBar, IconButton, Menu, Toolbar, Typography, Button, Box } from '@mui/material'
-import React, { useReducer, useState } from 'react'
+import { IconButton, Toolbar, Typography, Button, Box } from '@mui/material'
+import React, {  useState } from 'react'
 import FlexBetween from './FlexBetween'
-import SettingsIcon from '@mui/icons-material/Settings';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useStateValue } from '../StateProvider';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Navbar({isSidebarOpen, setSidebarOpen }) {
   const [anchorEl,setAnchorEl]=useState(null);
@@ -35,16 +34,12 @@ function Navbar({isSidebarOpen, setSidebarOpen }) {
                 </IconButton>
                 <Typography fontWeight={"bold"} fontSize={"0.9rem"}
                   sx={{color: "White", fontSize:"50px", marginLeft:'25px'}}>
-                    Vinterbash 
+                    VINTERBASH
                   </Typography>
             </FlexBetween>
 
             {/* Right Side */}
             <FlexBetween gap="1.5rem">
-           <IconButton>
-            <SettingsIcon sx={{ fontSize: "25px",color:'white' }} />
-          </IconButton>
-
           <FlexBetween>
           <Button onClick={handleClick} sx={
             {
@@ -70,7 +65,7 @@ function Navbar({isSidebarOpen, setSidebarOpen }) {
 
                   {/* <ArrowDropDownOutlined sx={{color:'white', fontSize:'25px'}}/> */}
           </Button>
-          <Button onClick={handleClose} sx={{color:'white', backgroundColor:'grey'}}>Log Out</Button>
+          <Button onClick={handleClose} sx={{color:'black', backgroundColor:'white', borderRadius:'10px'}}>Log Out</Button>
         </FlexBetween>
 
       </FlexBetween>

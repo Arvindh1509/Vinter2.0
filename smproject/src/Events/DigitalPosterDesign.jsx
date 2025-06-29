@@ -6,6 +6,7 @@ import Three_Member_Team from '../components/Three_Member_Team';
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
 import One_Member_Event from '../components/One_Member_Event';
+import { Navigate } from 'react-router-dom';
 
 function DigitalPosterDesign() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
@@ -26,6 +27,7 @@ function DigitalPosterDesign() {
   }, [schoolName, activeEvent]);
 
   return (
+    schoolName?
     <div className='ThreePEvent'>
       {Array.from({ length: 3 - registeredTeams.length }).map((_, i) => (
     <One_Member_Event
@@ -48,6 +50,7 @@ function DigitalPosterDesign() {
     />
   ))}
     </div>
+    :<Navigate to={'/signIn'} replace={true}/>
   );
 }
 

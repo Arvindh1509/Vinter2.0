@@ -28,7 +28,7 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
   const [active, setactive] = useState("");
   const [eventsOpen, setEventsOpen] = useState(false);
   const navigate = useNavigate();
-  const[{schoolName,events,activeEvent,activeEventId},dispatch]=useStateValue();
+  const[{events,activeEvent,activeEventId},dispatch]=useStateValue();
   const eventItems = events;
 
   useEffect(() => {
@@ -135,7 +135,9 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
             <Box m="1.5rem 2rem 2rem 2rem">
               <FlexBetween>
                 <Box display="flex" alignItems="center" flexDirection="column" gap="0.5rem">
-                  <img src={logo} alt="logo" width="120px" />
+                  <img src={logo} alt="logo" width="120px" onClick={() => {
+            navigate(`/dashboard`)}
+                  }/>
                 </Box>
                 <IconButton onClick={() => setSidebarOpen(!isSidebarOpen)}>
                   <ChevronLeftIcon />

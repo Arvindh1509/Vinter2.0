@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Box } from '@mui/material'
 import axios from '../axios';
 import './Three_Member_Team.css'
 

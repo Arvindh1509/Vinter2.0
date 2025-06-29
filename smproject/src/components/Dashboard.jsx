@@ -1,11 +1,10 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './Header';
-import Layout from '../templates/Layout';
 import { useStateValue } from '../StateProvider';
 import { Box } from '@mui/material';
 import Statbox from '../templates/Statbox';
 import FlexBetween from '../templates/FlexBetween';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import axios from '../axios';
 
 function Dashboard() {
@@ -37,7 +36,7 @@ function Dashboard() {
       <Header />
     </FlexBetween>
     <Box mt="20px" display={"flex"} gap="20px" marginLeft={"22%"}   >
-      <Statbox title={"Total Events"} value={totalEvents}/>
+      <Statbox title={"Total Events"} value={17}/>
       <Statbox title={"Registered Events"} value={fullReg}/>
       <Statbox title={"Yet To Register"} value={ToRegEvents}/> 
     </Box> 

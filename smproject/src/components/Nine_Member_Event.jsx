@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Box } from '@mui/material'
 import axios from '../axios';
 import './Three_Member_Team.css'
 
@@ -38,7 +37,7 @@ function Nine_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamI
         p8: { participantId: participantId8, participantName: p8 },
         p9: { participantId: participantId9, participantName: p9 },
         };
-      const participants=Object.values(participantsObj);
+      const participants=Object.values(participantObj);
 
       axios.post('/vinterbash/register', {
         participants,

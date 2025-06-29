@@ -5,6 +5,7 @@ import './Triquizzard.css'
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
 import Two_Member_Event from '../components/Two_Member_Event';
+import { Navigate } from 'react-router-dom';
 
 function Coding() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
@@ -25,6 +26,7 @@ function Coding() {
   }, [schoolName, activeEvent]);
 
   return (
+    schoolName?
     <div className='ThreePEvent'>
       {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
     <Two_Member_Event
@@ -47,6 +49,7 @@ function Coding() {
     />
   ))}
     </div>
+    :<Navigate to={'/signIn'} replace={true}/>
   );
 }
 

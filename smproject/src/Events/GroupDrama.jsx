@@ -5,6 +5,7 @@ import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
 import Eight_Member_Team from '../components/Eight_Member_Event';
 import Six_Member_Team from '../components/Six_Member_Event';
+import { Navigate } from 'react-router-dom';
 
 function GroupDrama() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
@@ -25,6 +26,7 @@ function GroupDrama() {
   }, [schoolName, activeEvent]);
 
   return (
+    schoolName?
     <div className='ThreePEvent'>
   {/* Render all registered teams */}
 
@@ -48,12 +50,9 @@ function GroupDrama() {
       schoolId={schoolId}
       teamIndex={index + 1}
     />
-  ))}
-
-  {/* Render up to 4 total team slots */}
-  
+  ))}  
 </div>
-
+:<Navigate to={'/signIn'} replace={true}/>
   );
 }
 

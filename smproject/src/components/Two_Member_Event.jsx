@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Box } from '@mui/material'
 import axios from '../axios';
 import './Three_Member_Team.css'
 import { useStateValue } from '../StateProvider';
@@ -7,7 +6,7 @@ import { useStateValue } from '../StateProvider';
 function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamIndex }) {
   const [p1, setP1] = useState('');
   const [p2, setP2] = useState('');
-  const[{schoolName},dispatch]=useStateValue();
+  const[{schoolName}]=useStateValue();
 
   function handleEvent(e) {
     e.preventDefault();

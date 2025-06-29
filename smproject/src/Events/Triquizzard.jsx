@@ -5,6 +5,7 @@ import './Triquizzard.css'
 import Three_Member_Team from '../components/Three_Member_Team';
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
+import { Navigate } from 'react-router-dom';
 
 function Triquizzard() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
@@ -25,8 +26,8 @@ function Triquizzard() {
   }, [schoolName, activeEvent]);
 
   return (
+    schoolName?
     <div className='ThreePEvent'>
-  {/* Render all registered teams */}
 
   {Array.from({ length: 3 - registeredTeams.length }).map((_, i) => (
     <Three_Member_Team
@@ -48,11 +49,8 @@ function Triquizzard() {
       teamIndex={index + 1}
     />
   ))}
-
-  {/* Render up to 4 total team slots */}
-  
 </div>
-
+:<Navigate to={'/signIn'} replace={true}/>
   );
 }
 

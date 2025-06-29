@@ -6,6 +6,7 @@ import { useStateValue } from '../StateProvider';
 import Two_Member_Event from '../components/Two_Member_Event'
 import RegisteredTeam from '../components/RegisteredTeam';
 import One_Member_Event from '../components/One_Member_Event';
+import { Navigate } from 'react-router-dom';
 
 function FIFA() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
@@ -26,6 +27,7 @@ function FIFA() {
   }, [schoolName, activeEvent]);
 
   return (
+    schoolName?
     <div className='ThreePEvent'>
       {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
     <One_Member_Event
@@ -48,6 +50,7 @@ function FIFA() {
     />
   ))}
     </div>
+    :<Navigate to={'/signIn'} replace={true}/>
   );
 }
 

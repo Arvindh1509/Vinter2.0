@@ -4,6 +4,7 @@ import './Triquizzard.css'
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
 import Eight_Member_Team from '../components/Eight_Member_Event';
+import { Navigate } from 'react-router-dom';
 
 function WesternDance() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
@@ -24,9 +25,8 @@ function WesternDance() {
   }, [schoolName, activeEvent]);
 
   return (
+    schoolName?
     <div className='ThreePEvent'>
-  {/* Render all registered teams */}
-
   {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
     <Eight_Member_Team
       key={`new-team-${i + 1}`}
@@ -49,11 +49,8 @@ function WesternDance() {
       maxMember={8}
     />
   ))}
-
-  {/* Render up to 4 total team slots */}
-  
 </div>
-
+:<Navigate to={'/signIn'} replace={true}/>
   );
 }
 

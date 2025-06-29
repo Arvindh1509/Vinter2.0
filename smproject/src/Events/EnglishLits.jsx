@@ -6,6 +6,7 @@ import './Triquizzard.css'
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
 import Four_Member_Event from '../components/Four_Member_Event';
+import { Navigate } from 'react-router-dom';
 
 function EnglishLits() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
@@ -26,6 +27,7 @@ function EnglishLits() {
   }, [schoolName, activeEvent]);
 
   return (
+    schoolName?
     <div className='ThreePEvent'>
       {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
     <Four_Member_Event
@@ -48,6 +50,7 @@ function EnglishLits() {
     />
   ))}
     </div>
+    :<Navigate to={'/signIn'} replace={true}/>
   );
 }
 
