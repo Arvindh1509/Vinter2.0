@@ -5,8 +5,9 @@ import './Triquizzard.css'
 import Three_Member_Team from '../components/Three_Member_Team';
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
+import One_Member_Event from '../components/One_Member_Event';
 
-function Triquizzard() {
+function Art() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
@@ -26,31 +27,39 @@ function Triquizzard() {
 
   return (
     <div className='ThreePEvent'>
-  {/* Render all registered teams */}
-  {registeredTeams.map((team, index) => (
-    <RegisteredTeam
-      key={team.teamId}
-      team={team}
-      eventId={eventId}
-      schoolId={schoolId}
-      teamIndex={index + 1}
-    />
-  ))}
-
-  {/* Render up to 4 total team slots */}
-  {Array.from({ length: 4 - registeredTeams.length }).map((_, i) => (
-    <Three_Member_Team
-      key={`new-team-${i + 1}`}
-      eventId={eventId}
-      eventName={activeEvent}
-      registeredTeams={registeredTeams}
-      schoolId={schoolId}
-      teamIndex={registeredTeams.length + i + 1}
-    />
-  ))}
-</div>
-
+      {registeredTeams.length === 1 ? (
+        <Box>
+          {registeredTeams.map((team, index) => (
+            <div key={team.teamId}>
+              <RegisteredTeam
+                eventId={eventId}
+                team={team}
+                schoolId={schoolId}
+                teamIndex={index + 1}
+              />
+            </div>
+          ))}
+        </Box>
+      ) : (
+        <div>
+          <One_Member_Event
+            eventId={activeEventId}
+            eventName={activeEvent}
+            registeredTeams={registeredTeams}
+            schoolId={schoolId}
+            teamIndex={1}
+          />
+          <One_Member_Event
+            eventId={activeEventId}
+            eventName={activeEvent}
+            registeredTeams={registeredTeams}
+            schoolId={schoolId}
+            teamIndex={2}
+          />
+        </div>
+      )}
+    </div>
   );
 }
 
-export default Triquizzard;
+export default Art;

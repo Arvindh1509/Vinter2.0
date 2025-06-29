@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
 import axios from '../axios';
 import './Triquizzard.css'
+import Three_Member_Team from '../components/Three_Member_Team';
 import { useStateValue } from '../StateProvider';
-import Two_Member_Event from '../components/Two_Member_Event'
 import RegisteredTeam from '../components/RegisteredTeam';
 import One_Member_Event from '../components/One_Member_Event';
 
-function FIFA() {
+function TamilLits() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
@@ -30,13 +30,14 @@ function FIFA() {
       {registeredTeams.length === 1 ? (
         <Box>
           {registeredTeams.map((team, index) => (
-            <RegisteredTeam
-              key={team.teamId}
-              team={team}
-              eventId={eventId}
-              schoolId={schoolId}
-              teamIndex={index + 1}
-            />
+            <div key={team.teamId}>
+              <RegisteredTeam
+                eventId={eventId}
+                team={team}
+                schoolId={schoolId}
+                teamIndex={index + 1}
+              />
+            </div>
           ))}
         </Box>
       ) : (
@@ -56,10 +57,9 @@ function FIFA() {
             teamIndex={2}
           />
         </div>
-        
       )}
     </div>
   );
 }
 
-export default FIFA;
+export default TamilLits;

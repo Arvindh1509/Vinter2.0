@@ -40,24 +40,48 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
   };
 
   const renderNavItem = (text,Id) => {    
-    const lcText = text=== 'Chordially Yours!'?'groupmusic':
-                           'Acoustic Nirvana'?'groupinst':
-                           'Nalla Otrainga da Reel-uh!'?'groupdrama':
-                           'Imitation Game'?'improv':
-                           'Unnai Kaanathu..!!'?'classicaldance':
-                           'Drop the Beat'?'westerndance':
-                           'Ar(T)elic!'?'art':
-                           'DOOMSDAY: The Final Frame'?'poster':
-                           'Koodu Vittu Koodu'?'tamillits':
-                           `Time Traveller's Theatre`?'elits':
-                           'The Triquizzard Tournament 5.O'?'triquizzard':
-                           'Ctrl + Alt + Decrypt'?'code':
-                           'No Time To Solve'?'cube':
-                           'Vinter Bowl-Out: Turf Cricket'?'cricket':
-                           'Vinter Kick-Off: 5-A Side Football'?'football':
-                           'Coronation: Mr. & Ms. Vinterbash'?'title':
-                           `Vinter Goal-Rush: FIFA '25`?'fifa':
-    text.toLowerCase();
+    console.log("EventName:-->",text);
+
+    let lcText=''
+    
+   if (text === 'Chordially Yours!') {
+  lcText = 'groupmusic';
+} else if (text === 'Acoustic Nirvana') {
+  lcText = 'groupinst';
+} else if (text === 'Nalla Otrainga da Reel-uh!') {
+  lcText = 'groupdrama';
+} else if (text === 'Imitation Game') {
+  lcText = 'improv';
+} else if (text === 'Unnai Kaanathu..!!') {
+  lcText = 'classicaldance';
+} else if (text === 'Drop the Beat') {
+  lcText = 'westerndance';
+} else if (text === 'Ar(T)elic!') {
+  lcText = 'art';
+} else if (text === 'DOOMSDAY: The Final Frame') {
+  lcText = 'poster';
+} else if (text === 'Koodu Vittu Koodu') {
+  lcText = 'tamillits';
+} else if (text === "Time Traveller's Theatre") {
+  lcText = 'elits';
+} else if (text === 'The Triquizzard Tournament 5.O') {
+  lcText = 'triquizzard';
+} else if (text === 'Ctrl + Alt + Decrypt') {
+  lcText = 'code';
+} else if (text === 'No Time To Solve') {
+  lcText = 'cube';
+} else if (text === 'Vinter Bowl-Out: Turf Cricket') {
+  lcText = 'cricket';
+} else if (text === 'Vinter Kick-Off: 5-A Side Football') {
+  lcText = 'football';
+} else if (text === 'Coronation: Mr. & Ms. Vinterbash') {
+  lcText = 'title';
+} else if (text === "Vinter Goal-Rush: FIFA '25") {
+  lcText = 'fifa';
+} else {
+  lcText = text.toLowerCase(); // default fallback
+}
+    console.log("lcText-->",lcText);
     const isActive = active === lcText;
        
 
