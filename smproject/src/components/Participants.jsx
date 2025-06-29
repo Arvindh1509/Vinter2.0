@@ -4,6 +4,7 @@ import { useStateValue } from '../StateProvider';
 import axios from '../axios';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import AnimatedPage from '../templates/AnimatedPage';
 
 function Participants() {
 
@@ -19,6 +20,7 @@ axios.post('/vinterbash/eventParticipantMap',{schoolName})
 
   return (
     schoolName?
+    <AnimatedPage>
     <div className="school-container">
       <h2>{schoolName} - Students</h2>
       <div className="student-grid">
@@ -29,6 +31,7 @@ axios.post('/vinterbash/eventParticipantMap',{schoolName})
         ))}
       </div>
     </div>
+    </AnimatedPage>
     :<Navigate to={'/signIn'} replace={true}/>
   );
 }

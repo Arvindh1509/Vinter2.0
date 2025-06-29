@@ -6,6 +6,7 @@ import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
 import Nine_Member_Team from '../components/Nine_Member_Event';
 import { Navigate } from 'react-router-dom';
+import AnimatedPage from '../templates/AnimatedPage';
 
 function TurfCricket() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
@@ -27,6 +28,7 @@ function TurfCricket() {
 
   return (
     schoolName?
+    <AnimatedPage>
     <div className='ThreePEvent'>
   {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
     <Nine_Member_Team
@@ -49,6 +51,7 @@ function TurfCricket() {
     />
   ))}
 </div>
+</AnimatedPage>
 :<Navigate to={'/signIn'} replace={true}/>
   );
 }

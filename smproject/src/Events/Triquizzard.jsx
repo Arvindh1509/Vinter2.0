@@ -6,6 +6,7 @@ import Three_Member_Team from '../components/Three_Member_Team';
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
 import { Navigate } from 'react-router-dom';
+import AnimatedPage from '../templates/AnimatedPage';
 
 function Triquizzard() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
@@ -27,6 +28,7 @@ function Triquizzard() {
 
   return (
     schoolName?
+    <AnimatedPage>
     <div className='ThreePEvent'>
 
   {Array.from({ length: 3 - registeredTeams.length }).map((_, i) => (
@@ -50,6 +52,7 @@ function Triquizzard() {
     />
   ))}
 </div>
+</AnimatedPage>
 :<Navigate to={'/signIn'} replace={true}/>
   );
 }

@@ -7,6 +7,7 @@ import Eight_Member_Team from '../components/Eight_Member_Event';
 import Six_Member_Team from '../components/Six_Member_Event';
 import Five_Member_Team from '../components/Five_Member_Event';
 import { Navigate } from 'react-router-dom';
+import AnimatedPage from '../templates/AnimatedPage';
 
 function GroupIntrument() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
@@ -28,6 +29,7 @@ function GroupIntrument() {
 
   return (
     schoolName?
+    <AnimatedPage>
     <div className='ThreePEvent'>
 
   {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
@@ -53,6 +55,7 @@ function GroupIntrument() {
   ))}
   
 </div>
+</AnimatedPage>
 :<Navigate to={'/signIn'} replace={true}/>
   );
 }

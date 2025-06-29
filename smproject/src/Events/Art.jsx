@@ -5,6 +5,7 @@ import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
 import One_Member_Event from '../components/One_Member_Event';
 import { Navigate } from 'react-router-dom';
+import AnimatedPage from '../templates/AnimatedPage';
 
 function Art() {
   const [{ schoolName, activeEvent, schoolId }, dispatch] = useStateValue();
@@ -26,6 +27,7 @@ function Art() {
 
   return (
     schoolName?
+    <AnimatedPage>
     <div className='ThreePEvent'>
       {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
     <One_Member_Event
@@ -48,6 +50,7 @@ function Art() {
     />
   ))}
     </div>
+    </AnimatedPage>
     :<Navigate to={'/signIn'} replace={true}/>
   );
 }

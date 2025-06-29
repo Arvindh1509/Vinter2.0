@@ -17,6 +17,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { useStateValue } from '../StateProvider';
+import AnimatedPage from './AnimatedPage';
 
 const navItems = [
   { text: "Dashboard" },
@@ -86,6 +87,7 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
        
 
     return (
+      <AnimatedPage>
       <ListItem key={text} disablePadding>
         <ListItemButton
           onClick={() => {
@@ -110,10 +112,12 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
           {isActive && <ChevronRightIcon sx={{ ml: "auto" }} />}
         </ListItemButton>
       </ListItem>
+      </AnimatedPage>
     );
   };
 
   return (
+    <AnimatedPage>
     <Box component="nav">
       {isSidebarOpen && (
         <Drawer
@@ -172,7 +176,9 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
         </Drawer>
       )}
     </Box>
+    </AnimatedPage>
   );
+  
 };
 
 export default Sidebar;

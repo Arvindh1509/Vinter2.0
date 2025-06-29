@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from '../axios';
 import './Three_Member_Team.css'
 import { useStateValue } from '../StateProvider';
+import AnimatedPage from '../templates/AnimatedPage';
 
 function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamIndex }) {
   const [p1, setP1] = useState('');
@@ -39,6 +40,7 @@ function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
   }
 
   return (
+    <AnimatedPage>
     <div className='login'>
       <div className='register_container'>
         <form>
@@ -54,6 +56,7 @@ function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
         </form>
       </div>
     </div>
+    </AnimatedPage>
   );
 }
 

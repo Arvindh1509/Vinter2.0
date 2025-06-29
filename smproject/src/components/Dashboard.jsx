@@ -6,6 +6,7 @@ import Statbox from '../templates/Statbox';
 import FlexBetween from '../templates/FlexBetween';
 import { Navigate } from 'react-router-dom';
 import axios from '../axios';
+import AnimatedPage from '../templates/AnimatedPage';
 
 function Dashboard() {
   const [{schoolId,schoolName}, dispatch] = useStateValue();
@@ -31,6 +32,8 @@ function Dashboard() {
 
   return (
     schoolName?
+    <AnimatedPage>
+    
     <div>
     <FlexBetween sx={{marginLeft:"20%"}} >
       <Header />
@@ -41,7 +44,9 @@ function Dashboard() {
       <Statbox title={"Yet To Register"} value={ToRegEvents}/> 
     </Box> 
     </div>
+    </AnimatedPage>
     :<Navigate to={'/signIn'} replace={true}/>
+    
   );
 }
 

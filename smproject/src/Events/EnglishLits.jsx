@@ -7,6 +7,7 @@ import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
 import Four_Member_Event from '../components/Four_Member_Event';
 import { Navigate } from 'react-router-dom';
+import AnimatedPage from '../templates/AnimatedPage';
 
 function EnglishLits() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
@@ -28,6 +29,7 @@ function EnglishLits() {
 
   return (
     schoolName?
+    <AnimatedPage>
     <div className='ThreePEvent'>
       {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
     <Four_Member_Event
@@ -50,6 +52,7 @@ function EnglishLits() {
     />
   ))}
     </div>
+    </AnimatedPage>
     :<Navigate to={'/signIn'} replace={true}/>
   );
 }

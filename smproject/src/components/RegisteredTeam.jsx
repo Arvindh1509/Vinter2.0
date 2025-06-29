@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import axios from '../axios';
 import './RegisteredTeam.css';
 import { useStateValue } from '../StateProvider';
+import AnimatedPage from '../templates/AnimatedPage';
 
 const RegisteredTeam = ({ eventId, team, schoolId, teamIndex, maxMember }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -76,6 +77,7 @@ const RegisteredTeam = ({ eventId, team, schoolId, teamIndex, maxMember }) => {
   };
 
   return (
+    <AnimatedPage>
     <Card sx={{ backgroundColor: '#D4AB68', borderRadius: '0.55rem', color: 'white', marginTop: '20px', mb: 3 }}>
       <CardContent>
         <Box sx={{ backgroundColor: 'white', borderRadius: '9px', width: 'fit-content', px: 2, py: 1, mb: 2, color: 'black' }}>
@@ -137,6 +139,7 @@ const RegisteredTeam = ({ eventId, team, schoolId, teamIndex, maxMember }) => {
         </Box>
       </CardContent>
     </Card>
+    </AnimatedPage>
   );
 };
 
