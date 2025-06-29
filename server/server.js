@@ -13,20 +13,232 @@ app.use(bodyParser.json()); // to parse JSON bodies
 
 // Dummy database (for testing)
 const schools = {
-  "Vageesha": {
+  "1": {
+    schoolName:"Vageesha",
     password: "123456",  // expected password
     events: ["FIFA Goal Rush", "Triquizzard","Code Rush", "Tech Talk"],
     eventsReg:["FIFA Goal Rush", "Triquizzard"],
     schoolId:1
   },
-  "KNMS": {
+  "2": {
+    schoolId:2,
+    schoolName:"KNMS",
     password: "abcdef",
-    eventsReg: ["Code Rush", "Tech Talk"],
-    events: ["FIFA Goal Rush", "Triquizzard","Code Rush", "Tech Talk"],
+    eventsReg: ["Chordially Yours!", "Acoustic Nirvana"],
+    events: [
+        {eventName:"Chordially Yours!",
+         eventId:"cu1"
+        },
+        {eventName:"Acoustic Nirvana",
+         eventId:"cu2"
+        },
+        {eventName:"Nalla Otrainga da Reel-uh!",
+         eventId:"cu3"
+        },
+        {eventName:"Imitation Game",
+         eventId:"cu4"
+        },
+        {eventName:"Unnai Kaanathu..!!",
+         eventId:"cu5"
+        },
+        {eventName:"Drop the Beat",
+         eventId:"cu6"
+        },
+        {eventName:"Ar(T)elic!",
+         eventId:"cu7"
+        },
+        {eventName:"DOOMSDAY: The Final Frame",
+         eventId:"cu8"
+        },
+        {eventName:"Koodu Vittu Koodu",
+         eventId:"cu9"
+        },
+        {eventName:"Time Traveller's Theatre",
+         eventId:"cu10"
+        },
+        {eventName:"The Triquizzard Tournament 5.O",
+         eventId:"cu11"
+        },
+        {eventName:"Ctrl + Alt + Decrypt",
+         eventId:"cu12"
+        },
+        {eventName:"No Time To Solve",
+         eventId:"cu13"
+        },
+        {eventName:"Vinter Bowl-Out: Turf Cricket",
+         eventId:"cu14"
+        },
+        {eventName:"Vinter Kick-Off: 5-A Side Football",
+         eventId:"cu15"
+        },
+        {eventName:"Coronation: Mr. & Ms. Vinterbash",
+         eventId:"cu16"
+        },
+        {
+         eventName:"Vinter Goal-Rush: FIFA '25",
+         eventId:"cu17"
+        }
+            ],
     fullyRegistered: 2,
     partiallyRegistered: 0,
     notRegistered: 13,
+    regTeams:[
+         {
+        eventId: "cu1",
+        eventName: "The Triquizzard Tournament 5.O",
+        teams: [
+            {
+                teamId: "101cu1t1",
+                teamName: "Santhanam cu1 t1",
+                participants: [
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Shrihari S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Arvindh S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "jayavanth S"
+                    }
+                ]
+            },{
+                teamId: "101cu1t1",
+                teamName: "Santhanam cu1 t1",
+                participants: [
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Shrihari S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Arvindh S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "jayavanth S"
+                    }
+                ]
+            }
+        ]
+    }
+    
+    ],
+participants:[
+    {
+        participantName: "Arun K",
+        eventName: "Chordially Yours!"
+    },
+    {
+        participantName: "Keerthana R",
+        eventName: "Chordially Yours!"
+    },
+    {
+        participantName: "Meera S",
+        eventName: "Chordially Yours!"
+    },
+    {
+        participantName: "Vijay A",
+        eventName: "Chordially Yours!"
+    },
+    {
+        participantName: "Sneha M",
+        eventName: "Chordially Yours!"
+    },
+    {
+        participantName: "Arun K",
+        eventName: "Chordially Yours!"
+    },
+    {
+        participantName: "Keerthana R",
+        eventName: "Chordially Yours!"
+    },
+    {
+        participantName: "Meera S",
+        eventName: "Chordially Yours!"
+    },
+    {
+        participantName: "Vijay A",
+        eventName: "Chordially Yours!"
+    },
+    {
+        participantName: "Sneha M",
+        eventName: "Chordially Yours!"
+    },
+    {
+        participantName: "Shrihari S",
+        eventName: "No time to Solve"
+    },
+    {
+        participantName: "Shrihari S",
+        eventName: "No time to Solve"
+    }
+]
+},
+"KNMS":{
     schoolId:2,
+    schoolName:"KNMS",
+    password: "abcdef",
+    eventsReg: ["Code Rush", "Tech Talk"],
+    events: [
+        {eventName:"Chordially Yours!",
+         eventId:"cu1"
+        },
+        {eventName:"Acoustic Nirvana",
+         eventId:"cu2"
+        },
+        {eventName:"Nalla Otrainga da Reel-uh!",
+         eventId:"cu3"
+        },
+        {eventName:"Imitation Game",
+         eventId:"cu4"
+        },
+        {eventName:"Unnai Kaanathu..!!",
+         eventId:"cu5"
+        },
+        {eventName:"Drop the Beat",
+         eventId:"cu6"
+        },
+        {eventName:"Ar(T)elic!",
+         eventId:"cu7"
+        },
+        {eventName:"DOOMSDAY: The Final Frame",
+         eventId:"cu8"
+        },
+        {eventName:"Koodu Vittu Koodu",
+         eventId:"cu9"
+        },
+        {eventName:"Time Traveller's Theatre",
+         eventId:"cu10"
+        },
+        {eventName:"The Triquizzard Tournament 5.O",
+         eventId:"cu11"
+        },
+        {eventName:"Ctrl + Alt + Decrypt",
+         eventId:"cu12"
+        },
+        {eventName:"No Time To Solve",
+         eventId:"cu13"
+        },
+        {eventName:"Vinter Bowl-Out: Turf Cricket",
+         eventId:"cu14"
+        },
+        {eventName:"Vinter Kick-Off: 5-A Side Football",
+         eventId:"cu15"
+        },
+        {eventName:"Coronation: Mr. & Ms. Vinterbash",
+         eventId:"cu16"
+        },
+        {
+         eventName:"Vinter Goal-Rush: FIFA '25",
+         eventId:"cu17"
+        }
+            ],
+    fullyRegistered: 2,
+    partiallyRegistered: 0,
+    notRegistered: 13,
     regTeams:[
          {
         eventId: "cu1",
@@ -155,9 +367,12 @@ catch(error){
 }
 });
 
-app.post('/vinterbash/add_team',async(req,res)=>{
+app.post('/vinterbash/register',async(req,res)=>{
     try {
-        const { teamName,p1,p2,p3,activeEvent,schoolId } = req.body;
+        const { participants,eventId,
+        eventName,
+        schoolId,
+        teamId} = req.body;
         console.log(req.body);
         
    // Success
@@ -168,7 +383,7 @@ app.post('/vinterbash/add_team',async(req,res)=>{
     }
 })
 
-app.post('/vinterbash/eventTeams',async(req,res)=>{
+app.post('/vinterbash/events',async(req,res)=>{
     try {
         const { schoolName, activeEvent } = req.body;
 
@@ -215,8 +430,9 @@ app.post('/vinterbash/updateTeamParticipants',async(req,res)=>{
 
 app.post('/vinterbash/registeredEvents',async(req,res)=>{
     try {
-        const {schoolName}=req.body;
-        const school=schools[schoolName];
+        const {schoolId}=req.body;
+        console.log(schoolId);
+        const school=schools[schoolId];
         return res.json({
              fullyRegistered: school.fullyRegistered,
              partiallyRegistered: school.partiallyRegistered,

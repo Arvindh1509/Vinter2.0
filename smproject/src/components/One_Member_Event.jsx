@@ -2,35 +2,29 @@ import React, { useState } from 'react'
 import { Box } from '@mui/material'
 import axios from '../axios';
 import './Three_Member_Team.css'
+import { useStateValue } from '../StateProvider';
 
-function Three_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamIndex }) {
+function One_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamIndex }) {
   const [p1, setP1] = useState('');
-  const [p2, setP2] = useState('');
-  const [p3, setP3] = useState('');
+  const[{schoolName},dispatch]=useStateValue();
 
   function handleEvent(e) {
     e.preventDefault();
-    if (p1 && p2 && p3) {
+    if (p1 ) {
       const teamId = `${schoolId}${eventId}t${teamIndex}`;
       const participantId1 = `${teamId}p1`;
-      const participantId2 = `${teamId}p2`;
-      const participantId3 = `${teamId}p3`;
 
       axios.post('/vinterbash/register', {
         participants:{
         p1: { participantId: participantId1, participantName: p1 },
-        p2: { participantId: participantId2, participantName: p2 },
-        p3: { participantId: participantId3, participantName: p3 },
         },
         eventId,
-        eventName,
         schoolId,
+        schoolName,
         teamId
       })
         .then(() => {
           setP1('');
-          setP2('');
-          setP3('');
           alert('Added Successfully');
         })
         .catch((error) => alert(error.response?.data || 'Error adding team'));
@@ -46,12 +40,6 @@ function Three_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
           <h5>Participant 1</h5>
           <input type='text' value={p1} onChange={(e) => setP1(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
 
-          <h5>Participant 2</h5>
-          <input type='text' value={p2} onChange={(e) => setP2(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
-
-          <h5>Participant 3</h5>
-          <input type='text' value={p3} onChange={(e) => setP3(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
-
           <button className='login_signin' type='submit' onClick={handleEvent}>
             Click to add the team
           </button>
@@ -61,4 +49,4 @@ function Three_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
   );
 }
 
-export default Three_Member_Team;
+export default One_Member_Event;

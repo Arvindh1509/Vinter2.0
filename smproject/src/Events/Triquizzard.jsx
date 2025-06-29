@@ -6,53 +6,78 @@ import Three_Member_Team from '../components/Three_Member_Team';
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
 
-function Triquizzard(){
+function Triquizzard() {
+  const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
+  const [registeredTeams, setRegisteredTeams] = useState([]);
+  const [eventId, setEventId] = useState();
 
-    const[{schoolName,activeEvent},dispatch]=useStateValue();
-    const [registeredTeams, setRegisteredTeams] = useState([]);
-    const[evntId,setEventId]=useState();
-useEffect(()=>{
-    axios.post(`/vinterbash/eventTeams`,{schoolName,activeEvent})
-    .then((response)=>{
-        console.log('InsideTriquizzard-->',response.data);
+  useEffect(() => {
+    axios
+      .post(`/vinterbash/events`, { schoolName, activeEvent })
+      .then((response) => {
+        console.log('InsideTriquizzard-->', response.data);
         setRegisteredTeams(response.data.teams);
         setEventId(response.data.eventId);
-               
-    })
-    .catch((error)=>{
-        console.log("Error fetching teams:",error);
-        
-    })
-},[schoolName,activeEvent]);
-console.log("length-->",registeredTeams.length);
-console.log("Event Id-->",evntId);
+      })
+      .catch((error) => {
+        console.log('Error fetching teams:', error);
+      });
+  }, [schoolName, activeEvent]);
 
-    return(
-        <div className='ThreePEvent'>
-        {registeredTeams.length === 2 ? (
-  <Box>
-    {registeredTeams.map((team) => (
-      <RegisteredTeam key={team.teamId} team={team} />
-    ))}
-  </Box>
-) : registeredTeams.length === 1 ? (
-  <Box>
-    {registeredTeams.map((team) => (
-      <div key={team.teamId}>
-        <RegisteredTeam eventId={evntId} team={team} />
-        <Three_Member_Team />
-      </div>
-    ))}
-  </Box>
-) : (
-  <div>
-    <Three_Member_Team />
-    <Three_Member_Team />
-  </div>
-)}
-        
+  return (
+    <div className='ThreePEvent'>
+      {registeredTeams.length === 2 ? (
+        <Box>
+          {registeredTeams.map((team, index) => (
+            <RegisteredTeam
+              key={team.teamId}
+              team={team}
+              eventId={eventId}
+              schoolId={schoolId}
+              teamIndex={index + 1}
+            />
+          ))}
+        </Box>
+      ) : registeredTeams.length === 1 ? (
+        <Box>
+          {registeredTeams.map((team, index) => (
+            <div key={team.teamId}>
+              <RegisteredTeam
+                eventId={eventId}
+                team={team}
+                schoolId={schoolId}
+                teamIndex={index + 1}
+              />
+              <Three_Member_Team
+                eventId={activeEventId}
+                eventName={activeEvent}
+                registeredTeams={registeredTeams}
+                schoolId={schoolId}
+                teamIndex={2}
+              />
+            </div>
+          ))}
+        </Box>
+      ) : (
+        <div>
+          <Three_Member_Team
+            eventId={activeEventId}
+            eventName={activeEvent}
+            registeredTeams={registeredTeams}
+            schoolId={schoolId}
+            teamIndex={1}
+          />
+          <Three_Member_Team
+            eventId={activeEventId}
+            eventName={activeEvent}
+            registeredTeams={registeredTeams}
+            schoolId={schoolId}
+            teamIndex={2}
+          />
         </div>
-    )
+      )}
+    </div>
+  );
 }
 
-export default Triquizzard
+export default Triquizzard;

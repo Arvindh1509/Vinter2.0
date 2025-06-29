@@ -28,7 +28,7 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
   const [active, setactive] = useState("");
   const [eventsOpen, setEventsOpen] = useState(false);
   const navigate = useNavigate();
-  const[{schoolName,events,activeEvent},dispatch]=useStateValue();
+  const[{schoolName,events,activeEvent,activeEventId},dispatch]=useStateValue();
   const eventItems = events;
 
   useEffect(() => {
@@ -39,8 +39,25 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
     setEventsOpen((prev) => !prev);
   };
 
-  const renderNavItem = (text) => {    
-    const lcText = text==='FIFA Goal Rush'?'fifa':text.toLowerCase();
+  const renderNavItem = (text,Id) => {    
+    const lcText = text=== 'Chordially Yours!'?'groupmusic':
+                           'Acoustic Nirvana'?'groupinst':
+                           'Nalla Otrainga da Reel-uh!'?'groupdrama':
+                           'Imitation Game'?'improv':
+                           'Unnai Kaanathu..!!'?'classicaldance':
+                           'Drop the Beat'?'westerndance':
+                           'Ar(T)elic!'?'art':
+                           'DOOMSDAY: The Final Frame'?'poster':
+                           'Koodu Vittu Koodu'?'tamillits':
+                           `Time Traveller's Theatre`?'elits':
+                           'The Triquizzard Tournament 5.O'?'triquizzard':
+                           'Ctrl + Alt + Decrypt'?'code':
+                           'No Time To Solve'?'cube':
+                           'Vinter Bowl-Out: Turf Cricket'?'cricket':
+                           'Vinter Kick-Off: 5-A Side Football'?'football':
+                           'Coronation: Mr. & Ms. Vinterbash'?'title':
+                           `Vinter Goal-Rush: FIFA '25`?'fifa':
+    text.toLowerCase();
     const isActive = active === lcText;
        
 
@@ -52,9 +69,10 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
             setactive(lcText);
             dispatch({
               type:'SidebarEvent',
-              activeEvent:text
+              activeEvent:text,
+              activeEventId:Id
                     })
-              console.log('ActiveEvent-->',activeEvent);
+              console.log('ActiveEvent-->',activeEvent,"ID-->",activeEventId);
           }}
           sx={{
             backgroundColor: isActive ? 'white' : 'transparent',
@@ -117,8 +135,8 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
                 <List component="div" disablePadding>
                   {eventItems.map(( text ) => (
                    
-                    <Box key={text} pl={4}>
-                      {renderNavItem(text)}
+                    <Box key={text.eventName} pl={4}>
+                      {renderNavItem(text.eventName,text.eventId)}
                     </Box>
                   ))}
                 </List>

@@ -9,14 +9,15 @@ import { Navigate } from 'react-router-dom';
 import axios from '../axios';
 
 function Dashboard() {
-  const [{schoolName}, dispatch] = useStateValue();
+  const [{schoolId,schoolName}, dispatch] = useStateValue();
   const[totalEvents,setTotalEvents]=useState();
   const[ToRegEvents,setToRegEvents]=useState();
   const[partiallyReg,setPartiallyRegistered]=useState();
   const[fullReg,setFullyReg]=useState();
 
     
-        axios.post('/vinterbash/registeredEvents', { schoolName })
+        axios.post('/vinterbash/registeredEvents', {schoolId})
+        //change to schoolId
         .then((response)=>{
             console.log('InsideDashboard--->',response.data);            
             setTotalEvents(17);

@@ -33,8 +33,7 @@ function SignIn() {
         // //    return <Navigate to='/' replace={true}/>;
          })
          .catch((error)=>alert(error.response.data));
-
-
+         
          
     }
     return (

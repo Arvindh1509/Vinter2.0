@@ -2,7 +2,8 @@ export const initialState={
 schoolName:"",
 events:[],
 schoolId:"",
-activeEvent:""
+activeEvent:"",
+activeEventId:""
 }
 
 function reducer(state,action) {
@@ -25,7 +26,8 @@ function reducer(state,action) {
         case 'SidebarEvent':
             return{
                 ...state,
-                activeEvent:action.activeEvent
+                activeEvent:action.activeEvent,
+                activeEventId:action.activeEventId
             }
     
         default:

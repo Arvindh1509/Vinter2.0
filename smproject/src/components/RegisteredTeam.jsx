@@ -1,34 +1,36 @@
-import {  Box, Button, Card, CardContent, Typography, TextField} from '@mui/material';
+import { Box, Button, Card, CardContent, Typography, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import axios from '../axios';
 import './RegisteredTeam.css';
 import { useStateValue } from '../StateProvider';
 
-const RegisteredTeam = ({ eventId,team }) => {
+const RegisteredTeam = ({ eventId, team, schoolId, teamIndex }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [{ activeEvent, schoolName }] = useStateValue();
 
   const [participants, setParticipants] = useState(
-    team.participants.map((p) => ({ ...p }))
+    team.participants.map((p, index) => ({
+      ...p,
+      participantId: `${schoolId}${eventId}t${teamIndex}p${index + 1}`
+    }))
   );
 
   const handleNameChange = (index, newName) => {
     const updated = [...participants];
     updated[index].participantName = newName;
     setParticipants(updated);
-    // console.log("updated-->",participants);
-    
   };
 
-  const handleSubmit = (e) => {
-    console.log("updated-->",participants);
-    axios.post('/vinterbash/updateTeamParticipants', {
+  const handleSubmit = () => {
+    axios
+      .post('/vinterbash/updateTeamParticipants', {
+        schoolId,
         schoolName,
-        eventId: eventId,
+        eventId,
         teamId: team.teamId,
         participants,
       })
-      .then((res) => {
+      .then(() => {
         alert('Updated successfully');
         setIsEditing(false);
       })
@@ -39,25 +41,14 @@ const RegisteredTeam = ({ eventId,team }) => {
   };
 
   return (
-    <Card
-      sx={{ backgroundColor: '#D4AB68', borderRadius: '0.55rem',color: 'white', marginTop:'20px', mb: 3,}} >
+    <Card sx={{ backgroundColor: '#D4AB68', borderRadius: '0.55rem', color: 'white', marginTop: '20px', mb: 3 }}>
       <CardContent>
-        <Box
-          sx={{
-            backgroundColor: 'white',
-            borderRadius: '9px',
-            width: 'fit-content',
-            px: 2,
-            py: 1,
-            mb: 2,
-            color: 'black',
-          }}
-        >
+        <Box sx={{ backgroundColor: 'white', borderRadius: '9px', width: 'fit-content', px: 2, py: 1, mb: 2, color: 'black' }}>
           <Typography fontSize={14}>{activeEvent}</Typography>
         </Box>
 
         <Typography variant="h6" gutterBottom>
-          Team: {team.teamName}
+          Team {teamIndex}
         </Typography>
 
         {participants.map((p, index) => (
@@ -78,19 +69,11 @@ const RegisteredTeam = ({ eventId,team }) => {
         ))}
 
         {!isEditing ? (
-          <Button
-            variant="contained"
-            sx={{ mt: 2, backgroundColor: 'white', color: 'black' }}
-            onClick={() => setIsEditing(true)}
-          >
+          <Button variant="contained" sx={{ mt: 2, backgroundColor: 'white', color: 'black' }} onClick={() => setIsEditing(true)}>
             Edit Participants
           </Button>
         ) : (
-          <Button
-            variant="contained"
-            sx={{ mt: 2, backgroundColor: 'white', color: 'black' }}
-            onClick={handleSubmit}
-          >
+          <Button variant="contained" sx={{ mt: 2, backgroundColor: 'white', color: 'black' }} onClick={handleSubmit}>
             Submit
           </Button>
         )}
