@@ -369,10 +369,10 @@ catch(error){
 
 app.post('/vinterbash/register',async(req,res)=>{
     try {
-        const { participants,eventId,
+        const { eventId,
         eventName,
         schoolId,
-        teamId} = req.body;
+        teamId,participants} = req.body;
         console.log(req.body);
         
    // Success

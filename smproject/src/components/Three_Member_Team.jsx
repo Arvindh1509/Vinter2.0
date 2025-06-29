@@ -23,7 +23,6 @@ function Three_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
         p3: { participantId: participantId3, participantName: p3 },
         },
         eventId,
-        eventName,
         schoolId,
         teamId
       })

@@ -23,7 +23,7 @@ function Dashboard() {
             setToRegEvents(response.data.notRegistered);
             setPartiallyRegistered(response.data.partiallyRegistered);
             setFullyReg(response.data.fullyRegistered);
-            setTotalEvents(fullReg+ToRegEvents);
+            setTotalEvents(Number(fullReg)+Number(ToRegEvents));
         })
        
        },[])
