@@ -5,7 +5,7 @@ import { useStateValue } from '../StateProvider';
 import { Box } from '@mui/material';
 import Statbox from '../templates/Statbox';
 import FlexBetween from '../templates/FlexBetween';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import axios from '../axios';
 
 function Dashboard() {
@@ -14,21 +14,24 @@ function Dashboard() {
   const[ToRegEvents,setToRegEvents]=useState();
   const[partiallyReg,setPartiallyRegistered]=useState();
   const[fullReg,setFullyReg]=useState();
-
-    
-        axios.post('/vinterbash/registeredEvents', {schoolId})
+        useEffect(() => {
+       axios.post('/vinterbash/registeredEvents', {schoolId})
         //change to schoolId
         .then((response)=>{
             console.log('InsideDashboard--->',response.data);            
-            setTotalEvents(17);
+            
             setToRegEvents(response.data.notRegistered);
             setPartiallyRegistered(response.data.partiallyRegistered);
             setFullyReg(response.data.fullyRegistered);
+            setTotalEvents(fullReg+ToRegEvents);
         })
+       
+       },[])
+       
     
 
   return (
-     schoolName?
+    schoolName?
     <div>
     <FlexBetween sx={{marginLeft:"20%"}} >
       <Header />

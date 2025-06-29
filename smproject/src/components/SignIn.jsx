@@ -22,15 +22,14 @@ function SignIn() {
          setPassword("");
          alert("Logged In");
          console.log("School Name --->", response.data);
-         
             dispatch({
                 type:'login', 
                 schoolName:response.data.schoolName,
                 schoolId:response.data.schoolId,
                 events:response.data.events
+                
           });
           navigate("/dashboard");
-        // //    return <Navigate to='/' replace={true}/>;
          })
          .catch((error)=>alert(error.response.data));
          

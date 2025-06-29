@@ -27,6 +27,18 @@ function Triquizzard() {
   return (
     <div className='ThreePEvent'>
   {/* Render all registered teams */}
+
+  {Array.from({ length: 3 - registeredTeams.length }).map((_, i) => (
+    <Three_Member_Team
+      key={`new-team-${i + 1}`}
+      eventId={eventId}
+      eventName={activeEvent}
+      registeredTeams={registeredTeams}
+      schoolId={schoolId}
+      teamIndex={registeredTeams.length + i + 1}
+    />
+  ))}
+  
   {registeredTeams.map((team, index) => (
     <RegisteredTeam
       key={team.teamId}
@@ -38,16 +50,7 @@ function Triquizzard() {
   ))}
 
   {/* Render up to 4 total team slots */}
-  {Array.from({ length: 4 - registeredTeams.length }).map((_, i) => (
-    <Three_Member_Team
-      key={`new-team-${i + 1}`}
-      eventId={eventId}
-      eventName={activeEvent}
-      registeredTeams={registeredTeams}
-      schoolId={schoolId}
-      teamIndex={registeredTeams.length + i + 1}
-    />
-  ))}
+  
 </div>
 
   );

@@ -242,7 +242,7 @@ participants:[
     regTeams:[
          {
         eventId: "cu1",
-        eventName: "Triquizzard",
+        eventName: "The Triquizzard Tournament 5.O",
         teams: [
             {
                 teamId: "101cu1t1",
