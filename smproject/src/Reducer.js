@@ -20,7 +20,9 @@ function reducer(state,action) {
             return{
                 schoolName:null,
                 events:null,
-                schoolId:null
+                schoolId:null,
+                activeEvent:null,
+                activeEventId:null
             }
             break;
         case 'SidebarEvent':

@@ -121,6 +121,7 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
     <Box component="nav">
       {isSidebarOpen && (
         <Drawer
+        
           open={isSidebarOpen}
           onClose={() => setSidebarOpen(false)}
           variant="persistent"
@@ -134,6 +135,7 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
               borderRight: "2px solid #ccc",
             },
           }}
+          transitionDuration={{ enter: 400, exit: 300 }}
         >
           <Box width="100%">
             <Box m="1.5rem 2rem 2rem 2rem">

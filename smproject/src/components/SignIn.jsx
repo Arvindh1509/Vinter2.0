@@ -5,6 +5,7 @@ import axios from '../axios';
 import { useStateValue } from '../StateProvider';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/vinterbash_2025_logo.png';
+import AnimatedPage from '../templates/AnimatedPage';
 
 
 function SignIn() {
@@ -36,6 +37,7 @@ function SignIn() {
          
     }
     return (
+        <AnimatedPage>
         <div className='login'>
            
                 <img className='login_logo' src={logo} alt="Logo"/>
@@ -57,6 +59,7 @@ function SignIn() {
                 </p>
             </div>
         </div>
+        </AnimatedPage>
     );
 }
 
