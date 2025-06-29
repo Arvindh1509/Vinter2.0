@@ -34,7 +34,7 @@ function Triquizzard() {
   {Array.from({ length: 3 - registeredTeams.length }).map((_, i) => (
     <Three_Member_Team
       key={`new-team-${i + 1}`}
-      eventId={eventId}
+      eventId={activeEventId}
       eventName={activeEvent}
       registeredTeams={registeredTeams}
       schoolId={schoolId}
@@ -46,7 +46,7 @@ function Triquizzard() {
     <RegisteredTeam
       key={team.teamId}
       team={team}
-      eventId={eventId}
+      eventId={activeEventId}
       schoolId={schoolId}
       teamIndex={index + 1}
     />

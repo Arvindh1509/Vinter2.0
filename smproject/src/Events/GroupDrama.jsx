@@ -35,7 +35,7 @@ function GroupDrama() {
   {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
     <Six_Member_Team
       key={`new-team-${i + 1}`}
-      eventId={eventId}
+      eventId={activeEventId}
       eventName={activeEvent}
       registeredTeams={registeredTeams}
       schoolId={schoolId}
@@ -48,7 +48,7 @@ function GroupDrama() {
     <RegisteredTeam
       key={team.teamId}
       team={team}
-      eventId={eventId}
+      eventId={activeEventId}
       schoolId={schoolId}
       teamIndex={index + 1}
     />

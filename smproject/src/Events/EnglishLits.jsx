@@ -34,7 +34,7 @@ function EnglishLits() {
       {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
     <Four_Member_Event
       key={`new-team-${i + 1}`}
-      eventId={eventId}
+      eventId={activeEventId}
       eventName={activeEvent}
       registeredTeams={registeredTeams}
       schoolId={schoolId}
@@ -46,7 +46,7 @@ function EnglishLits() {
     <RegisteredTeam
       key={team.teamId}
       team={team}
-      eventId={eventId}
+      eventId={activeEventId}
       schoolId={schoolId}
       teamIndex={index + 1}
     />

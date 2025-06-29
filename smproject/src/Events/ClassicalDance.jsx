@@ -34,7 +34,7 @@ function ClassicalDance() {
      {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
     <One_Member_Event
       key={`new-team-${i + 1}`}
-      eventId={eventId}
+      eventId={activeEventId}
       eventName={activeEvent}
       registeredTeams={registeredTeams}
       schoolId={schoolId}
@@ -46,7 +46,7 @@ function ClassicalDance() {
     <RegisteredTeam
       key={team.teamId}
       team={team}
-      eventId={eventId}
+      eventId={activeEventId}
       schoolId={schoolId}
       teamIndex={index + 1}
     />
