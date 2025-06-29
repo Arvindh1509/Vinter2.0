@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
 import axios from '../axios';
 import './Triquizzard.css'
-import Three_Member_Team from '../components/Three_Member_Team';
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
-import One_Member_Event from '../components/One_Member_Event';
+import Nine_Member_Team from '../components/Nine_Member_Event';
 
-function TitleEvent() {
+function TurfCricket() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
@@ -27,8 +26,9 @@ function TitleEvent() {
 
   return (
     <div className='ThreePEvent'>
-      {Array.from({ length: 4 - registeredTeams.length }).map((_, i) => (
-    <One_Member_Event
+  {/* Render all registered teams */}
+  {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
+    <Nine_Member_Team
       key={`new-team-${i + 1}`}
       eventId={eventId}
       eventName={activeEvent}
@@ -47,8 +47,12 @@ function TitleEvent() {
       teamIndex={index + 1}
     />
   ))}
-    </div>
+
+  {/* Render up to 4 total team slots */}
+  
+</div>
+
   );
 }
 
-export default TitleEvent;
+export default TurfCricket;

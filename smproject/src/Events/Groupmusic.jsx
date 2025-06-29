@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Box } from '@mui/material'
 import axios from '../axios';
 import './Triquizzard.css'
-import Three_Member_Team from '../components/Three_Member_Team';
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
-import One_Member_Event from '../components/One_Member_Event';
+import Eight_Member_Team from '../components/Eight_Member_Event';
 
-function Groupmusic() {
+function GroupMusic() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
@@ -27,32 +25,35 @@ function Groupmusic() {
 
   return (
     <div className='ThreePEvent'>
-      {registeredTeams.length === 1 ? (
-        <Box>
-          {registeredTeams.map((team, index) => (
-            <div key={team.teamId}>
-              <RegisteredTeam
-                eventId={eventId}
-                team={team}
-                schoolId={schoolId}
-                teamIndex={index + 1}
-              />
-            </div>
-          ))}
-        </Box>
-      ) : (
-        <div>
-          <One_Member_Event
-            eventId={activeEventId}
-            eventName={activeEvent}
-            registeredTeams={registeredTeams}
-            schoolId={schoolId}
-            teamIndex={1}
-          />
-        </div>
-      )}
-    </div>
+  {/* Render all registered teams */}
+
+  {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
+    <Eight_Member_Team
+      key={`new-team-${i + 1}`}
+      eventId={eventId}
+      eventName={activeEvent}
+      registeredTeams={registeredTeams}
+      schoolId={schoolId}
+      teamIndex={registeredTeams.length + i + 1}
+      minMember={4}
+    />
+  ))}
+  
+  {registeredTeams.map((team, index) => (
+    <RegisteredTeam
+      key={team.teamId}
+      team={team}
+      eventId={eventId}
+      schoolId={schoolId}
+      teamIndex={index + 1}
+    />
+  ))}
+
+  {/* Render up to 4 total team slots */}
+  
+</div>
+
   );
 }
 
-export default Groupmusic;
+export default GroupMusic;

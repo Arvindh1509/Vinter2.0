@@ -280,6 +280,42 @@ participants:[
                 ]
             }
         ]
+    },
+    {
+        eventId: "bu1",
+        eventName: "Drop the Beat",
+        teams: [
+            {
+                teamId: "101cu1t1",
+                teamName: "Santhanam cu1 t1",
+                participants: [
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Shrihari S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Arvindh S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "jayavanth S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Shrihari S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Arvindh S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "jayavanth S"
+                    }
+                ]
+            }
+        ]
     }
     
     ],

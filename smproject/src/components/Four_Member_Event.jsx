@@ -2,22 +2,26 @@ import React, { useState } from 'react'
 import { Box } from '@mui/material'
 import axios from '../axios';
 import './Three_Member_Team.css'
-import { useStateValue } from '../StateProvider';
 
-function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamIndex }) {
+function Three_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamIndex }) {
   const [p1, setP1] = useState('');
   const [p2, setP2] = useState('');
-  const[{schoolName},dispatch]=useStateValue();
+  const [p3, setP3] = useState('');
+  const [p4, setP4] = useState('');
 
   function handleEvent(e) {
     e.preventDefault();
-    if (p1 && p2) {
+    if (p1 && p2 && p3 && p4) {
       const teamId = `${schoolId}${eventId}t${teamIndex}`;
       const participantId1 = `${teamId}p1`;
       const participantId2 = `${teamId}p2`;
-      const participantObj= {
+      const participantId3 = `${teamId}p3`;
+      const participantId4 = `${teamId}p4`;
+       const participantObj= {
         p1: { participantId: participantId1, participantName: p1 },
         p2: { participantId: participantId2, participantName: p2 },
+        p3: { participantId: participantId3, participantName: p3 },
+        p4: { participantId: participantId4, participantName: p4 }
         };
       const participants=Object.values(participantObj);
 
@@ -25,12 +29,12 @@ function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
         participants,
         eventId,
         schoolId,
-        schoolName,
         teamId
       })
         .then(() => {
           setP1('');
           setP2('');
+          setP3('');
           alert('Added Successfully');
         })
         .catch((error) => alert(error.response?.data || 'Error adding team'));
@@ -49,6 +53,12 @@ function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
           <h5>Participant 2</h5>
           <input type='text' value={p2} onChange={(e) => setP2(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
 
+          <h5>Participant 3</h5>
+          <input type='text' value={p3} onChange={(e) => setP3(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
+
+          <h5>Participant 4</h5>
+          <input type='text' value={p4} onChange={(e) => setP4(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
+
           <button className='login_signin' type='submit' onClick={handleEvent}>
             Click to add the team
           </button>
@@ -58,4 +68,4 @@ function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
   );
 }
 
-export default Two_Member_Event;
+export default Three_Member_Team;

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Box } from '@mui/material'
 import axios from '../axios';
 import './Triquizzard.css'
-import Three_Member_Team from '../components/Three_Member_Team';
+
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
-import One_Member_Event from '../components/One_Member_Event';
+import Four_Member_Event from '../components/Four_Member_Event';
 
-function TitleEvent() {
+function EnglishLits() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
@@ -27,8 +27,8 @@ function TitleEvent() {
 
   return (
     <div className='ThreePEvent'>
-      {Array.from({ length: 4 - registeredTeams.length }).map((_, i) => (
-    <One_Member_Event
+      {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
+    <Four_Member_Event
       key={`new-team-${i + 1}`}
       eventId={eventId}
       eventName={activeEvent}
@@ -51,4 +51,4 @@ function TitleEvent() {
   );
 }
 
-export default TitleEvent;
+export default EnglishLits;

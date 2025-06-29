@@ -13,11 +13,13 @@ function One_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
     if (p1 ) {
       const teamId = `${schoolId}${eventId}t${teamIndex}`;
       const participantId1 = `${teamId}p1`;
+       const participantObj= {
+        p1: { participantId: participantId1, participantName: p1 },
+        };
+      const participants=Object.values(participantObj);
 
       axios.post('/vinterbash/register', {
-        participants:{
-        p1: { participantId: participantId1, participantName: p1 },
-        },
+        participants,
         eventId,
         schoolId,
         schoolName,

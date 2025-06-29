@@ -6,7 +6,7 @@ import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
 import Two_Member_Event from '../components/Two_Member_Event';
 
-function ClassicalDance() {
+function Coding() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
@@ -26,32 +26,28 @@ function ClassicalDance() {
 
   return (
     <div className='ThreePEvent'>
-      {registeredTeams.length === 1 ? (
-        <Box>
-          {registeredTeams.map((team, index) => (
-            <div key={team.teamId}>
-              <RegisteredTeam
-                eventId={eventId}
-                team={team}
-                schoolId={schoolId}
-                teamIndex={index + 1}
-              />
-            </div>
-          ))}
-        </Box>
-      ) : (
-        <div>
-          <Two_Member_Event
-            eventId={activeEventId}
-            eventName={activeEvent}
-            registeredTeams={registeredTeams}
-            schoolId={schoolId}
-            teamIndex={1}
-          />
-        </div>
-      )}
+      {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
+    <Two_Member_Event
+      key={`new-team-${i + 1}`}
+      eventId={eventId}
+      eventName={activeEvent}
+      registeredTeams={registeredTeams}
+      schoolId={schoolId}
+      teamIndex={registeredTeams.length + i + 1}
+    />
+  ))}
+  
+  {registeredTeams.map((team, index) => (
+    <RegisteredTeam
+      key={team.teamId}
+      team={team}
+      eventId={eventId}
+      schoolId={schoolId}
+      teamIndex={index + 1}
+    />
+  ))}
     </div>
   );
 }
 
-export default ClassicalDance;
+export default Coding;

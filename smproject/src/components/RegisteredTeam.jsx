@@ -1,12 +1,26 @@
-import { Box, Button, Card, CardContent, Typography, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Typography
+} from '@mui/material';
 import React, { useState } from 'react';
 import axios from '../axios';
 import './RegisteredTeam.css';
 import { useStateValue } from '../StateProvider';
 
-const RegisteredTeam = ({ eventId, team, schoolId, teamIndex }) => {
+const RegisteredTeam = ({ eventId, team, schoolId, teamIndex, maxMember }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [{ activeEvent, schoolName }] = useStateValue();
+
+  const allowedEvents = [
+    "Vinter Kick-Off: 5-A Side Football",
+    "Drop the Beat",
+    "Nalla Otrainga da Reel-uh!",
+    "Acoustic Nirvana",
+    "Chordially Yours!"
+  ];
 
   const [participants, setParticipants] = useState(
     team.participants.map((p, index) => ({
@@ -21,7 +35,27 @@ const RegisteredTeam = ({ eventId, team, schoolId, teamIndex }) => {
     setParticipants(updated);
   };
 
+  const handleAddParticipant = () => {
+    if (participants.length >= maxMember) {
+      alert(`Maximum of ${maxMember} members allowed.`);
+      return;
+    }
+
+    const newIndex = participants.length;
+    const newParticipant = {
+      participantId: `${schoolId}${eventId}t${teamIndex}p${newIndex + 1}`,
+      participantName: ''
+    };
+    setParticipants([...participants, newParticipant]);
+  };
+
   const handleSubmit = () => {
+  const hasBlank = participants.some((p) => p.participantName.trim() === '');
+      if(hasBlank)
+        {alert('Participant Names can not be blank');
+          return
+        }
+   else{
     axios
       .post('/vinterbash/updateTeamParticipants', {
         schoolId,
@@ -38,6 +72,7 @@ const RegisteredTeam = ({ eventId, team, schoolId, teamIndex }) => {
         console.error(err);
         alert('Failed to update');
       });
+   } 
   };
 
   return (
@@ -51,32 +86,55 @@ const RegisteredTeam = ({ eventId, team, schoolId, teamIndex }) => {
           Team {teamIndex}
         </Typography>
 
+        {/* Participant fields */}
         {participants.map((p, index) => (
           <Box key={p.participantId} sx={{ mb: 1 }}>
+            <h5 style={{ marginBottom: '4px' }}>{`Participant ${index + 1}`}</h5>
             {isEditing ? (
-              <TextField
+              <input
+                type="text"
                 value={p.participantName}
                 onChange={(e) => handleNameChange(index, e.target.value)}
-                variant="outlined"
-                size="small"
-                fullWidth
-                sx={{ backgroundColor: 'white', borderRadius: 1 }}
+                placeholder="Type Candidate's Name"
+                className="register_form"
               />
             ) : (
-              <Typography>{`Participant ${index + 1}: ${p.participantName}`}</Typography>
+              <Typography>{`${p.participantName}`}</Typography>
             )}
           </Box>
         ))}
 
-        {!isEditing ? (
-          <Button variant="contained" sx={{ mt: 2, backgroundColor: 'white', color: 'black' }} onClick={() => setIsEditing(true)}>
-            Edit Participants
-          </Button>
-        ) : (
-          <Button variant="contained" sx={{ mt: 2, backgroundColor: 'white', color: 'black' }} onClick={handleSubmit}>
-            Submit
-          </Button>
-        )}
+        {/* Action Buttons */}
+        <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+          {!isEditing ? (
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: 'white', color: 'black' }}
+              onClick={() => setIsEditing(true)}
+            >
+              Edit Participants
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: 'white', color: 'black' }}
+              onClick={handleSubmit}
+            >
+              Submit
+            </Button>
+          )}
+
+          {/* Show Add Team Member button only for allowed events */}
+          {isEditing && allowedEvents.includes(activeEvent) && participants.length < maxMember && (
+            <Button
+              variant="contained"
+              sx={{ color: 'black', backgroundColor: 'white' }}
+              onClick={handleAddParticipant}
+            >
+              Add Team Member
+            </Button>
+          )}
+        </Box>
       </CardContent>
     </Card>
   );
