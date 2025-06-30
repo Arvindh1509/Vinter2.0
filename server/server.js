@@ -465,6 +465,11 @@ app.post('/vinterbash/events',async(req,res)=>{
   console.log(matchingEvent);
 
   if (matchingEvent) {
+//     return res.status(200).json({
+//     "eventId": null,
+//     "eventName": activeEvent,
+//     "teams":[]
+// })
     return res.status(200).json(matchingEvent); // return existing registered team
   } else {
     // Return empty structure for UI to show registration form

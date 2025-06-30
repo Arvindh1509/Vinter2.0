@@ -3,6 +3,7 @@ import axios from '../axios';
 import './One_Member_Event.css'
 import { useStateValue } from '../StateProvider';
 import AnimatedPage from '../templates/AnimatedPage';
+import { useEffect } from 'react';
 
 function One_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamIndex }) {
   const [p1, setP1] = useState('');
@@ -32,7 +33,7 @@ function One_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
         .catch((error) => alert(error.response?.data || 'Error adding team'));
     } else {
       alert('Fill all required participant details');
-    }
+    }  
   }
 
   return (
@@ -42,7 +43,11 @@ function One_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
       <h3><u>Team: {teamIndex}</u></h3>
         <form>
           <h5>Participant 1</h5>
-          <input type='text' value={p1} onChange={(e) => setP1(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
+          <input type='text' value={p1} onChange={(e) => {
+              const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
+              if (!isValid) { alert("Only alphabets are allowed");
+                return; }
+              setP1(value);}} placeholder="Type Candidate's Name" className='register_form' />
 
           <button className='login_signin' type='submit' onClick={handleEvent}>
             Click to add the team

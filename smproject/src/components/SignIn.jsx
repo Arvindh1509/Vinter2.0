@@ -6,6 +6,7 @@ import { useStateValue } from '../StateProvider';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/vinterbash_2025_logo.png';
 import AnimatedPage from '../templates/AnimatedPage';
+import { useEffect } from 'react';
 
 
 function SignIn() {
@@ -16,7 +17,6 @@ function SignIn() {
 
     function signin(e) {
         e.preventDefault();
-        
         axios.post('/vinterbash/validate',{schoolName,password})
         .then((response)=>{
          setSchoolName("");
@@ -33,12 +33,9 @@ function SignIn() {
           navigate("/dashboard");
          })
          .catch((error) => {
-  console.error(error); // for debugging
-  alert(error.response?.data?.error || "An unknown error occurred");
-});
-
-         
-         
+            console.error(error); // for debugging
+            alert(error.response?.data?.error || "An unknown error occurred");
+            });
     }
     return (
         <AnimatedPage>

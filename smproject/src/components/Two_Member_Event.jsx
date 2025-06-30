@@ -3,6 +3,7 @@ import axios from '../axios';
 import './Three_Member_Team.css'
 import { useStateValue } from '../StateProvider';
 import AnimatedPage from '../templates/AnimatedPage';
+import { useEffect } from 'react';
 
 function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamIndex }) {
   const [p1, setP1] = useState('');
@@ -11,6 +12,7 @@ function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
 
   function handleEvent(e) {
     e.preventDefault();
+      
     if (p1 && p2) {
       const teamId = `${schoolId}${eventId}t${teamIndex}`;
       const participantId1 = `${teamId}p1`;
@@ -20,7 +22,7 @@ function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
         p2: { participantId: participantId2, participantName: p2 },
         };
       const participants=Object.values(participantObj);
-
+      
       axios.post('/vinterbash/register', {
         participants,
         eventId,
@@ -34,9 +36,11 @@ function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
           alert('Added Successfully');
         })
         .catch((error) => alert(error.response?.data || 'Error adding team'));
+       
     } else {
       alert('Fill all required participant details');
     }
+    
   }
 
   return (
@@ -46,10 +50,18 @@ function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
       <h3><u>Team: {teamIndex}</u></h3>
         <form>
           <h5>Participant 1</h5>
-          <input type='text' value={p1} onChange={(e) => setP1(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
+          <input type='text' value={p1} onChange={(e) => {
+              const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
+              if (!isValid) { alert("Only alphabets are allowed");
+                return; }
+              setP1(value);}} placeholder="Type Candidate's Name" className='register_form' />
 
           <h5>Participant 2</h5>
-          <input type='text' value={p2} onChange={(e) => setP2(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
+          <input type='text' value={p2} onChange={(e) => {
+              const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
+              if (!isValid) { alert("Only alphabets are allowed");
+                return; }
+              setP2(value);}} placeholder="Type Candidate's Name" className='register_form' />
 
           <button className='login_signin' type='submit' onClick={handleEvent}>
             Click to add the team

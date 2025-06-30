@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from '../axios';
 import './Three_Member_Team.css';
 import AnimatedPage from '../templates/AnimatedPage';
+import { useEffect } from 'react';
 
 function Eight_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamIndex, minMember }) {
   const [p1, setP1] = useState('');
@@ -36,8 +37,7 @@ function Eight_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
       participantId: `${teamId}p${index + 1}`,
       participantName: name
     }));
-
-    axios.post('/vinterbash/register', {
+       axios.post('/vinterbash/register', {
       participants: participantArray,
       eventId,
       schoolId,
@@ -56,6 +56,8 @@ function Eight_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
         alert('Added Successfully');
       })
       .catch((error) => alert(error.response?.data || 'Error adding team'));
+
+   
   }
 
   return (
@@ -64,29 +66,60 @@ function Eight_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
       <div className='register_container'>
       <h3><u>Team: {teamIndex}</u></h3>
         <form>
-          <h5>Participant 1</h5>
-          <input type='text' value={p1} onChange={(e) => setP1(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
+          <input type='text' value={p1} onChange={(e) => {
+              const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
+              if (!isValid) { alert("Only alphabets are allowed");
+                return; }
+              setP1(value);}} placeholder="Type Candidate's Name" className='register_form' />
 
           <h5>Participant 2</h5>
-          <input type='text' value={p2} onChange={(e) => setP2(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
+          <input type='text' value={p2} onChange={(e) => {
+              const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
+              if (!isValid) { alert("Only alphabets are allowed");
+                return; }
+              setP2(value);}} placeholder="Type Candidate's Name" className='register_form' />
 
           <h5>Participant 3</h5>
-          <input type='text' value={p3} onChange={(e) => setP3(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
+          <input type='text' value={p3} onChange={(e) => {
+              const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
+              if (!isValid) { alert("Only alphabets are allowed");
+                return; }
+              setP3(value);}} placeholder="Type Candidate's Name" className='register_form' />
 
           <h5>Participant 4</h5>
-          <input type='text' value={p4} onChange={(e) => setP4(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
+          <input type='text' value={p4} onChange={(e) => {
+              const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
+              if (!isValid) { alert("Only alphabets are allowed");
+                return; }
+              setP4(value);}} placeholder="Type Candidate's Name" className='register_form' />
 
           <h5>Participant 5</h5>
-          <input type='text' value={p5} onChange={(e) => setP5(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
+          <input type='text' value={p5} onChange={(e) => {
+              const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
+              if (!isValid) { alert("Only alphabets are allowed");
+                return; }
+              setP5(value);}} placeholder="Type Candidate's Name" className='register_form' />
 
           <h5>Participant 6</h5>
-          <input type='text' value={p6} onChange={(e) => setP6(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
+          <input type='text' value={p6} onChange={(e) => {
+              const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
+              if (!isValid) { alert("Only alphabets are allowed");
+                return; }
+              setP6(value);}} placeholder="Type Candidate's Name" className='register_form' />
 
           <h5>Participant 7</h5>
-          <input type='text' value={p7} onChange={(e) => setP7(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
+          <input type='text' value={p7} onChange={(e) => {
+              const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
+              if (!isValid) { alert("Only alphabets are allowed");
+                return; }
+              setP7(value);}} placeholder="Type Candidate's Name" className='register_form' />
 
           <h5>Participant 8</h5>
-          <input type='text' value={p8} onChange={(e) => setP8(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />
+          <input type='text' value={p8} onChange={(e) => {
+              const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
+              if (!isValid) { alert("Only alphabets are allowed");
+                return; }
+              setP8(value);}} placeholder="Type Candidate's Name" className='register_form' />
 
           <button className='login_signin' type='submit' onClick={handleEvent}>
             Click to add the team
