@@ -58,6 +58,7 @@ function Six_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamIn
     <AnimatedPage>
     <div className='login'>
       <div className='register_container'>
+      <h3><u>Team: {teamIndex}</u></h3>
         <form>
           <h5>Participant 1</h5>
           <input type='text' value={p1} onChange={(e) => setP1(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />

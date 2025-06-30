@@ -51,6 +51,7 @@ function GroupIntrument() {
       eventId={activeEventId}
       schoolId={schoolId}
       teamIndex={index + 1}
+      maxMember={5}
     />
   ))}
   

@@ -51,6 +51,7 @@ function GroupDrama() {
       eventId={activeEventId}
       schoolId={schoolId}
       teamIndex={index + 1}
+      maxMember={6}
     />
   ))}  
 </div>

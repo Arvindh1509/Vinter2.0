@@ -123,8 +123,31 @@ const schools = {
                 ]
             }
         ]
-    }
-    
+    },
+    {
+        eventId: "cu1",
+        eventName: "The Triquizzard Tournament 5.O",
+        teams: [
+            {
+                teamId: "101cu1t1",
+                teamName: "Santhanam cu1 t1",
+                participants: [
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Shrihari S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Arvindh S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "jayavanth S"
+                    }
+                ]
+            }
+        ]
+    },
     ],
 participants:[
     {
@@ -241,27 +264,28 @@ participants:[
     notRegistered: 13,
     regTeams:[
          {
-        eventId: "cu1",
-        eventName: "The Triquizzard Tournament 5.O",
+        eventId: "cu3",
+        eventName: "Nalla Otrainga da Reel-uh!",
         teams: [
+            // {
+            //     teamId: "101cu1t1",
+            //     teamName: "Santhanam cu1 t1",
+            //     participants: [
+            //         {
+            //             participantId: "101cu1t1p1",
+            //             participantName: "Shrihari S"
+            //         },
+            //         {
+            //             participantId: "101cu1t1p1",
+            //             participantName: "Arvindh S"
+            //         },
+            //         {
+            //             participantId: "101cu1t1p1",
+            //             participantName: "jayavanth S"
+            //         }
+            //     ]
+            // },
             {
-                teamId: "101cu1t1",
-                teamName: "Santhanam cu1 t1",
-                participants: [
-                    {
-                        participantId: "101cu1t1p1",
-                        participantName: "Shrihari S"
-                    },
-                    {
-                        participantId: "101cu1t1p1",
-                        participantName: "Arvindh S"
-                    },
-                    {
-                        participantId: "101cu1t1p1",
-                        participantName: "jayavanth S"
-                    }
-                ]
-            },{
                 teamId: "101cu1t1",
                 teamName: "Santhanam cu1 t1",
                 participants: [
@@ -281,6 +305,7 @@ participants:[
             }
         ]
     },
+
     {
         eventId: "bu1",
         eventName: "Drop the Beat",
@@ -435,7 +460,9 @@ app.post('/vinterbash/events',async(req,res)=>{
   const regTeams = school.regTeams || [];
 
   // Find if the event is already registered
+  
   const matchingEvent = regTeams.find(e => e.eventName === activeEvent);
+  console.log(matchingEvent);
 
   if (matchingEvent) {
     return res.status(200).json(matchingEvent); // return existing registered team

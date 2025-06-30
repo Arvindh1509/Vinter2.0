@@ -32,7 +32,11 @@ function SignIn() {
           });
           navigate("/dashboard");
          })
-         .catch((error)=>alert(error.response.data));
+         .catch((error) => {
+  console.error(error); // for debugging
+  alert(error.response?.data?.error || "An unknown error occurred");
+});
+
          
          
     }

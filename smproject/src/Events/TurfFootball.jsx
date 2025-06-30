@@ -48,6 +48,7 @@ function TurfFootball() {
       eventId={activeEventId}
       schoolId={schoolId}
       teamIndex={index + 1}
+      maxMember={8}
     />
   ))}
 </div>

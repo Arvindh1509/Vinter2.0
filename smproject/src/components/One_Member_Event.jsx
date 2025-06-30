@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from '../axios';
-import './Three_Member_Team.css'
+import './One_Member_Event.css'
 import { useStateValue } from '../StateProvider';
 import AnimatedPage from '../templates/AnimatedPage';
 
@@ -37,8 +37,9 @@ function One_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
 
   return (
     <AnimatedPage>
-    <div className='login'>
+    <div className='loginONE'>
       <div className='register_container'>
+      <h3><u>Team: {teamIndex}</u></h3>
         <form>
           <h5>Participant 1</h5>
           <input type='text' value={p1} onChange={(e) => setP1(e.target.value)} placeholder="Type Candidate's Name" className='register_form' />

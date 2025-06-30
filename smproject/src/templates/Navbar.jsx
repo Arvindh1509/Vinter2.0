@@ -15,8 +15,8 @@ function Navbar({isSidebarOpen, setSidebarOpen }) {
     dispatch({
       type:'logout'
     })
-    navigate("/signIn")
     console.log(e);
+    navigate("/signIn");
   }
 
     function handleClick(e){

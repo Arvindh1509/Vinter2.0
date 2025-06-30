@@ -18,11 +18,12 @@ function reducer(state,action) {
             break;
         case 'logout':
             return{
-                schoolName:null,
-                events:null,
-                schoolId:null,
-                activeEvent:null,
-                activeEventId:null
+                ...state,
+                schoolName:"",
+events:[],
+schoolId:"",
+activeEvent:"",
+activeEventId:""
             }
             break;
         case 'SidebarEvent':

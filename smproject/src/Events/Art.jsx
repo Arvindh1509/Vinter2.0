@@ -37,6 +37,7 @@ function Art() {
       registeredTeams={registeredTeams}
       schoolId={schoolId}
       teamIndex={registeredTeams.length + i + 1}
+      title={`Team:`+registeredTeams.length + i + 1}
     />
   ))}
   

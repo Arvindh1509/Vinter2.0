@@ -5,6 +5,7 @@ import axios from '../axios';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import AnimatedPage from '../templates/AnimatedPage';
+import { useEffect } from 'react';
 
 function Participants() {
 
@@ -12,10 +13,13 @@ function Participants() {
 const[{schoolName},dispatch]=useStateValue();
 const[participants,setParticipants]=useState([]);
 
+useEffect(()=>{
 axios.post('/vinterbash/eventParticipantMap',{schoolName})
 .then((response)=>{
   setParticipants(response.data.participants);
 })  
+},[])
+
 // console.log("InsideParticipantsPage-->",participants);
 
   return (

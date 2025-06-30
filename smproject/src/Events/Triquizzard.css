@@ -1,6 +1,7 @@
-.ThreePEvent{
+.ThreePEvent {
   display: flex;
   flex-direction: column;
-  gap: 1px; /* You can reduce or increase this spacing */
+  gap: 1px; /* Proper spacing between components */
   align-items: center;
+  padding: 0; /* Removed invalid negative padding */
 }
