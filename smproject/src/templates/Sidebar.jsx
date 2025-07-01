@@ -61,7 +61,7 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
   lcText = 'art';
 } else if (text === 'DOOMSDAY: The Final Frame') {
   lcText = 'poster';
-} else if (text === 'Koodu Vittu Koodu') {
+} else if (text === 'Koodu vittu koodu') {
   lcText = 'tamillits';
 } else if (text === "Time Traveller's Theatre") {
   lcText = 'elits';
@@ -69,13 +69,13 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
   lcText = 'triquizzard';
 } else if (text === 'Ctrl + Alt + Decrypt') {
   lcText = 'code';
-} else if (text === 'No Time To Solve') {
+} else if (text === 'No time to Solve') {
   lcText = 'cube';
 } else if (text === 'Vinter Bowl-Out: Turf Cricket') {
   lcText = 'cricket';
 } else if (text === 'Vinter Kick-Off: 5-A Side Football') {
   lcText = 'football';
-} else if (text === 'Coronation: Mr. & Ms. Vinterbash') {
+} else if (text === 'Coronation - (Mr And Ms VinterBash)') {
   lcText = 'title';
 } else if (text === "Vinter Goal-Rush: FIFA '25") {
   lcText = 'fifa';
