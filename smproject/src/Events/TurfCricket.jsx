@@ -24,7 +24,7 @@ function TurfCricket() {
       .catch((error) => {
         console.log('Error fetching teams:', error);
       });
-  }, [schoolName, activeEvent]);
+  }, [registeredTeams]);
 
   return (
     schoolName?

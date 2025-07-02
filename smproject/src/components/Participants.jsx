@@ -9,16 +9,24 @@ import { useEffect } from 'react';
 
 function Participants() {
 
-  const students = ["Aarav", "Bhavya", "Charan", "Deepika", "Eshwar", "Farzana", "Gokul", "Harini"];
 const[{schoolName},dispatch]=useStateValue();
 const[participants,setParticipants]=useState([]);
 
 useEffect(()=>{
 axios.post('/vinterbash/eventParticipantMap',{schoolName})
 .then((response)=>{
-  setParticipants(response.data.participants);
-})  
-},[])
+   const data = response?.data?.participants;
+        if (Array.isArray(data)) {
+          setParticipants(data);
+        } else {
+          setParticipants([]); // fallback for null or invalid data
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching participants:', error);
+        setParticipants([]); // fallback on request failure
+      }); 
+},[schoolName])
 
 // console.log("InsideParticipantsPage-->",participants);
 

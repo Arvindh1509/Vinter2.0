@@ -30,7 +30,7 @@ function TamilLits() {
         console.log('Error fetching teams:', error);
         setRegisteredTeams([]); // fallback on error
       });
-  }, [schoolName, activeEvent]);
+  }, [registeredTeams]);
 
   if (!schoolName) return <Navigate to="/signIn" replace />;
 

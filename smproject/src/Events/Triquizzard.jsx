@@ -23,7 +23,7 @@ function Triquizzard() {
         console.log('Error fetching teams:', error);
         setRegisteredTeams([]); // fallback on error
       });
-  }, [schoolName, activeEvent]);
+  }, [registeredTeams]);
 
   return schoolName ? (
     <AnimatedPage>

@@ -4,6 +4,7 @@ import FlexBetween from './FlexBetween'
 import MenuIcon from '@mui/icons-material/Menu';
 import { useStateValue } from '../StateProvider';
 import { useNavigate } from 'react-router-dom';
+import logo from '../assets/srivv_osa_logo.png'
 
 function Navbar({isSidebarOpen, setSidebarOpen }) {
   const [anchorEl,setAnchorEl]=useState(null);
@@ -27,20 +28,27 @@ function Navbar({isSidebarOpen, setSidebarOpen }) {
   return (
     <div>
         <Toolbar
-            sx={{display:'flex', justifyContent: "space-between" , backgroundColor:'#D4AB68'}}>
+            sx={{display:'flex', justifyContent: "space-between" , background: 'linear-gradient(135deg, #FEC000, #F37D00)'}}>
             <FlexBetween>
                 <IconButton onClick={()=>setSidebarOpen(!isSidebarOpen)}>
                     <MenuIcon   sx={{color:'white'}}/>
                 </IconButton>
                 <Typography fontWeight={"bold"} fontSize={"0.9rem"}
-                  sx={{color: "White", fontSize:"50px", marginLeft:'25px'}}>
-                    VINTERBASH
+                  sx={{color: "White", fontSize:"50px", marginLeft:'25px', fontFamily: `'nevis', sans-serif`}}>
+                    VINTERBASH 2025
                   </Typography>
             </FlexBetween>
 
             {/* Right Side */}
             <FlexBetween gap="1.5rem">
           <FlexBetween>
+          <Box component="img"
+                alt='profile'
+                src={logo}
+                height={"100px"}
+                width="100px"
+               
+                sx={{objectFit:"cover"}} />
           <Button onClick={handleClick} sx={
             {
               display:"flex",
@@ -50,22 +58,19 @@ function Navbar({isSidebarOpen, setSidebarOpen }) {
               gap:"1rem"
             }
           }>
-          <Box component="img"
-                alt='profile'
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzwXgn0FyiHXZIQZmx-s7A-1ENxosvfoQiydMyBKsRBA&s"
-                height={"32px"}
-                width="32px"
-                borderRadius={"50%"}
-                sx={{objectFit:"cover"}} />
+          
 
                 <Typography fontWeight={"bold"} fontSize={"0.9rem"}
-                  sx={{color: "black"}}>
+                  sx={{color: "white"}}>
                     {schoolName}
                   </Typography>
 
                   {/* <ArrowDropDownOutlined sx={{color:'white', fontSize:'25px'}}/> */}
           </Button>
-          <Button onClick={handleClose} sx={{color:'black', backgroundColor:'white', borderRadius:'10px'}}>Log Out</Button>
+          <Button onClick={handleClose} sx={{color:'white', backgroundColor:'transparent',border:'3px solid white',borderColor:'white', fontFamily: `'nevis', sans-serif`,fontWeight:'600',fontSize:'15px', '&:hover': {
+      backgroundColor: '#f0f0f0',
+      color:'black' // light gray on hover
+    },}}>Log Out</Button>
         </FlexBetween>
 
       </FlexBetween>

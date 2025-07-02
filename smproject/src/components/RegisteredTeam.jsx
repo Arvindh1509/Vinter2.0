@@ -78,13 +78,13 @@ const RegisteredTeam = ({ eventId, team, schoolId, teamIndex, maxMember }) => {
 
   return (
     <AnimatedPage>
-    <Card sx={{ backgroundColor: '#D4AB68', borderRadius: '0.55rem', color: 'white', marginTop: '20px', mb: 3 }}>
+    <Card sx={{ background: 'linear-gradient(135deg, #F37D00, #FEC000 )', borderRadius: '0.55rem', color: 'white', marginTop: '20px', mb: 3, }}>
       <CardContent>
-        <Box sx={{ backgroundColor: 'white', borderRadius: '9px', width: 'fit-content', px: 2, py: 1, mb: 2, color: 'black' }}>
+        <Box sx={{ backgroundColor: 'white', borderRadius: '9px', width: 'fit-content', px: 2, py: 1, mb: 2, color: 'black',fontFamily: `'nevis', sans-serif` }}>
           <Typography fontSize={14}>{activeEvent}</Typography>
         </Box>
 
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h6" gutterBottom sx={{fontFamily: `'nevis', sans-serif`, fontWeight:'600'}}>
           Team {teamIndex}
         </Typography>
 
@@ -101,7 +101,7 @@ const RegisteredTeam = ({ eventId, team, schoolId, teamIndex, maxMember }) => {
                 className="register_form"
               />
             ) : (
-              <Typography>{`${p.participantName}`}</Typography>
+              <Typography sx={{fontFamily: `'nevis', sans-serif`, fontSize:'20px'}}>{`${p.participantName}`}</Typography>
             )}
           </Box>
         ))}

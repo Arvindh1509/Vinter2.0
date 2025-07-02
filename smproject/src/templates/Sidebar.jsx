@@ -11,7 +11,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import FlexBetween from './FlexBetween';
-import logo from '../assets/vinterbash_2025_logo.png';
+import logo from '../assets/vinter_logo_1.png';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -106,6 +106,7 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
             '&:hover': {
               backgroundColor: '#f5f5f5',
             },
+            fontFamily: `'nevis', sans-serif`,fontWeight:'600',fontSize:'24px'
           }}
         >
           <ListItemText primary={text} sx={{ ml: "1rem" }} />
@@ -128,8 +129,8 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
           anchor="left"
           sx={{
             width: drawerWidth,
-            "& .MuiDrawer-paper": {
-              backgroundColor: '#D4AB68',
+            "& .MuiDrawer-paper": {  
+              backgroundColor: '#F68F04',
               boxSizing: "border-box",
               width: drawerWidth,
               borderRight: "2px solid #ccc",
@@ -141,9 +142,15 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
             <Box m="1.5rem 2rem 2rem 2rem">
               <FlexBetween>
                 <Box display="flex" alignItems="center" flexDirection="column" gap="0.5rem">
-                  <img src={logo} alt="logo" width="120px" onClick={() => {
-            navigate(`/dashboard`)}
-                  }/>
+                  <img
+  src={logo}
+  alt="logo"
+  width="140px"
+  style={{ transform: 'rotate(70deg)',marginLeft:'10px' }}
+  onClick={() => {
+    navigate(`/dashboard`);
+  }}
+/>
                 </Box>
                 <IconButton onClick={() => setSidebarOpen(!isSidebarOpen)}>
                   <ChevronLeftIcon />
