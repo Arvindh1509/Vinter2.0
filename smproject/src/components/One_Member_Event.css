@@ -1,82 +1,98 @@
-.register_container{
-    width: 600px;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    border-radius: 5px;
-    border: 2px solid #f9bc25;
-    padding: 20px;
-    background-color: white;
-    margin-top: 50px;
+/* Container for the form */
+.register_container {
+  width: 90%;
+  max-width: 600px;
+  min-width: 280px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 2px solid #f9bc25;
+  padding: 20px;
+  background-color: white;
+  margin-top: 30px;
+  box-sizing: border-box;
 }
 
-.register_container >h1{
-    font-weight: 500;
-    margin-bottom: 20px;
-    text-align: center;
+/* Heading inside container */
+.register_container > h1 {
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-.register_container>form>h5{
-    margin-bottom: 5px;
+/* Form label */
+.register_container > form > h5 {
+  margin-bottom: 5px;
 }
 
-
-.register_form{
-    height: 30px;
-    margin-bottom: 10px;
-    background-color: gainsboro;
-    width: 98% ;
-    border-radius: 5px;
-    border: none;
+/* Input field */
+.register_form,
+.register_form_error {
+  height: 35px;
+  margin-bottom: 10px;
+  background-color: gainsboro;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
-.error{
-    padding-top: 1px;
-    padding-bottom: 5px;
-    color: red;
+.register_form_error {
+  border: 2px solid red;
 }
 
-.register_form_error{
-    height: 30px;
-    margin-bottom: 10px;
-    background-color: gainsboro;
-    width: 98% ;
-    border-radius: 5px;
-    border: 2px solid red;
+/* Error message styling */
+.error {
+  padding-top: 1px;
+  padding-bottom: 5px;
+  color: red;
+  font-size: 0.9em;
 }
 
-
-.loginONE{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
-    height: 40vh;
-    background-color: white;
-
+/* Page-level wrapper */
+.loginONE {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-.login_signin{
-    background-color: #f9bc25;
-    border-radius: 5px;
-    width: 100%;
-    height: 30px;
-    border: 1px solid;
-    margin-top: 10px;
-    color: white;
-    font-weight: 650;
+/* Submit button */
+.login_signin {
+  background-color: #f9bc25;
+  border-radius: 5px;
+  width: 100%;
+  height: 35px;
+  border: 1px solid;
+  margin-top: 10px;
+  color: white;
+  font-weight: 650;
+  font-size: 1em;
 }
+
 .login_signin:hover {
-  background-color:#ec7f40; /* hover color */
-}
-.login_register{
-    background-color: whitesmoke;
-    border-radius: 5px;
-    width: 100%;
-    height: 40px;
-    border: 1px solid;
-    margin-top: 10px;
-    color: black;
-    font-weight: 550;
+  background-color: #ec7f40;
 }
 
+/* Make responsive adjustments */
+@media (max-width: 600px) {
+  .register_container {
+    padding: 15px;
+    margin-top: 20px;
+  }
+
+  .register_form,
+  .register_form_error {
+    height: 32px;
+  }
+
+  .login_signin {
+    height: 32px;
+    font-size: 0.95em;
+  }
+}

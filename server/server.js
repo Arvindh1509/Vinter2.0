@@ -200,7 +200,7 @@ participants:[
     }
 ]
 },
-"KNMS":{
+"Sri Akilandeswari Vidyalaya":{
     schoolId:2,
     schoolName:"KNMS",
     password: "abcdef",

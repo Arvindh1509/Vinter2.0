@@ -1,13 +1,43 @@
-.header{
+/* Base styles (desktop-first) */
+.header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-direction: row;
-    margin-left: 20px;
+    margin: 0 10px;
+    padding: 10px 0;
 }
 
-.user_icon{
-    size: 3px;
-    border-radius: 4px;
-    width: 10%;
-    height:10%
+.user_icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Tablet and smaller */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 10px;
+    }
+
+    .user_icon {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .header {
+        margin: 8px;
+        padding: 8px 0;
+    }
+
+    .user_icon {
+        width: 30px;
+        height: 30px;
+    }
 }
