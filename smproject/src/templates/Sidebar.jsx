@@ -22,6 +22,7 @@ import AnimatedPage from './AnimatedPage';
 const navItems = [
   { text: "Dashboard" },
   { text: "Participants" },
+  { text : "Teacher's Info"}
 ];
 
 const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
@@ -47,6 +48,8 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
     
    if (text === 'Chordially Yours!') {
   lcText = 'groupmusic';
+} else if (text==="Teacher's Info"){
+   lcText = 'teacherInfo';
 } else if (text === 'Acoustic Nirvana') {
   lcText = 'groupinst';
 } else if (text === 'Nalla Otrainga da Reel-uh!') {

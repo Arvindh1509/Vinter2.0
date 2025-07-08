@@ -30,7 +30,7 @@ function Art() {
     <AnimatedPage>
     <div className='ThreePEvent'>
       {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
-    <One_Member_Event
+     <One_Member_Event
       key={`new-team-${i + 1}`}
       eventId={activeEventId}
       eventName={activeEvent}
@@ -38,18 +38,18 @@ function Art() {
       schoolId={schoolId}
       teamIndex={registeredTeams.length + i + 1}
       title={`Team:`+registeredTeams.length + i + 1}
-    />
-  ))}
+     />
+      ))}
   
-  {registeredTeams.map((team, index) => (
-    <RegisteredTeam
+      {registeredTeams.map((team, index) => (
+        <RegisteredTeam
       key={team.teamId}
       team={team}
       eventId={activeEventId}
       schoolId={schoolId}
       teamIndex={index + 1}
-    />
-  ))}
+      />
+      ))}
     </div>
     </AnimatedPage>
     :<Navigate to={'/signIn'} replace={true}/>

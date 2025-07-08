@@ -21,6 +21,7 @@ import GroupDrama from './Events/GroupDrama';
 import GroupIntrument from './Events/GroupInstrument';
 import Art from './Events/Art';
 import Coding from './Events/Coding';
+import StaffContact from './components/StaffContact';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
     <Route path='/signIn' element={<SignIn/>} />
     <Route element={<Layout/>}>
       <Route path='/dashboard' element={<Dashboard/>} />
+      <Route path='/teacherInfo' element={<StaffContact/>}/>
       <Route path='/classicaldance' element={<ClassicalDance/>}/>
       <Route path='/triquizzard' element={<Triquizzard/>}/>
       <Route path='/participants' element={<Participants/>}/>

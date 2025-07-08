@@ -524,6 +524,30 @@ app.post('/vinterbash/eventParticipantMap',async(req,res)=>{
     }
 });
 
+app.post('/vinterbash/teacherRegister',async(req,res)=>{
+    try {
+        console.log(req.body);
+        return res.send("Inserted Successfully");
+        
+    } catch (error) {
+         console.log(error);
+    }
+})
+
+app.post('/vinterbash/teacherInfo',async(req,res)=>{
+    try {
+        const {schoolId}=req.body;
+        return res.json({
+            teacher1name:schools[schoolId].teacher1name,
+            teacher1number:schools[schoolId].teacher1number,
+            teacher2name:schools[schoolId].teacher2name,
+            teacher2number:schools[schoolId].teacher2number,
+        });
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 // Start server
 app.listen(PORT, () => {
   console.log(`✅ Backend running at http://localhost:${PORT}`);

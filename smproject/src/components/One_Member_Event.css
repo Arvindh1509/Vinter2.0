@@ -79,6 +79,26 @@
   background-color: #ec7f40;
 }
 
+.schoolDetails{
+  display: flex;
+  flex:1;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.staffNumber{
+  display: flex;
+  align-items: center;
+  margin-left: 10%;
+}
+
+.staffName{
+  display: flex;
+  align-items: center;
+  margin-right: 10%;
+  justify-content: center;
+}
+
 /* Make responsive adjustments */
 @media (max-width: 600px) {
   .register_container {
