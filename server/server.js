@@ -12,6 +12,30 @@ app.use(cors()); // allow requests from any origin (dev)
 app.use(bodyParser.json()); // to parse JSON bodies
 
 // Dummy database (for testing)
+
+const events={
+    "eventNames":[
+        "Chordially Yours!",
+        "Acoustic Nirvana",
+        "Nalla Otrainga da Reel-uh!",
+        "Imitation Game",
+        "Unnai Kaanathu..!!",
+        "Drop the Beat",
+        "Ar(T)elic!",
+        "DOOMSDAY: The Final Frame",
+        "Koodu Vittu Koodu",
+        "Time Traveller's Theatre",
+        "The Triquizzard Tournament 5.O",
+        "Ctrl + Alt + Decrypt",
+        "No Time To Solve",
+        "Vinter Bowl-Out: Turf Cricket",
+        "Vinter Kick-Off: 5-A Side Football",
+        "Coronation: Mr. & Ms. Vinterbash",
+        "Vinter Goal-Rush: FIFA '25"
+            ]
+}
+
+
 const schools = {
   "1": {
     schoolName:"Vageesha",
@@ -545,6 +569,15 @@ app.post('/vinterbash/teacherInfo',async(req,res)=>{
         });
     } catch (error) {
         console.log(error);
+    }
+})
+
+app.get('/vinterbash/getAllEvents',async(req,res)=>{
+    try {
+        return res.json(events);
+    } catch (error) {
+        console.log(error);
+        
     }
 })
 

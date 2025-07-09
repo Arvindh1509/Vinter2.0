@@ -146,14 +146,14 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
               <FlexBetween>
                 <Box display="flex" alignItems="center" flexDirection="column" gap="0.5rem">
                   <img
-  src={logo}
-  alt="logo"
-  width="140px"
-  style={{ transform: 'rotate(70deg)',marginLeft:'10px' }}
-  onClick={() => {
-    navigate(`/dashboard`);
-  }}
-/>
+                    src={logo}
+                    alt="logo"
+                    width="140px"
+                    style={{ transform: 'rotate(70deg)',marginLeft:'10px' }}
+                    onClick={() => {
+                      navigate(`/dashboard`);
+                    }}
+                  />
                 </Box>
                 <IconButton onClick={() => setSidebarOpen(!isSidebarOpen)}>
                   <ChevronLeftIcon />

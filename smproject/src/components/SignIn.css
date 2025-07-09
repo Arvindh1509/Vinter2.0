@@ -12,6 +12,7 @@
     align-items: center;
     height: 100vh;
     background-color: white;
+    padding-bottom: 20px;
 }
 
 .login_container{

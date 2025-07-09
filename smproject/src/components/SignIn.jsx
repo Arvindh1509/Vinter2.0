@@ -41,7 +41,9 @@ function SignIn() {
         <AnimatedPage>
         <div className='login'>
            
-                <img className='login_logo' src={logo} alt="Logo"/>
+                <img className='login_logo' src={logo} alt="Logo" onClick={()=>{
+                    navigate(`/homepage`)
+                }}/>
             
 
             <div className='login_container'>
@@ -54,10 +56,11 @@ function SignIn() {
                     <input type='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
                     <button className='login_signin' type='submit' onClick={signin}> Sign In</button>
                 </form>
-
+                <p style={{color:"red"}}>Please paste the exact School Name and Password given</p>
                 <p>
                     By Signing in here you accept to all our term and conditions
                 </p>
+                <p>For further queries contact : 7010184600</p>
             </div>
         </div>
         </AnimatedPage>

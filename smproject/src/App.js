@@ -1,4 +1,6 @@
 import './App.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 import SignIn from './components/SignIn';
 import Layout from './templates/Layout';
@@ -22,14 +24,23 @@ import GroupIntrument from './Events/GroupInstrument';
 import Art from './Events/Art';
 import Coding from './Events/Coding';
 import StaffContact from './components/StaffContact';
+import Homepage from './general/Homepage';
+import Events from './general/Events';
+import Contact from './general/Contact';
+import Navbar from './general/Navbar';
 
 function App() {
   return (
     <div className="App">
     <BrowserRouter>
     <Routes>
-    <Route path='/' element={<Navigate to='/signIn' replace/>}/>
+    <Route path='/' element={<Navigate to='/homepage' replace/>}/>
     <Route path='/signIn' element={<SignIn/>} />
+    <Route element={<Navbar/>}>
+      <Route path='/homepage' element={<Homepage/>}/>
+      <Route path='/events' element={<Events/>}/>
+      <Route path='/POC' element={<Contact/>}/>
+      </Route>
     <Route element={<Layout/>}>
       <Route path='/dashboard' element={<Dashboard/>} />
       <Route path='/teacherInfo' element={<StaffContact/>}/>
