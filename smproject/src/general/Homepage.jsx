@@ -1,123 +1,245 @@
-import { IconButton, Toolbar, Typography, Button, Box } from '@mui/material'
-import React, {  useState } from 'react'
-import FlexBetween from '../templates/FlexBetween'
-import { useStateValue } from '../StateProvider';
-import { useNavigate } from 'react-router-dom';
-import Navbar from './Navbar';
-import Slider from 'react-slick';
-import logo1 from '../assets/srivv_logo_2.png'
-import logo2 from '../assets/srivv_osa_logo.png'
-import AnimatedPage from '../templates/AnimatedPage';
+import {
+  Box,
+  Typography,
+  Button,
+  Toolbar,
+  useTheme,
+  useMediaQuery
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import Slider from "react-slick";
+import AnimatedPage from "../templates/AnimatedPage";
+import FlexBetween from "../templates/FlexBetween";
+import logo1 from "../assets/srivv_logo_2.png";
+import logo2 from "../assets/srivv_osa_logo.png";
 
 function Homepage() {
-  const navigate=useNavigate();
-   const settings = {
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const downMd = useMediaQuery(theme.breakpoints.down("md"));  // < 960 px
+  const downSm = useMediaQuery(theme.breakpoints.down("sm"));  // < 600 px
+
+  const settings = {
     dots: true,
     infinite: true,
-    speed: 800, 
+    speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 4000,
     pauseOnHover: true,
   };
-    
+
+  /* helper widths */
+  const sideMargin = downSm ? "4%" : downMd ? "8%" : "17%";
+
   return (
     <AnimatedPage>
-     <Box
-    sx={{
-      animation: "fadeIn 1.5s ease-in-out",
-      "@keyframes fadeIn": {
-        from: { opacity: 0 },
-        to: { opacity: 1 }
-      }
-    }}
-  >
-    <div>
-        <Box display="flex" flexDirection="column"  marginTop="2%">
-        <Typography fontWeight={"bold"} fontFamily='nevis, `sans-serif`' fontSize={"4rem"} sx={{color: "black", textAlign:"center"}}>
-        V   I   N   T   E   R   B   A   S   H    '25
-        </Typography>
-        <Typography fontWeight={"bold"} fontFamily='nevis, `sans-serif`' fontSize={"2rem"} sx={{color: "black", textAlign:"center"}}>
-        CATCH-UP ! RISE ! TAKE-OVER
-        </Typography>
+      <Box
+        sx={{
+          animation: "fadeIn 1.5s ease-in-out",
+          "@keyframes fadeIn": { from: { opacity: 0 }, to: { opacity: 1 } },
+          px: downSm ? 1 : 0,           /* lite horizontal pad for tiny phones */
+        }}
+      >
+        {/* ===== title ===== */}
+        <Box display="flex" flexDirection="column" mt="2%">
+          <Typography
+            fontWeight="bold"
+            fontFamily="nevis, sans-serif"
+            fontSize="4rem"               /* original size */
+            sx={{
+              color: "black",
+              textAlign: "center",
+              lineHeight: downSm ? 1.1 : 1,  // prevent wrap overlap
+              fontSize: downSm ? "2.5rem" : downMd ? "3rem" : "4rem",
+            }}
+          >
+            V&nbsp;I&nbsp;N&nbsp;T&nbsp;E&nbsp;R&nbsp;B&nbsp;A&nbsp;S&nbsp;H&nbsp;’25
+          </Typography>
+
+          <Typography
+            fontWeight="bold"
+            fontFamily="nevis, sans-serif"
+            fontSize="2rem"               /* original size */
+            sx={{
+              color: "black",
+              textAlign: "center",
+              fontSize: downSm ? "1.3rem" : downMd ? "1.6rem" : "2rem",
+            }}
+          >
+            CATCH-UP&nbsp;!&nbsp;RISE&nbsp;!&nbsp;TAKE-OVER
+          </Typography>
         </Box>
-        <Box sx={{ width: '100%', maxWidth: '1000px', margin: 'auto', border:'0.3rem solid  #FEC000', borderRadius: '15px' }}>
-            <Slider {...settings}>
-            {[1, 2, 3, 4, 5, 6, 7].map((index) => ( 
-                <Box key={index} sx={{ position: 'relative' }}>
-             <img
-              src={require(`../assets/org_pics/assets/pic${index}.jpg`)}
-              alt={`My pics in navbar ${index}`}
-              style={{ width: '100%', height: 'auto', borderRadius: '10px' }}
+
+        {/* ===== carousel ===== */}
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: downSm ? 320 : downMd ? 700 : 1000, // shrink below 960 px
+            mx: "auto",
+            mt: 2,
+            border: "0.3rem solid #FEC000",
+            borderRadius: 3,
+          }}
+        >
+          <Slider {...settings}>
+            {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+              <Box key={i}>
+                <Box
+                  component="img"
+                  src={require(`../assets/org_pics/assets/pic${i}.jpg`)}
+                  alt={`carousel ${i}`}
+                  sx={{ width: "100%", height: "auto", borderRadius: 2 }}
                 />
-                </Box>
-                    ))}
-            </Slider>
+              </Box>
+            ))}
+          </Slider>
         </Box>
-        <Box display="flex" borderRadius="2rem" justifyContent="space-between" marginLeft="17%" marginTop="2%" marginRight="17%" sx={{backgroundColor:"black"}} padding="2%">
-        <Typography fontWeight={"bold"} fontFamily='nevis, `sans-serif`' fontSize={"2rem"} sx={{color: "white", textAlign:"center"}}>
-        Click here to register for Events
-        </Typography>
-        <Button onClick={() => {navigate(`/signIn`); }} sx={{
-            backgroundColor:"#F37D00",
-            color:"white",
-            '&:hover': {
-            backgroundColor: "#FEC000",
-        },
 
-        }}>Register</Button>
+        {/* ===== register strip ===== */}
+        <FlexBetween
+          sx={{
+            flexWrap: downSm ? "wrap" : "nowrap",
+            gap: 2,
+            bgcolor: "black",
+            borderRadius: 4,
+            px: 3,
+            py: 2,
+            mt: 3,
+            ml: sideMargin,
+            mr: sideMargin,
+          }}
+        >
+          <Typography
+            fontWeight="bold"
+            fontFamily="nevis, sans-serif"
+            fontSize="2rem"                 /* keep original */
+            sx={{
+              color: "white",
+              fontSize: downSm ? "1.3rem" : "2rem",
+              textAlign: downSm ? "center" : "left",
+              flex: "1 1 240px",
+            }}
+          >
+            Click here to register for Events
+          </Typography>
+
+          <Button
+            onClick={() => navigate("/signIn")}
+            sx={{
+              bgcolor: "#F37D00",
+              color: "white",
+              "&:hover": { bgcolor: "#FEC000" },
+              width: downSm ? "100%" : "auto",
+              px: 4,
+            }}
+          >
+            Register
+          </Button>
+        </FlexBetween>
+
+        {/* ===== about ===== */}
+        <Box mt={4}>
+          <Typography variant="h4" textAlign="center" mb={2}>
+            About&nbsp;Us
+          </Typography>
+
+          <Typography
+            component="p"
+            sx={{
+              width: downSm ? "90%" : "66%",
+              mx: "auto",
+              textAlign: "justify",
+              fontSize: "1rem",
+            }}
+          >
+            With the blessings of the Almighty, the Old Students Association of
+            Sri Vageesha Vidhyashram has been successfully conducting
+            “Vinterbash” – our flagship interschool competition which showcases
+            the best and brightest minds from various schools in Trichy for the
+            past four years. Join us to witness young minds unleash their
+            creativity, skill, and strategy in a series of competitive events
+            ranging from riveting debates, dazzling performances, cheery worthy
+            goals, and intriguing intellect, as the fourth edition of Vinterbash
+            is just around the corner – an event ‘where champions rise.’
+            Registrations are now open. Mark your calendars for July 26 as we
+            welcome you all to ignite dreams and define victories with us!
+          </Typography>
         </Box>
-        <Box>
-            <h1>About Us</h1>
-            <h3 style={{
-                display: "flex",
-                justifyContent : "center",
-                alignItems: "center",
-                flexDirection: "column",
-                width:"66%",
-                marginLeft: "17%",
-                textAlign:"justify"
-            }}>
-        With the blessings of the Almighty, the Old Students Association of Sri Vageesha Vidhyashram has been successfully conducting “Vinterbash” – our flagship interschool competition which showcases the best and brightest minds from various schools in Trichy for the past four years. Join us  to witness young minds unleash their creativity, skill, and strategy in a series of competitive events ranging from riveting debates, dazzling performances, cheery worthy goals, and intriguing intellect, as the fourth edition of Vinterbash is just around the corner – an event ‘where  champions rise.’ Registrations are now open. Mark your calendars for July 26 as we welcome you all to ignite dreams and define victories with us!
-            </h3>
-        </Box>
-        <div>
+
+        {/* ===== footer ===== */}
         <Toolbar
-            sx={{display:'flex', justifyContent: "space-between" , background: "black"}}>
-            <FlexBetween>
-            <Box display="flex" alignItems="center" flexDirection="column" gap="0.5rem">
-            <Typography fontWeight={"bold"} fontSize={"1.5rem"} sx={{color: "white"}} >
-           © Developed by Tech Team Of Vinterbash
-            </Typography>
-                  </Box>
-            </FlexBetween>
-
-            {/* Right Side */}
-            <FlexBetween gap="1.5rem" marginLeft="10rem">
-          <FlexBetween>
-            <Box component="img"
-                            alt='profile'
-                            src={logo1}
-                            height={"138px"}
-                            width="138px"
-                           
-                            sx={{objectFit:"cover"}} />
-            <Box component="img"
-                            alt='profile'
-                            src={logo2}
-                            height={"200px"}
-                            width="200px"
-                           
-                            sx={{objectFit:"cover"}} />
+          sx={{
+            flexDirection: downSm ? "column" : "row",
+            bgcolor: "black",
+            mt: 4,
+            px: 3,
+            py: 3,
+            gap: downSm ? 2 : 0,
+          }}
+        >
+        <Box display="flex" flexDirection="column">
+          <Typography
+            fontWeight="bold"
+            fontSize="1.5rem"
+            sx={{
+              color: "white",
+              fontSize: downSm ? "1.1rem" : "1.5rem",
+              textAlign: "center",
+            }}
+          >
+            © Developed by Tech Team Of Vinterbash
+          </Typography>
+          <Box display="flex" flexDirection="row" justifyContent="space-around" marginTop="2.5%">
+          <Typography
+            fontWeight="bold"
+            fontSize="1.5rem"
+            sx={{
+              color: "white",
+              fontSize: downSm ? "1.1rem" : "1.5rem",
+            }}
+            
+          >
+            Arvindh Lakshman
+          </Typography>
+          <Typography
+            fontWeight="bold"
+            fontSize="1.5rem"
+            sx={{
+              color: "white",
+              fontSize: downSm ? "1.1rem" : "1.5rem",
+            }}
+          >
+            Shrihari
+          </Typography>
+          </Box>
+            </Box>
+          <FlexBetween gap={2} ml={downSm ? 0 : "auto"}>
+            <Box
+              component="img"
+              src={logo1}
+              alt="srivv"
+              sx={{
+                width: downSm ? 120 : 100,
+                height: "auto",
+              }}
+            />
+            
+            <Box
+              component="img"
+              src={logo2}
+              alt="osa"
+              sx={{
+                width: downSm ? 120 : 200,
+                height: "auto",
+              }}
+            />
           </FlexBetween>
-      </FlexBetween>
         </Toolbar>
-    </div>
-    </div>
-    </Box>
+      </Box>
     </AnimatedPage>
-  )
+  );
 }
 
-export default Homepage
+export default Homepage;

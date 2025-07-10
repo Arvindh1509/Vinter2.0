@@ -1,118 +1,124 @@
-/* Container for the form */
-.register_container {
-  width: 90%;
-  max-width: 600px;
-  min-width: 280px;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  border-radius: 5px;
-  border: 2px solid #f9bc25;
-  padding: 20px;
-  background-color: white;
-  margin-top: 30px;
-  box-sizing: border-box;
+/* ========= Root helpers ========= */
+:root {
+  --brand-amber: #f9bc25;
+  --brand-amber-dark: #ec7f40;
+  --field-h-sm: 34px;
+  --field-h-lg: 42px;
+  --gap: clamp(12px, 2.5vw, 24px);
+  --radius: 6px;
+  --font-base: clamp(0.9rem, 2vw, 1rem);
+  --font-lg: clamp(1.25rem, 3vw, 2rem);
 }
 
-/* Heading inside container */
-.register_container > h1 {
-  font-weight: 500;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* Form label */
-.register_container > form > h5 {
-  margin-bottom: 5px;
-}
-
-/* Input field */
-.register_form,
-.register_form_error {
-  height: 35px;
-  margin-bottom: 10px;
-  background-color: gainsboro;
-  width: 100%;
-  border-radius: 5px;
-  border: none;
-  padding: 0 10px;
-  box-sizing: border-box;
-}
-
-.register_form_error {
-  border: 2px solid red;
-}
-
-/* Error message styling */
-.error {
-  padding-top: 1px;
-  padding-bottom: 5px;
-  color: red;
-  font-size: 0.9em;
-}
-
-/* Page-level wrapper */
+/* ========= Page wrapper ========= */
 .loginONE {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
-  padding: 20px;
+  width: 100%;
+  padding: var(--gap);
   box-sizing: border-box;
-  width: 100%;
+  background: #fff;
 }
 
-/* Submit button */
+/* ========= Registration Card ========= */
+.register_container {
+  width: min(100%, 600px);
+  /* never narrower than 280 px */
+  min-width: 280px;
+  padding: var(--gap);
+  border: 2px solid var(--brand-amber);
+  border-radius: var(--radius);
+  background: #fff;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+/* Heading */
+.register_container > h1 {
+  font-weight: 600;
+  font-size: var(--font-lg);
+  text-align: center;
+  margin: 0;
+}
+
+/* ========= Form ========= */
+.register_container form {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--gap) * 0.6);
+}
+
+/* Label */
+.register_container form > h5 {
+  margin: 0 0 4px 2px;
+  font-size: var(--font-base);
+}
+
+/* Inputs */
+.register_form,
+.register_form_error {
+  height: var(--field-h-sm);
+  background: gainsboro;
+  width: 100%;
+  border: none;
+  border-radius: var(--radius);
+  padding-inline: 10px;
+  box-sizing: border-box;
+  font-size: var(--font-base);
+}
+
+.register_form_error { border: 2px solid red; }
+
+/* Error text */
+.error {
+  color: red;
+  font-size: 0.85rem;
+  margin: -4px 0 4px;
+}
+
+/* ========= Submit button ========= */
 .login_signin {
-  background-color: #f9bc25;
-  border-radius: 5px;
+  height: var(--field-h-sm);
   width: 100%;
-  height: 35px;
-  border: 1px solid;
-  margin-top: 10px;
-  color: white;
-  font-weight: 650;
-  font-size: 1em;
+  background: var(--brand-amber);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  color: #fff;
+  font-weight: 700;
+  font-size: var(--font-base);
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
-.login_signin:hover {
-  background-color: #ec7f40;
-}
+.login_signin:hover { background: var(--brand-amber-dark); }
 
-.schoolDetails{
-  display: flex;
-  flex:1;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.staffNumber{
+/* ========= Row groups ========= */
+.schoolDetails,
+.staffNumber,
+.staffName {
   display: flex;
   align-items: center;
-  margin-left: 10%;
+  gap: var(--gap);
 }
 
-.staffName{
-  display: flex;
-  align-items: center;
-  margin-right: 10%;
-  justify-content: center;
+/* Allow wrapping on narrow screens */
+.schoolDetails { flex-wrap: wrap; }
+
+/* ========= Breakpoints ========= */
+@media (min-width: 480px) {
+  :root { --field-h-sm: 36px; }
 }
 
-/* Make responsive adjustments */
-@media (max-width: 600px) {
-  .register_container {
-    padding: 15px;
-    margin-top: 20px;
-  }
+@media (min-width: 768px) {
+  :root { --field-h-sm: 40px; --field-h-lg: 48px; }
+  .register_container { gap: calc(var(--gap) * 1.2); }
+  .login_signin { font-size: 1.05rem; }
+}
 
-  .register_form,
-  .register_form_error {
-    height: 32px;
-  }
-
-  .login_signin {
-    height: 32px;
-    font-size: 0.95em;
-  }
+@media (min-width: 1024px) {
+  :root { --field-h-sm: 42px; }
+  .register_container { padding: calc(var(--gap) * 1.4); }
 }
