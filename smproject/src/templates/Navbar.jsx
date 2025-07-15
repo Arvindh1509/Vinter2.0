@@ -13,15 +13,16 @@ function Navbar({isSidebarOpen, setSidebarOpen }) {
   const navigate=useNavigate();
 
      function handleClose(e){
-      if(!staffName1&&!staffName2){
-        alert("Please fill the staff contact information from the Sidebar")
-      }else{
-    dispatch({
-      type:'logout'
-    })
-    console.log(e);
-    navigate("/signIn");
-  }
+  //     if(!staffName1&&!staffName2){
+  //       alert("Please fill the staff contact information from the Sidebar")
+  //     }else{
+  //   dispatch({
+  //     type:'logout'
+  //   })
+  //   console.log(e);
+  //   navigate("/signIn");
+  // }
+  navigate("/signIn");
 }
 
     function handleClick(e){
