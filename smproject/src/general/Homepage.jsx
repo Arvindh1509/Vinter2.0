@@ -84,7 +84,7 @@ function Homepage() {
           }}
         >
           <Slider {...settings}>
-            {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <Box key={i}>
                 <Box
                   component="img"
@@ -152,19 +152,16 @@ function Homepage() {
               mx: "auto",
               textAlign: "justify",
               fontSize: "1rem",
+              fontWeight:"bold",
+            fontFamily:"nevis, sans-serif"
             }}
           >
-            With the blessings of the Almighty, the Old Students Association of
-            Sri Vageesha Vidhyashram has been successfully conducting
-            “Vinterbash” – our flagship interschool competition which showcases
-            the best and brightest minds from various schools in Trichy for the
-            past four years. Join us to witness young minds unleash their
-            creativity, skill, and strategy in a series of competitive events
-            ranging from riveting debates, dazzling performances, cheery worthy
-            goals, and intriguing intellect, as the fourth edition of Vinterbash
-            is just around the corner – an event ‘where champions rise.’
-            Registrations are now open. Mark your calendars for July 26 as we
-            welcome you all to ignite dreams and define victories with us!
+           <p>With the blessings of the Almighty, the Old Students Association of Sri Vageesha Vidhyashram proudly presents the fifth edition of Vinterbash – our flagship inter-school fest that has lit up Trichy with talent, creativity, and youthful spirit for the past four years.</p>
+<p>What began as a celebration of excellence has now grown into one of the city’s most anticipated events, drawing the brightest students from schools across the region. From fierce debates and captivating performances to high-octane sports and mind-bending intellectual challenges, Vinterbash is where brilliance takes centre stage.</p>
+<p>This year, it’s bigger. It’s bolder. And it’s bursting with even more excitement.</p>
+<p>Vinterbash is not just a competition – it’s a stage where champions catch-up, rise, and take-over. It’s where passion meets purpose, and where young minds push the limits of what’s possible.</p>
+<p>Let the countdown begin. Let the spirit ignite. Let Vinterbash roar!</p>
+
           </Typography>
         </Box>
 
@@ -189,7 +186,7 @@ function Homepage() {
               textAlign: "center",
             }}
           >
-            © Developed by Tech Team Of Vinterbash
+            © Developed by Tech Team Of SriVV OSA
           </Typography>
           <Box display="flex" flexDirection="row" justifyContent="space-around" marginTop="2.5%">
           <Typography

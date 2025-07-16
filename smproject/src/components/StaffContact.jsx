@@ -64,10 +64,10 @@ function StaffContact() {
       await axios.post('/vinterbash/teacherRegister', {
         
         schoolId,
-        teacher1name:staffName1,
-        teacher2name:staffName2,
-        teacher1number:staffNumber1,
-        teacher2number:staffNumber2
+        teacher1Name:staffName1,
+        teacher2Name:staffName2,
+        teacher1Phone:staffNumber1,
+        teacher2Phone:staffNumber2
       });
 
       alert('Staff Contact Updated');

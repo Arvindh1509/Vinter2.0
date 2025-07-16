@@ -172,6 +172,42 @@ const schools = {
             }
         ]
     },
+    {
+        eventId:"cu1",
+        eventName:"Chordially Yours!",
+        teams: [
+            {
+                teamId: "101cu1t1",
+                teamName: "Santhanam cu1 t1",
+                participants: [
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Shrihari S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Arvindh S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "jayavanth S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Shrihari S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Arvindh S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "jayavanth S"
+                    }
+                ]
+            }
+        ]
+    }
     ],
 participants:[
     {
@@ -224,7 +260,7 @@ participants:[
     }
 ]
 },
-"Sri Akilandeswari Vidyalaya":{
+"KNMS":{
     schoolId:2,
     schoolName:"KNMS",
     password: "abcdef",
@@ -333,6 +369,42 @@ participants:[
     {
         eventId: "bu1",
         eventName: "Drop the Beat",
+        teams: [
+            {
+                teamId: "101cu1t1",
+                teamName: "Santhanam cu1 t1",
+                participants: [
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Shrihari S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Arvindh S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "jayavanth S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Shrihari S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "Arvindh S"
+                    },
+                    {
+                        participantId: "101cu1t1p1",
+                        participantName: "jayavanth S"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        eventId:"cu1",
+        eventName:"Chordially Yours!",
         teams: [
             {
                 teamId: "101cu1t1",
@@ -486,7 +558,7 @@ app.post('/vinterbash/events',async(req,res)=>{
   // Find if the event is already registered
   
   const matchingEvent = regTeams.find(e => e.eventName === activeEvent);
-  console.log(matchingEvent);
+//   console.log(matchingEvent);
 
   if (matchingEvent) {
 //     return res.status(200).json({
@@ -503,6 +575,10 @@ app.post('/vinterbash/events',async(req,res)=>{
       teams: []
     });
   }
+
+
+        console.log(res.data);
+        
     } catch (error) {
         console.log(error);
         
@@ -569,6 +645,16 @@ app.post('/vinterbash/teacherInfo',async(req,res)=>{
         });
     } catch (error) {
         console.log(error);
+    }
+})
+
+app.post('/vinterbash/teacherRegister',async(req,res)=>{
+    try {
+       console.log(res.data);
+        
+    } catch (error) {
+        console.log(error);
+        
     }
 })
 
