@@ -10,7 +10,7 @@ function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
   const [p2, setP2] = useState('');
   const[{schoolName}]=useStateValue();
 
-  function handleEvent(e) {
+  const handleEvent = async (e) => {
     e.preventDefault();
       
     if (p1 && p2) {
@@ -22,7 +22,8 @@ function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
         p2: { participantId: participantId2, participantName: p2 },
         };
       const participants=Object.values(participantObj);
-      
+       try {
+          await
       axios.post('/vinterbash/register', {
         participants,
         eventId,
@@ -36,6 +37,9 @@ function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
           alert('Added Successfully');
         })
         .catch((error) => alert(error.response?.data || 'Error adding team'));
+      }catch (error){
+        alert(error.response?.data || 'Error updating participants');
+      }
        
     } else {
       alert('Fill all required participant details');

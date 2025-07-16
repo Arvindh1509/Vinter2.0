@@ -60,7 +60,7 @@ function SignIn() {
                 <p>
                     By Signing in here you accept to all our term and conditions
                 </p>
-                <p>For further queries contact : 7010184600</p>
+                <p>For further queries contact : 7010089170</p>
             </div>
         </div>
         </AnimatedPage>

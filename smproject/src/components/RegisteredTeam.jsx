@@ -50,29 +50,25 @@ const RegisteredTeam = ({ eventId, team, schoolId, teamIndex, maxMember }) => {
     setParticipants([...participants, newParticipant]);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
   const hasBlank = participants.some((p) => p.participantName.trim() === '');
       if(hasBlank)
         {alert('Participant Names can not be blank');
           return
         }
    else{
-    axios
-      .post('/vinterbash/updateTeamParticipants', {
-        schoolId,
-        schoolName,
-        eventId,
-        teamId: team.teamId,
-        participants,
-      })
+    try {
+      await axios.post('/vinterbash/updateTeamParticipants', {schoolId,schoolName,eventId,teamId: team.teamId,participants,})
       .then(() => {
         alert('Updated successfully');
         setIsEditing(false);
       })
       .catch((err) => {
-        console.error(err);
         alert('Failed to update');
       });
+    } catch (error) {
+      alert(error.response?.data || 'Error updating participants');
+    }
    } 
   };
 

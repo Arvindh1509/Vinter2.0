@@ -14,17 +14,15 @@ function Eight_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
   const [p7, setP7] = useState('');
   const [p8, setP8] = useState('');
 
-  function handleEvent(e) {
+  const handleEvent = async (e) => {
     e.preventDefault();
 
     const participantNames = [p1, p2, p3, p4, p5, p6, p7, p8];
 
-    // Get filled participants with their index
     const filledParticipants = participantNames
       .map((name, index) => ({ name: name.trim(), index }))
       .filter(participant => participant.name !== '');
 
-    // Validate minimum required
     if (filledParticipants.length < minMember) {
       alert(`Please enter at least ${minMember} participant(s).`);
       return;
@@ -37,12 +35,8 @@ function Eight_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
       participantId: `${teamId}p${index + 1}`,
       participantName: name
     }));
-       axios.post('/vinterbash/register', {
-      participants: participantArray,
-      eventId,
-      schoolId,
-      teamId
-    })
+      try {
+        await axios.post('/vinterbash/register', {participants: participantArray,eventId,schoolId,teamId})
       .then(() => {
         // Reset fields
         setP1('');
@@ -55,9 +49,10 @@ function Eight_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
         setP8('');
         alert('Added Successfully');
       })
-      .catch((error) => alert(error.response?.data || 'Error adding team'));
-
-   
+      .catch((error) => alert(error.response?.data || 'Error adding team'));        
+      } catch (error) {
+        alert(error.response?.data || 'Error updating participants');
+      }
   }
 
   return (

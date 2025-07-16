@@ -9,7 +9,7 @@ function Three_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
   const [p2, setP2] = useState('');
   const [p3, setP3] = useState('');
 
-  function handleEvent(e) {
+  const handleEvent = async (e) => {
     e.preventDefault();
     if (p1 && p2 && p3) {
       const teamId = `${schoolId}${eventId}t${teamIndex}`;
@@ -22,13 +22,8 @@ function Three_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
         p3: { participantId: participantId3, participantName: p3 },
         };
       const participants=Object.values(participantObj);
-
-      axios.post('/vinterbash/register', {
-        participants,
-        eventId,
-        schoolId,
-        teamId
-      })
+        try {
+          await axios.post('/vinterbash/register', {participants,eventId,schoolId,teamId})
         .then(() => {
           setP1('');
           setP2('');
@@ -36,6 +31,9 @@ function Three_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
           alert('Added Successfully');
         })
         .catch((error) => alert(error.response?.data || 'Error adding team'));
+        } catch (error) {
+          alert(error.response?.data || 'Error updating participants');
+        }
     } else {
       alert('Fill all required participant details');
     }

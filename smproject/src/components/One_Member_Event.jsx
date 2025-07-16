@@ -9,7 +9,7 @@ function One_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
   const [p1, setP1] = useState('');
   const[{schoolName},dispatch]=useStateValue();
 
-  function handleEvent(e) {
+  const handleEvent = async (e) => {
     e.preventDefault();
     if (p1 ) {
       const teamId = `${schoolId}${eventId}t${teamIndex}`;
@@ -18,19 +18,17 @@ function One_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
         p1: { participantId: participantId1, participantName: p1 },
         };
       const participants=Object.values(participantObj);
-
-      axios.post('/vinterbash/register', {
-        participants,
-        eventId,
-        schoolId,
-        schoolName,
-        teamId
-      })
+        try {
+          await axios.post('/vinterbash/register', {participants,eventId,schoolId,schoolName,teamId})
         .then(() => {
           setP1('');
           alert('Added Successfully');
         })
         .catch((error) => alert(error.response?.data || 'Error adding team'));
+          
+        } catch (error) {
+           alert(error.response?.data || 'Error updating participants');
+        }
     } else {
       alert('Fill all required participant details');
     }  

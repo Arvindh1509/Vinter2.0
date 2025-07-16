@@ -11,7 +11,7 @@ function Five_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamI
   const [p4, setP4] = useState('');
   const [p5, setP5] = useState('');
  
-  function handleEvent(e) {
+  const handleEvent = async (e) => {
     e.preventDefault();
 
     const participantNames = [p1, p2, p3, p4, p5];
@@ -34,12 +34,8 @@ function Five_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamI
       participantId: `${teamId}p${index + 1}`,
       participantName: name
     }));
-      axios.post('/vinterbash/register', {
-      participants: participantArray,
-      eventId,
-      schoolId,
-      teamId
-    })
+      try {
+        await  axios.post('/vinterbash/register', {participants: participantArray,eventId,schoolId,teamId})
       .then(() => {
         // Reset fields
         setP1('');
@@ -50,7 +46,9 @@ function Five_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamI
         alert('Added Successfully');
       })
       .catch((error) => alert(error.response?.data || 'Error adding team'));
-  
+      } catch (error) {
+        alert(error.response?.data || 'Error updating participants');
+      }
   }
 
   return (
