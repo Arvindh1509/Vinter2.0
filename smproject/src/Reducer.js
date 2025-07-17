@@ -7,7 +7,8 @@ activeEventId:"",
 staffName1:"", 
 staffName2:"",
 staffNumber1:"",
-staffNumber2:""
+staffNumber2:"",
+refresh:false
 }
 
 function reducer(state,action) {
@@ -31,7 +32,8 @@ function reducer(state,action) {
                 staffName1:"", 
                 staffName2:"",
                 staffNumber1:"",
-                staffNumber2:""
+                staffNumber2:"",
+                refresh:false
             }
             break;
         case 'SidebarEvent':

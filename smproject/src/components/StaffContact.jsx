@@ -20,6 +20,7 @@ function StaffContact() {
   const [existingContact, setExistingContact] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [{ schoolName, schoolId }, dispatch] = useStateValue();
+  const[staffArray,setStaffArray]=useState([]);
 
   useEffect(() => {
     if (schoolId) {
@@ -31,11 +32,12 @@ function StaffContact() {
             setStaff1Number(res.data.teacher1number);
             setStaff2Name(res.data.teacher2name);
             setStaff2Number(res.data.teacher2number);
+            setStaffArray(prev => [...prev, staffName1, staffNumber1, staffName2, staffNumber2]);
           }
         })
         .catch(err => console.error("Error fetching staff contact:", err));
     }
-  }, [staffName1,staffName2,staffNumber1,staffNumber2]);
+  },[staffArray]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
