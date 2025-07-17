@@ -37,7 +37,7 @@ function StaffContact() {
         })
         .catch(err => console.error("Error fetching staff contact:", err));
     }
-  },[staffArray]);
+  },[schoolId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
