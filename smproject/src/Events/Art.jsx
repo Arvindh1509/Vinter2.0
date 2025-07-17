@@ -23,7 +23,7 @@ function Art() {
       .catch((error) => {
         console.log('Error fetching teams:', error);
       });
-  }, [registeredTeams]);
+  }, []);
 
   return (
     schoolName?

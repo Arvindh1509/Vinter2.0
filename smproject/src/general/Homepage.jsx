@@ -68,7 +68,7 @@ function Homepage() {
               fontSize: downSm ? "1.3rem" : downMd ? "1.6rem" : "2rem",
             }}
           >
-            CATCH-UP&nbsp;!&nbsp;RISE&nbsp;!&nbsp;TAKE-OVER
+            CATCH-UP&nbsp;.&nbsp;RISE&nbsp;.&nbsp;TAKE-OVER
           </Typography>
         </Box>
 
@@ -169,7 +169,7 @@ function Homepage() {
         <Toolbar
           sx={{
             flexDirection: downSm ? "column" : "row",
-            bgcolor: "black",
+            bgcolor:"#291611",
             mt: 4,
             px: 3,
             py: 3,

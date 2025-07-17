@@ -12,7 +12,7 @@ import StaffContact from './StaffContact';
 
 function Dashboard() {
   const [{ schoolId, schoolName }, dispatch] = useStateValue();
-  const [totalEvents, setTotalEvents] = useState();
+  const [totalEvents, setTotalEvents] = useState(17);
   const [ToRegEvents, setToRegEvents] = useState();
   const [partiallyReg, setPartiallyRegistered] = useState();
   const [fullReg, setFullyReg] = useState();
@@ -24,7 +24,6 @@ function Dashboard() {
         setToRegEvents(response.data.notRegistered);
         setPartiallyRegistered(response.data.partiallyRegistered);
         setFullyReg(response.data.fullyRegistered);
-        setTotalEvents(Number(response.data.fullyRegistered) + Number(response.data.notRegistered));
       });
   }, [schoolId]);
 
@@ -58,8 +57,8 @@ function Dashboard() {
             maxWidth="800px"
           >
             <Statbox title="Total Events" value={totalEvents || 0} />
-            <Statbox title="Registered Events" value={fullReg || 0} />
-            <Statbox title="Yet To Register" value={(totalEvents || 0) - (fullReg || 0)} />
+            <Statbox title="Fully Registered Events" value={fullReg || 0} />
+            <Statbox title="Partially Reg Events" value={partiallyReg || 0} />
           </Box>
           <Typography variant="h6" mt={5} mb={2} fontFamily= {`'nevis', sans-serif`}>
             View the Rulebook here ⬇

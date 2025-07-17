@@ -23,7 +23,7 @@ function GroupMusic() {
       .catch((error) => {
         console.log('Error fetching teams:', error);
       });
-  }, [registeredTeams]);
+  }, []);
 
   return (
 
