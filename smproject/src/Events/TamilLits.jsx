@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import axios from '../axios';
 import './Triquizzard.css';
@@ -12,29 +12,31 @@ import AnimatedPage from '../templates/AnimatedPage';
 function TamilLits() {
   const [{ schoolName, activeEvent, schoolId, activeEventId }] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
+    const [eventId, setEventId] = useState();
+  
 
-  useEffect(() => {
+  const fetchTeams = useCallback(() => {
+    if (!schoolName || !activeEvent) return;
+
     axios
       .post(`/vinterbash/events`, { schoolName, activeEvent })
       .then((response) => {
-        console.log('InsideTamilLits-->', response.data);
-
-        // Always set to an array to avoid null errors
-        if (Array.isArray(response.data.teams)) {
-          setRegisteredTeams(response.data.teams);
-        } else {
-          setRegisteredTeams([]);
-        }
+        console.log('InsideTriquizzard-->', response.data);
+        setRegisteredTeams(response.data.teams);
+        setEventId(response.data.eventId);
       })
       .catch((error) => {
         console.log('Error fetching teams:', error);
-        setRegisteredTeams([]); // fallback on error
       });
-  }, [registeredTeams]);
+  }, [schoolName, activeEvent]);
+
+  useEffect(() => {
+    fetchTeams(); // only runs on mount or when schoolName/activeEvent changes
+  }, [fetchTeams]);
 
   if (!schoolName) return <Navigate to="/signIn" replace />;
 
-  return (
+  return schoolName?(
     <AnimatedPage>
       <div className="ThreePEvent">
         {/* Render unregistered team forms */}
@@ -46,6 +48,7 @@ function TamilLits() {
             registeredTeams={registeredTeams}
             schoolId={schoolId}
             teamIndex={registeredTeams.length + i + 1}
+            onTeamUpdate={fetchTeams} 
           />
         ))}
 
@@ -57,10 +60,12 @@ function TamilLits() {
             eventId={activeEventId}
             schoolId={schoolId}
             teamIndex={index + 1}
+            onTeamUpdate={fetchTeams} 
           />
         ))}
       </div>
     </AnimatedPage>
+  ):(<Navigate to={'/signIn'} replace={true}/>
   );
 }
 

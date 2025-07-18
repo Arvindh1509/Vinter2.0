@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from '../axios';
-import './Triquizzard.css'
+import './Triquizzard.css';
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
 import One_Member_Event from '../components/One_Member_Event';
@@ -8,11 +8,14 @@ import { Navigate } from 'react-router-dom';
 import AnimatedPage from '../templates/AnimatedPage';
 
 function Art() {
-  const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
+  const [{ schoolName, activeEvent, schoolId, activeEventId }] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
 
-  useEffect(() => {
+  // Create fetch function and memoize it
+  const fetchTeams = useCallback(() => {
+    if (!schoolName || !activeEvent) return;
+
     axios
       .post(`/vinterbash/events`, { schoolName, activeEvent })
       .then((response) => {
@@ -23,36 +26,43 @@ function Art() {
       .catch((error) => {
         console.log('Error fetching teams:', error);
       });
-  }, []);
+  }, [schoolName, activeEvent]);
 
-  return (
-    schoolName?
+  useEffect(() => {
+    fetchTeams(); // only runs on mount or when schoolName/activeEvent changes
+  }, [fetchTeams]);
+
+  // Pass fetchTeams to child components if they need to refresh the list
+  return schoolName ? (
     <AnimatedPage>
-    <div className='ThreePEvent'>
-      {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
-     <One_Member_Event
-      key={`new-team-${i + 1}`}
-      eventId={activeEventId}
-      eventName={activeEvent}
-      registeredTeams={registeredTeams}
-      schoolId={schoolId}
-      teamIndex={registeredTeams.length + i + 1}
-      title={`Team:`+registeredTeams.length + i + 1}
-     />
-      ))}
-  
-      {registeredTeams.map((team, index) => (
-        <RegisteredTeam
-      key={team.teamId}
-      team={team}
-      eventId={activeEventId}
-      schoolId={schoolId}
-      teamIndex={index + 1}
-      />
-      ))}
-    </div>
+      <div className='ThreePEvent'>
+        {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
+          <One_Member_Event
+            key={`new-team-${i + 1}`}
+            eventId={activeEventId}
+            eventName={activeEvent}
+            registeredTeams={registeredTeams}
+            schoolId={schoolId}
+            teamIndex={registeredTeams.length + i + 1}
+            title={`Team: ` + (registeredTeams.length + i + 1)}
+            onTeamUpdate={fetchTeams} // optional: trigger refresh from inside child
+          />
+        ))}
+
+        {registeredTeams.map((team, index) => (
+          <RegisteredTeam
+            key={team.teamId}
+            team={team}
+            eventId={activeEventId}
+            schoolId={schoolId}
+            teamIndex={index + 1}
+            onTeamUpdate={fetchTeams} // optional: same here
+          />
+        ))}
+      </div>
     </AnimatedPage>
-    :<Navigate to={'/signIn'} replace={true}/>
+  ) : (
+    <Navigate to={'/signIn'} replace={true} />
   );
 }
 

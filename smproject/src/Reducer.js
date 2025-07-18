@@ -46,10 +46,10 @@ function reducer(state,action) {
         case 'staff':
             return{
                 ...state,
-                staffName1:action.payload.staffName1,
-                staffName2:action.payload.staffName2,
-                staffNumber1:action.payload.staffNumber1,
-                staffNumber2:action.payload.staffNumber2
+                staffName1:action.payload.staff1Name,
+                staffName2:action.payload.staff2Name,
+                staffNumber1:action.payload.staff1Number,
+                staffNumber2:action.payload.staff2Number
             }
     
         default:

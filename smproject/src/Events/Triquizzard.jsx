@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import axios from '../axios';
 import './Triquizzard.css';
@@ -11,26 +11,33 @@ import AnimatedPage from '../templates/AnimatedPage';
 function Triquizzard() {
   const [{ schoolName, activeEvent, schoolId, activeEventId }] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
+  const [eventId, setEventId] = useState();
 
-  useEffect(() => {
+  const fetchTeams = useCallback(() => {
+    if (!schoolName || !activeEvent) return;
+
     axios
       .post(`/vinterbash/events`, { schoolName, activeEvent })
       .then((response) => {
         console.log('InsideTriquizzard-->', response.data);
-        setRegisteredTeams(response.data.teams || []); // fallback to empty array
+        setRegisteredTeams(response.data.teams);
+        setEventId(response.data.eventId);
       })
       .catch((error) => {
         console.log('Error fetching teams:', error);
-        setRegisteredTeams([]); // fallback on error
       });
-  }, [registeredTeams]);
+  }, [schoolName, activeEvent]);
+
+  useEffect(() => {
+    fetchTeams(); // only runs on mount or when schoolName/activeEvent changes
+  }, [fetchTeams]);
 
   return schoolName ? (
     <AnimatedPage>
       <div className="ThreePEvent">
         {/* Add Three_Member_Team components if less than 3 teams */}
         {Array.isArray(registeredTeams) &&
-          Array.from({ length: Math.max(0, 3 - registeredTeams.length) }).map((_, i) => (
+          Array.from({ length: Math.max(0, 2 - registeredTeams.length) }).map((_, i) => (
             <Box key={`new-team-${i + 1}`} sx={{ width: '100%', maxWidth: '600px' }}>
               <Three_Member_Team
                 eventId={activeEventId}
@@ -38,6 +45,7 @@ function Triquizzard() {
                 registeredTeams={registeredTeams}
                 schoolId={schoolId}
                 teamIndex={registeredTeams.length + i + 1}
+                onTeamUpdate={fetchTeams} 
               />
             </Box>
           ))}
@@ -50,6 +58,7 @@ function Triquizzard() {
             eventId={activeEventId}
             schoolId={schoolId}
             teamIndex={index + 1}
+            onTeamUpdate={fetchTeams} 
           />
         ))}
       </div>

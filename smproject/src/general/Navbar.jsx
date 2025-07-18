@@ -13,7 +13,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate, Outlet } from "react-router-dom";
 import FlexBetween from "../templates/FlexBetween";
-import logo from "../assets/vinter_logo_2.png";
+import logo from "../assets/vinter_logo_1.png";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ function Navbar() {
           onClick={() => navigate("/homepage")}
           sx={{
             width: downSm ? 45 : 60,
-            transform: "rotate(100deg)",
+            transform: "rotate(80deg)",
             cursor: "pointer",
             my: downSm ? 1 : 0,
           }}

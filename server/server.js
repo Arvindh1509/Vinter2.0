@@ -45,6 +45,10 @@ const schools = {
     schoolId:1
   },
   "2": {
+    teacher1name:"Arvindh",
+    teacher1number:"8300475270",
+    teacher2name:"Lakshman",
+    teacher2number:"9345198715",
     schoolId:2,
     schoolName:"KNMS",
     password: "abcdef",
@@ -261,6 +265,10 @@ participants:[
 ]
 },
 "KNMS":{
+    teacher1name:"Arvindh",
+    teacher1number:"8300475270",
+    teacher2name:"Lakshman",
+    teacher2number:"9345198715",
     schoolId:2,
     schoolName:"KNMS",
     password: "abcdef",

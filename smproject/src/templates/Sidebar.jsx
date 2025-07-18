@@ -42,7 +42,6 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
   };
 
   const renderNavItem = (text,Id) => {    
-    console.log("EventName:-->",text);
 
     let lcText=''
     
@@ -85,7 +84,6 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
 } else {
   lcText = text.toLowerCase(); // default fallback
 }
-    console.log("lcText-->",lcText);
     const isActive = active === lcText;
        
 
@@ -101,7 +99,6 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
               activeEvent:text,
               activeEventId:Id
                     })
-              console.log('ActiveEvent-->',activeEvent,"ID-->",activeEventId);
           }}
           sx={{
             backgroundColor: isActive ? 'white' : 'transparent',

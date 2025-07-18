@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Box } from '@mui/material'
 import axios from '../axios';
 import './Triquizzard.css'
@@ -13,7 +13,9 @@ function TurfCricket() {
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
 
-  useEffect(() => {
+  const fetchTeams = useCallback(() => {
+    if (!schoolName || !activeEvent) return;
+
     axios
       .post(`/vinterbash/events`, { schoolName, activeEvent })
       .then((response) => {
@@ -24,10 +26,13 @@ function TurfCricket() {
       .catch((error) => {
         console.log('Error fetching teams:', error);
       });
-  }, [registeredTeams]);
+  }, [schoolName, activeEvent]);
 
-  return (
-    schoolName?
+  useEffect(() => {
+    fetchTeams(); // only runs on mount or when schoolName/activeEvent changes
+  }, [fetchTeams]);
+
+  return schoolName?(
     <AnimatedPage>
     <div className='ThreePEvent'>
   {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
@@ -38,6 +43,7 @@ function TurfCricket() {
       registeredTeams={registeredTeams}
       schoolId={schoolId}
       teamIndex={registeredTeams.length + i + 1}
+      onTeamUpdate={fetchTeams} 
     />
   ))}
   
@@ -48,11 +54,12 @@ function TurfCricket() {
       eventId={activeEventId}
       schoolId={schoolId}
       teamIndex={index + 1}
+      onTeamUpdate={fetchTeams} 
     />
   ))}
 </div>
 </AnimatedPage>
-:<Navigate to={'/signIn'} replace={true}/>
+  ):(<Navigate to={'/signIn'} replace={true}/>
   );
 }
 
