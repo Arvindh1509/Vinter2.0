@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Box } from '@mui/material'
 import axios from '../axios';
 import './Triquizzard.css'
-import Three_Member_Team from '../components/Three_Member_Team';
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
 import One_Member_Event from '../components/One_Member_Event';
@@ -10,7 +8,7 @@ import { Navigate } from 'react-router-dom';
 import AnimatedPage from '../templates/AnimatedPage';
 
 function Cubing() {
-  const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
+  const [{ schoolName, activeEvent, schoolId,activeEventId }] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
 
@@ -33,8 +31,7 @@ function Cubing() {
     fetchTeams(); // only runs on mount or when schoolName/activeEvent changes
   }, [fetchTeams]);
 
-  return 
-    schoolName?(
+  return schoolName?(
     <AnimatedPage>
     <div className='ThreePEvent'>
       {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
