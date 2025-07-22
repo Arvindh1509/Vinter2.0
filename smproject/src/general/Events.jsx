@@ -51,6 +51,46 @@ const imgMap = {
   "Vinter Goal-Rush: FIFA '25": gaming,
 };
 
+const timeMap ={
+  "Chordially Yours!": "9.15 AM to 11.15 AM",
+  "Acoustic Nirvana": "2.00PM - 4.00PM",
+  "Nalla Otrainga da Reel-uh!": "11.30AM - 1.30PM",
+  "Imitation Game": "Prelims: 2.30PM - 3.30PM | Finals: 4.00PM - 5.00PM",
+  "Unnai Kaanathu..!!": "9.15 AM to 11.15 AM",
+  "Drop the Beat": "2.00PM - 4.00PM",
+  "Ar(T)elic!": "2PM - 4PM",
+  "DOOMSDAY: The Final Frame": "",
+  "Koodu Vittu Koodu": "Prelims: 11.30AM - 12.30AM | Finals: 2.00PM - 4.00PM",
+  "Time Traveller's Theatre": "11.30 AM - 1.30PM",
+  "The Triquizzard Tournament 5.O": "Prelims: 9.30AM - 10.30AM | Finals: 11.30AM - 1.30PM ",
+  "Ctrl + Alt + Decrypt": "Prelims : 9.30AM - 10.30Am | Finals : 11.30AM - 1.30PM ",
+  "No Time To Solve": "Prelims: 2.00PM - 3.00PM | Finals: 4.00PM - 5.00PM ",
+  "Vinter Bowl-Out: Turf Cricket": "9AM - 6PM",
+  "Vinter Kick-Off: 5-A Side Football": "9AM - 6PM",
+  "Coronation: Mr. & Ms. Vinterbash": "Prelims: 10.30AM - 11.00AM | Finals: 5.00PM - 6.00PM ",
+  "Vinter Goal-Rush: FIFA '25": "Elimination: 11.30AM - 1.30PM | Knockouts: 2.00PM - 4.00PM",
+}
+
+const venueMap={
+  "Chordially Yours!": " Venue: Rangapriya",
+  "Acoustic Nirvana": " Venue: Hareetham",
+  "Nalla Otrainga da Reel-uh!": " Venue: Rangapriya",
+  "Imitation Game": "Prelims Venue: :3S,3U,3V | Finals Venue:  Hareetham",
+  "Unnai Kaanathu..!!": " Venue: Hareetham",
+  "Drop the Beat": " Venue: Rangapriya",
+  "Ar(T)elic!": " Venue: Physics Laboratory, Biology Laboratory",
+  "DOOMSDAY: The Final Frame": "",
+  "Koodu Vittu Koodu": "Prelims Venue:  2U, 2N, 2S | Finals Venue:  2N, 2U, 2S",
+  "Time Traveller's Theatre": " Venue: Hareetham",
+  "The Triquizzard Tournament 5.O": "Prelims Venue:  2V,1U,1S | Finals Venue:  Confrenece Hall",
+  "Ctrl + Alt + Decrypt": "Prelims Venue:  Creya Lab | Finals Venue:   Creya Lab",
+  "No Time To Solve": "Prelims Venue:  5S, 5N | Finals Venue:  5S, 5N ",
+  "Vinter Bowl-Out: Turf Cricket": " Venue: Green Grass Turf, Srirangam",
+  "Vinter Kick-Off: 5-A Side Football": " Venue: Green Grass Turf, Srirangam",
+  "Coronation: Mr. & Ms. Vinterbash": "Prelims Venue:  4U ,4S, 4N | Finals Venue:  Rangapriya",
+  "Vinter Goal-Rush: FIFA '25": "Elimination Venue:  AV Hall | Knockouts Venue:  AV Hall",
+}
+
 function Events() {
   const [events, setEvents] = useState([]);
   const theme = useTheme();
@@ -81,7 +121,7 @@ function Events() {
             fontSize: downSm ? "1.8rem" : downMd ? "2.2rem" : "2.5rem",
           }}
         >
-          Events
+          Events & Venues
         </Typography>
 
         <Grid
@@ -117,6 +157,7 @@ function Events() {
                   src={imgMap[event]}
                   alt={event}
                   sx={{
+                    paddingTop : "20px",
                     width: imgSize,
                     height: imgSize,
                     borderRadius: 2,
@@ -132,6 +173,26 @@ function Events() {
                     sx={{ fontSize: downSm ? "0.95rem" : "1.05rem" }}
                   >
                     {event}
+                  </Typography>
+                </CardContent>
+                <CardContent sx={{ p: 0 }}>
+                  <Typography
+                    variant="h6"
+                    fontWeight={600}
+                    textAlign="center"
+                    sx={{ fontSize: downSm ? "0.95rem" : "1.05rem" }}
+                  >
+                    {timeMap[event]}
+                  </Typography>
+                </CardContent>
+                <CardContent sx={{ p: 0 }}>
+                  <Typography
+                    variant="h6"
+                    fontWeight={600}
+                    textAlign="center"
+                    sx={{ fontSize: downSm ? "0.95rem" : "1.05rem" }}
+                  >
+                    {venueMap[event]}
                   </Typography>
                 </CardContent>
               </Card>

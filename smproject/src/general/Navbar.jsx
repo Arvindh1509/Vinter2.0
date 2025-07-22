@@ -28,7 +28,7 @@ function Navbar() {
 
   /* nav links */
   const links = [
-    { label: "Events", to: "/events" },
+    { label: "Events & Venues", to: "/events" },
     {
       label: "2025 Rule Book",
       href: "https://drive.google.com/file/d/19yIQmbFQa8O7OOrL5MQYW7ba-uEuQO1l/view?usp=sharing",
