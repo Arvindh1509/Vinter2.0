@@ -29,69 +29,92 @@ function Dashboard() {
 
   return (
     schoolName ? (
-      <AnimatedPage>
+  <AnimatedPage>
+    {schoolName === 'admin' ? (
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: { xs: '10px', sm: '20px', md: '40px' },
+          textAlign: 'center',
+          boxSizing: 'border-box',
+        }}
+      >
+        <FlexBetween sx={{ width: '100%', justifyContent: 'center' }}>
+          <Header />
+        </FlexBetween>
+      </Box>
+    ) : (
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: { xs: '10px', sm: '20px', md: '40px' },
+          textAlign: 'center',
+          boxSizing: 'border-box',
+        }}
+      >
+        <FlexBetween sx={{ width: '100%', justifyContent: 'center' }}>
+          <Header />
+        </FlexBetween>
+
         <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: { xs: '10px', sm: '20px', md: '40px' },
-            textAlign: 'center',
-            boxSizing: 'border-box',
+          display="flex"
+          flexDirection="row"
+          flexWrap="wrap"
+          justifyContent="center"
+          alignItems="center"
+          gap={2}
+          width="100%"
+          maxWidth="800px"
+        >
+          <Statbox title="Total Events" value={totalEvents || 0} />
+          <Statbox title="Fully Registered Events" value={fullReg || 0} />
+          <Statbox title="Partially Reg Events" value={partiallyReg || 0} />
+        </Box>
+
+        <Typography
+          variant="h6"
+          mt={5}
+          mb={2}
+          fontFamily="'nevis', sans-serif"
+        >
+          View the Rulebook here ⬇
+        </Typography>
+
+        <a
+          href="https://drive.google.com/file/d/19yIQmbFQa8O7OOrL5MQYW7ba-uEuQO1l/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            color: '#1a73e8',
+            textDecoration: 'underline',
+            display: 'inline-block',
           }}
         >
-          <FlexBetween sx={{ width: '100%', justifyContent: 'center'}}>
-            <Header />
-          </FlexBetween>
-         
-          <Box
-            
-            display="flex"
-            flexDirection={"row"}
-            flexWrap="wrap"
-            justifyContent="center"
-            alignItems="center"
-            gap={2}
-            width="100%" 
-            maxWidth="800px"
-          >
-            <Statbox title="Total Events" value={totalEvents || 0} />
-            <Statbox title="Fully Registered Events" value={fullReg || 0} />
-            <Statbox title="Partially Reg Events" value={partiallyReg || 0} />
-          </Box>
-          <Typography variant="h6" mt={5} mb={2} fontFamily= {`'nevis', sans-serif`}>
-            View the Rulebook here ⬇
-          </Typography>
-
-          <a
-            href="https://drive.google.com/file/d/19yIQmbFQa8O7OOrL5MQYW7ba-uEuQO1l/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
+          <img
+            src={logo}
+            alt="logo"
             style={{
-              color: '#1a73e8',
-              textDecoration: 'underline',
-              display: 'inline-block',
+              width: '80%',
+              maxWidth: '200px',
+              height: 'auto',
+              display: 'block',
+              margin: '0 auto',
             }}
-          >
-            <img
-              src={logo}
-              alt="logo"
-              style={{
-                width: '80%',
-                maxWidth: '200px',
-                height: 'auto',
-                display: 'block',
-                margin: '0 auto',
-              }}
-            />
-          </a>
-          
-        </Box>
-      </AnimatedPage>
-    ) : (
-      <Navigate to="/signIn" replace />
-    )
+          />
+        </a>
+      </Box>
+    )}
+  </AnimatedPage>
+) : (
+  <Navigate to="/signIn" replace />
+)
+
   );
 }
 

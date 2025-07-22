@@ -34,6 +34,7 @@ function Triquizzard() {
 
   return schoolName ? (
     <AnimatedPage>
+     {schoolName != 'admin' ?
       <div className="ThreePEvent">
         {/* Add Three_Member_Team components if less than 3 teams */}
         {Array.isArray(registeredTeams) &&
@@ -57,11 +58,26 @@ function Triquizzard() {
             team={team}
             eventId={activeEventId}
             schoolId={schoolId}
+            eventName={activeEvent}
             teamIndex={index + 1}
             onTeamUpdate={fetchTeams} 
           />
         ))}
       </div>
+      : <div className='ThreePEvent'>
+        {registeredTeams.map((team, index) => (
+          <RegisteredTeam
+            key={team.teamId}
+            team={team}
+            eventId={activeEventId}
+            schoolId={schoolId}
+            eventName={team.schoolName}
+            teamIndex={index + 1}
+            onTeamUpdate={fetchTeams} // optional: same here
+          />
+        ))}
+      </div>
+    }
     </AnimatedPage>
   ) : (
     <Navigate to="/signIn" replace={true} />

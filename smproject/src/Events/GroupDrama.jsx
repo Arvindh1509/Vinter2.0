@@ -34,6 +34,7 @@ function GroupDrama() {
 
   return schoolName? (
     <AnimatedPage>
+     {schoolName != 'admin' ?
     <div className='ThreePEvent'>
   {/* Render all registered teams */}
 
@@ -57,11 +58,27 @@ function GroupDrama() {
       eventId={activeEventId}
       schoolId={schoolId}
       teamIndex={index + 1}
+      eventName={activeEvent}
       maxMember={6}
       onTeamUpdate={fetchTeams} 
     />
   ))}  
 </div>
+: <div className='ThreePEvent'>
+
+        {registeredTeams.map((team, index) => (
+          <RegisteredTeam
+            key={team.teamId}
+            team={team}
+            eventId={activeEventId}
+            schoolId={schoolId}
+            eventName={team.schoolName}
+            teamIndex={index + 1}
+            onTeamUpdate={fetchTeams} // optional: same here
+          />
+        ))}
+      </div>
+    }
 </AnimatedPage>
   ):(<Navigate to={'/signIn'} replace={true}/>
   );

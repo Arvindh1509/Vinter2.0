@@ -12,7 +12,9 @@ function Navbar({isSidebarOpen, setSidebarOpen }) {
   const [{staffName1,staffName2,schoolName},dispatch]=useStateValue();
   const navigate=useNavigate();
 
+  
      function handleClose(e){
+     
       if(!staffName1&&!staffName2){
         alert("Please fill the staff contact information from the Sidebar")
       }else{
@@ -21,9 +23,10 @@ function Navbar({isSidebarOpen, setSidebarOpen }) {
     })
     console.log(e);
     navigate("/signIn");
-  }
-  // navigate("/signIn");
+  }  // navigate("/signIn");
+  
 }
+
 
     function handleClick(e){
         console.log("Side Bar Opened");

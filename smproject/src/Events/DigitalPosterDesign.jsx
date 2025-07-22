@@ -35,6 +35,7 @@ function DigitalPosterDesign() {
 
   return schoolName?(
     <AnimatedPage>
+     {schoolName != 'admin' ?
     <div className='ThreePEvent'>
       {Array.from({ length: 3 - registeredTeams.length }).map((_, i) => (
     <One_Member_Event
@@ -54,11 +55,27 @@ function DigitalPosterDesign() {
       team={team}
       eventId={activeEventId}
       schoolId={schoolId}
+      eventName={activeEvent}
       teamIndex={index + 1}
       onTeamUpdate={fetchTeams} 
     />
   ))}
     </div>
+    : <div className='ThreePEvent'>
+
+        {registeredTeams.map((team, index) => (
+          <RegisteredTeam
+            key={team.teamId}
+            team={team}
+            eventId={activeEventId}
+            schoolId={schoolId}
+            eventName={team.schoolName}
+            teamIndex={index + 1}
+            onTeamUpdate={fetchTeams} // optional: same here
+          />
+        ))}
+      </div>
+    }
     </AnimatedPage>
     ):(<Navigate to={'/signIn'} replace={true}/>
   );

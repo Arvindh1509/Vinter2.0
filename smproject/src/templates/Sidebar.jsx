@@ -27,6 +27,7 @@ const navItems = [
 
 const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
   const { pathname } = useLocation();
+  const[{schoolName,schoolId}]=useStateValue();
   const [active, setactive] = useState("");
   const [eventsOpen, setEventsOpen] = useState(false);
   const navigate = useNavigate();
@@ -159,7 +160,15 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
             </Box>
 
             <List>
-              {navItems.map(({ text }) => renderNavItem(text))}
+              {navItems
+  .filter(({ text }) => {
+    if (schoolId === '999') {
+      // Hide Participants and Teacher's Info for admin
+      return text !== 'Participants' && text !== "Teacher's Info";
+    }
+    return true; // Keep all items for others
+  })
+  .map(({ text }) => renderNavItem(text))}
 
               {/* Events main item */}
               <ListItem disablePadding>

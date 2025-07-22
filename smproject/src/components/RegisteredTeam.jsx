@@ -11,7 +11,7 @@ import './RegisteredTeam.css';
 import { useStateValue } from '../StateProvider';
 import AnimatedPage from '../templates/AnimatedPage';
 
-const RegisteredTeam = ({ eventId, team, schoolId, teamIndex, maxMember }) => {
+const RegisteredTeam = ({ eventId,eventName, team, schoolId, teamIndex, maxMember }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [{ activeEvent, schoolName }] = useStateValue();
 
@@ -77,7 +77,7 @@ const RegisteredTeam = ({ eventId, team, schoolId, teamIndex, maxMember }) => {
     <Card sx={{ background: 'linear-gradient(135deg, #F37D00, #FEC000 )', borderRadius: '0.55rem', color: 'white', marginTop: '20px', mb: 3, }}>
       <CardContent>
         <Box sx={{ backgroundColor: 'white', borderRadius: '9px', width: 'fit-content', px: 2, py: 1, mb: 2, color: 'black',fontFamily: `'nevis', sans-serif` }}>
-          <Typography fontSize={14}>{activeEvent}</Typography>
+          <Typography fontSize={14}>{eventName}</Typography>
         </Box>
 
         <Typography variant="h6" gutterBottom sx={{fontFamily: `'nevis', sans-serif`, fontWeight:'600'}}>
@@ -103,8 +103,9 @@ const RegisteredTeam = ({ eventId, team, schoolId, teamIndex, maxMember }) => {
         ))}
 
         {/* Action Buttons */}
+        {schoolId != '999'?
         <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
-          {!isEditing ? (
+          {!isEditing ?  (
             <Button
               variant="contained"
               sx={{ backgroundColor: 'white', color: 'black' }}
@@ -133,6 +134,8 @@ const RegisteredTeam = ({ eventId, team, schoolId, teamIndex, maxMember }) => {
             </Button>
           )}
         </Box>
+        :``
+        }
       </CardContent>
     </Card>
     </AnimatedPage>

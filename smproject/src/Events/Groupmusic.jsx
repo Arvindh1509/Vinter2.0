@@ -32,9 +32,8 @@ function GroupMusic() {
   }, [fetchTeams]);
 
   return schoolName? (
-
-    
     <AnimatedPage>
+      {schoolName != 'admin' ?
     <div className='ThreePEvent'>
 
   {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
@@ -55,6 +54,7 @@ function GroupMusic() {
       key={team.teamId}
       team={team}
       eventId={activeEventId}
+      eventName={activeEvent}
       schoolId={schoolId}
       teamIndex={index + 1}
       maxMember={8}
@@ -62,6 +62,21 @@ function GroupMusic() {
     />
   ))}
 </div>
+: <div className='ThreePEvent'>
+
+        {registeredTeams.map((team, index) => (
+          <RegisteredTeam
+            key={team.teamId}
+            team={team}
+            eventId={activeEventId}
+            schoolId={schoolId}
+            eventName={team.schoolName}
+            teamIndex={index + 1}
+            onTeamUpdate={fetchTeams} // optional: same here
+          />
+        ))}
+      </div>
+    }
 </AnimatedPage>
   ):(<Navigate to={'/signIn'} replace={true}/>
   );
