@@ -18,7 +18,7 @@ function Cubing() {
     axios
       .post(`/vinterbash/events`, { schoolName, activeEvent })
       .then((response) => {
-        console.log('InsideTriquizzard-->', response.data);
+        console.log('InsideCubing-->', response.data);
         setRegisteredTeams(response.data.teams);
         setEventId(response.data.eventId);
       })

@@ -9,7 +9,8 @@ import One_Member_Event from '../components/One_Member_Event';
 import { Navigate } from 'react-router-dom';
 import AnimatedPage from '../templates/AnimatedPage';
 
-function FIFA() {
+function Chess() {
+  console.log('inside Chess')
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
@@ -81,4 +82,4 @@ function FIFA() {
   );
 }
 
-export default FIFA;
+export default Chess;

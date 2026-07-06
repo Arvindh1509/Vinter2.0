@@ -109,7 +109,7 @@ const Queries = {
         FROM schools s CROSS JOIN events e LEFT JOIN teams t ON t.school_id = s.school_id AND t.event_id = e.event_id
         WHERE s.school_id = $1 GROUP BY s.school_id, s.school_name, e.event_id, e.max_teams_per_school
     `,
-    INSERT_SCHOOL: `INSERT INTO schools (school_id, school_name) VALUES ($1, (SELECT school_name FROM schools WHERE school_id = $1)) ON CONFLICT (school_id) DO NOTHING`,
+    INSERT_SCHOOL: `INSERT INTO schools (school_id, school_name) VALUES ($1, $2) ON CONFLICT (school_id) DO NOTHING`,
     INSERT_TEAM: `INSERT INTO teams (team_id, event_id, school_id, team_name) VALUES ($1, $2, $3, $4)`,
     INSERT_PARTICIPANT: `INSERT INTO participants (participant_id, team_id, participant_name) VALUES ($1, $2, $3)`,
     GET_PARTICIPANTS_AND_EVENTS_BY_SCHOOL: `
@@ -204,11 +204,11 @@ router.post('/register', async (req, res) => {
     const client = await pool.connect();
     try {
         /** @type {TeamRegistrationRequest} */
-        const { schoolId, eventId, teamId, participants } = req.body;
-        const teamName = `${schoolId}${teamId}`;
+        const { schoolId, schoolName, eventId, teamId, participants } = req.body;
+        const teamName = `${teamId}`;
 
         await client.query('BEGIN');
-        await client.query(Queries.INSERT_SCHOOL, [schoolId]);
+        await client.query(Queries.INSERT_SCHOOL, [schoolId,schoolName]);
         await client.query(Queries.INSERT_TEAM, [teamId, eventId, schoolId, teamName]);
         for (const p of participants) {
             await client.query(Queries.INSERT_PARTICIPANT, [p.participantId, teamId, p.participantName]);

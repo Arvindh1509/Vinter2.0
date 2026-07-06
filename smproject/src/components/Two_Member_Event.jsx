@@ -4,8 +4,9 @@ import './Three_Member_Team.css'
 import { useStateValue } from '../StateProvider';
 import AnimatedPage from '../templates/AnimatedPage';
 import { useEffect } from 'react';
+import RegisteredTeam from './RegisteredTeam';
 
-function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamIndex }) {
+function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamIndex, onTeamUpdate }) {
   const [p1, setP1] = useState('');
   const [p2, setP2] = useState('');
   const[{schoolName}]=useStateValue();
@@ -24,19 +25,14 @@ function Two_Member_Event({ eventId, eventName, registeredTeams, schoolId, teamI
       const participants=Object.values(participantObj);
        try {
           await
-      axios.post('/vinterbash/register', {
-        participants,
-        eventId,
-        schoolId,
-        schoolName,
-        teamId
-      })
-        .then(() => {
+      axios.post('/vinterbash/register', {participants,eventId,schoolId,schoolName,teamId});
+          
           setP1('');
           setP2('');
           alert('Added Successfully');
-        })
-        .catch((error) => alert(error.response?.data || 'Error adding team'));
+          if (onTeamUpdate) {
+            onTeamUpdate();
+          }
       }catch (error){
         alert(error.response?.data || 'Error updating participants');
       }

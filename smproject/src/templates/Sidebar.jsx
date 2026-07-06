@@ -74,7 +74,7 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
   lcText = 'code';
 } else if (text === 'No Time To Solve') {
   lcText = 'cube';
-} else if (text === 'Vinter Bowl-Out: Turf Cricket') {
+} else if (text === 'Cricket') {
   lcText = 'cricket';
 } else if (text === 'Vinter Kick-Off: 5-A Side Football') {
   lcText = 'football';
@@ -89,8 +89,8 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
        
 
     return (
-      <AnimatedPage>
-      <ListItem key={text} disablePadding>
+      <AnimatedPage key={text}>
+      <ListItem disablePadding>
         <ListItemButton
           onClick={() => {
             navigate(`/${lcText}`);

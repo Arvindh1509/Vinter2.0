@@ -3,8 +3,9 @@ import axios from '../axios';
 import './Three_Member_Team.css';
 import AnimatedPage from '../templates/AnimatedPage';
 import { useEffect } from 'react';
+import RegisteredTeam from './RegisteredTeam';
 
-function Six_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamIndex, minMember }) {
+function Six_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamIndex, minMember, onTeamUpdate }) {
   const [p1, setP1] = useState('');
   const [p2, setP2] = useState('');
   const [p3, setP3] = useState('');
@@ -33,8 +34,8 @@ function Six_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamIn
       participantName: name
     }));
     try {
-      await axios.post('/vinterbash/register', {participants: participantArray,eventId,schoolId,teamId})
-      .then(() => {
+      await axios.post('/vinterbash/register', {participants: participantArray,eventId,schoolId,schoolName,teamId})
+      
         setP1('');
         setP2('');
         setP3('');
@@ -42,8 +43,10 @@ function Six_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamIn
         setP5('');
         setP6('');
         alert('Added Successfully');
-      })
-      .catch((error) => alert(error.response?.data || 'Error adding team'));
+        if (onTeamUpdate) {
+            onTeamUpdate();
+          }
+      
     } catch (error) {
       alert(error.response?.data || 'Error updating participants');
     }
