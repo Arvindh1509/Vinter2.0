@@ -53,7 +53,7 @@ function App() {
       <Route path='/cubing' element={<Cubing/>}/>
       <Route path='/poster' element={<DigitalPosterDesign/>}/>
       <Route path='/tamillits' element={<TamilLits/>}/>
-      <Route path='/title' element={<TitleEvent/>}/>
+      <Route path='/titleevent' element={<TitleEvent/>}/>
       <Route path='/elits' element={<EnglishLits/>}/>
       <Route path='/cricket' element={<TurfCricket/>}/>
       <Route path='/football' element={<TurfFootball/>}/>

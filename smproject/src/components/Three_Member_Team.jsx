@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from '../axios';
 import './Three_Member_Team.css'
+import { useStateValue } from '../StateProvider';
 import AnimatedPage from '../templates/AnimatedPage';
 import { useEffect } from 'react';
 import RegisteredTeam from './RegisteredTeam';
@@ -9,6 +10,7 @@ function Three_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
   const [p1, setP1] = useState('');
   const [p2, setP2] = useState('');
   const [p3, setP3] = useState('');
+  const[{schoolName},dispatch]=useStateValue();
 
   const handleEvent = async (e) => {
     e.preventDefault();

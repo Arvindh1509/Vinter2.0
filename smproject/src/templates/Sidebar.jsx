@@ -79,7 +79,7 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
 } else if (text === 'Vinter Kick-Off: 5-A Side Football') {
   lcText = 'football';
 } else if (text === 'Coronation: Mr. & Ms. Vinterbash') {
-  lcText = 'title';
+  lcText = 'titleevent';
 } else if (text === "Vinter Goal-Rush: FIFA '25") {
   lcText = 'fifa';
 } else {
