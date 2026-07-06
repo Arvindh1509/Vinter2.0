@@ -8,7 +8,7 @@ const crypto = require('crypto');
 // 1. App Configuration & Database Setup
 // ============================================================================
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 app.use(cors({
     origin: [
