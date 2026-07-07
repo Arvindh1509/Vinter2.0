@@ -46,11 +46,30 @@ function Homepage() {
         {/* ===== hero (title centered over background) ===== */}
         <Box className="vb-hero">
           <Box className="vb-title-box">
-            <Typography className="vb-main-title">
+            <Typography
+              className="vb-main-title"
+              sx={{
+                fontFamily: '"Anton", "Arial Black", Impact, sans-serif',
+                fontSize: 'clamp(2rem, 8.8vw, 7.6rem)',
+                fontWeight: 500,
+                lineHeight: 0.95,
+                letterSpacing: '0.7rem',
+              }}
+            >
               VINTERBASH <span className="vb-year">’26</span>
             </Typography>
 
-            <Typography className="vb-subtitle" component="div">
+            <Typography
+              className="vb-subtitle"
+              component="div"
+              sx={{
+                fontFamily: '"Anton", "Arial Black", Impact, sans-serif',
+                fontSize: 'clamp(1rem, 2.8vw, 1.8rem)',
+                fontWeight: 100,
+                letterSpacing: '0.16em',
+                lineHeight: 1.2,
+              }}
+            >
               <span>From the greatest</span>
               <span className="vb-dot" aria-hidden="true">•</span>
               <span>To the greatest</span>
