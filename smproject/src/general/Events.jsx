@@ -32,23 +32,33 @@ import poster from "../assets/org_pics/assets/DOOMSDAY.png"
 import improv from "../assets/org_pics/assets/IMITATIONGAME.png"
 
 const imgMap = {
-  "Chordially Yours!": music,
+  "Chordially yours": music,
   "Acoustic Nirvana": inst,
-  "Nalla Otrainga da Reel-uh!": drama,
-  "Imitation Game": improv,
-  "Unnai Kaanathu..!!": classicalDance,
-  "Drop the Beat": dance,
+  "Imitation game": improv,
   "Ar(T)elic!": art,
-  "DOOMSDAY: The Final Frame": poster,
-  "Koodu Vittu Koodu": tamillits,
-  "Time Traveller's Theatre": elits,
-  "The Triquizzard Tournament 5.O": quiz,
-  "Ctrl + Alt + Decrypt": tech,
-  "No Time To Solve": cubing,
+  "The Triquizzard Tournament 6.0": quiz,
+  "Vinter CTF – 2026": tech,
+  "Cubing": cubing,
   "Vinter Bowl-Out: Turf Cricket": cricket,
   "Vinter Kick-Off: 5-A Side Football": football,
-  "Coronation: Mr. & Ms. Vinterbash": title,
+  "The One - Mr and Ms Vinterbash": title,
   "Vinter Goal-Rush: FIFA '25": gaming,
+  "Screenplay":drama,
+  "Heritage Quest - 2026":quiz,
+  "Kaapé D Art":art,
+  "வாயுள்ள பிள்ளை பிழைத்துக் கொள்ளும்":tamillits,
+  "முடிவு இங்கே! கதை எங்கே?":tamillits,
+  "Naa ready dhan varava?":drama,
+  "Vinter Chess Tournament - 2026":gaming,
+  "CIPHER":tech,
+  "Signal & Noise":music,
+  "Vinter Premiere League - Auction":gaming,
+  "Brand New Day: The First Frame":poster,
+  "Vector VOID":tech,
+  "Aththinthom!":dance,
+  "Sakkarapongalukku vadacurry":tamillits,
+  "Arangam Adhiratumae":classicalDance,
+  "Thirai @180°":poster,
 };
 
 const timeMap ={
@@ -104,10 +114,13 @@ function Events() {
 
   useEffect(() => {
     axios
-      .get("/vinterbash/getAllEvents")
-      .then((res) => setEvents(res.data.eventNames))
-      .catch(() => alert("No events"));
-  }, []);
+        .get("/vinterbash/getAllEvents")
+        .then((res) => {
+            console.log("Backend Response:", res.data.eventNames);
+            setEvents(res.data.eventNames);
+        })
+        .catch((err) => console.log(err));
+}, []);
 
   return (
     <AnimatedPage>

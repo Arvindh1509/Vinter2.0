@@ -34,58 +34,85 @@ function Contact() {
 
       <h1 className="Contact">Event Organizers:</h1>
       <div className="contactgrid">
-      {eventNames.includes("DOOMSDAY: The Final Frame") && (
-          <ContactCard name="Srivasthan" event="DOOMSDAY: The Final Frame" number="7010184600" />
+      {eventNames.includes("Brand New Day: The First Frame") && (
+          <ContactCard name="Srivasthan S" event="Brand New Day: The First Frame" number="9600673224" />
         )}
-        {eventNames.includes("Vinter Goal-Rush: FIFA '25") && (
-          <ContactCard name="Arvindh Lakshman" event="Vinter Goal-Rush: FIFA '25" number="83004 75270" />
+        {eventNames.includes("Heritage Quest - 2026") && (
+          <ContactCard name="R.Srinidhi" event="Heritage Quest - 2026" number="9487996690" />
         )}
-        {eventNames.includes("The Triquizzard Tournament 5.O") && (
-          <ContactCard name="Srinivasa Raghavan" event="The Triquizzard Tournament 5.O" number="88254 08754" />
+        {eventNames.includes("The Triquizzard Tournament 6.0") && (
+          <ContactCard name="Adithya.R" event="The Triquizzard Tournament 6.0" number="9943389128" />
         )}
         
         {eventNames.includes("Acoustic Nirvana") && (
-          <ContactCard name="Shyam Sundar" event="Acoustic Nirvana" number="8531829818" />
+          <ContactCard name="Harish Narayan R" event="Acoustic Nirvana" number="7904625596" />
         )}
-        {eventNames.includes("Nalla Otrainga da Reel-uh!") && (
-          <ContactCard name="Jay Shrinivaas" event="Nalla Otrainga da Reel-uh!" number="9087476555" />
+        {eventNames.includes("Kaapé D Art") && (
+          <ContactCard name="Barath Srinivas" event="Kaapé D Art" number="9486400146" />
         )}
-        {eventNames.includes("Imitation Game") && (
-          <ContactCard name="Sabarish" event="Imitation Game" number="9688031731" />
+        {eventNames.includes("Imitation game") && (
+          <ContactCard name="Subhashree" event="Imitation game" number="9600672110" />
         )}
-        {eventNames.includes("Unnai Kaanathu..!!") && (
-          <ContactCard name="Jayavarshini" event="Unnai Kaanathu..!!" number="9345758850" />
+        {eventNames.includes("வாயுள்ள பிள்ளை பிழைத்துக் கொள்ளும்") && (
+          <ContactCard name="Yasvanth Rishi S" event="வாயுள்ள பிள்ளை பிழைத்துக் கொள்ளும்" number="9790438181" />
         )}
-        {eventNames.includes("Drop the Beat") && (
-          <ContactCard name="Dhixitha" event="Drop the Beat" number="6381066216" />
+        {eventNames.includes("முடிவு இங்கே! கதை எங்கே?") && (
+          <ContactCard name="Deepikaa" event="முடிவு இங்கே! கதை எங்கே?" number="9865486084" />
         )}
         {eventNames.includes("Ar(T)elic!") && (
           <ContactCard name="Neeraja" event="Ar(T)elic!" number="9789313057" />
         )}
         
-        {eventNames.includes("Koodu Vittu Koodu") && (
-          <ContactCard name="Harshita Sri" event="Koodu Vittu Koodu" number="9344544395" />
+        {eventNames.includes("Naa ready dhan varava?") && (
+          <ContactCard name="Prithuvi" event="Naa ready dhan varava?" number="9342640410" />
         )}
-        {eventNames.includes("Time Traveller's Theatre") && (
-          <ContactCard name="Subhashree" event="Time Traveller's Theatre" number="9600672110" />
+        {eventNames.includes("Vinter Chess Tournament - 2026") && (
+          <ContactCard name="M. Anirudh" event="Vinter Chess Tournament - 2026" number="7550178882" />
         )}
-        {eventNames.includes("Ctrl + Alt + Decrypt") && (
-          <ContactCard name="Sundar Kumar" event="Ctrl + Alt + Decrypt" number="6379255328" />
+        {eventNames.includes("Vinter CTF – 2026") && (
+          <ContactCard name="Vetrithirumagan V" event="Vinter CTF – 2026" number="9047778161" />
         )}
-        {eventNames.includes("No Time To Solve") && (
-          <ContactCard name="Akshay Kumar" event="No Time To Solve" number="8754925976" />
+        {eventNames.includes("Cubing") && (
+          <ContactCard name="Akshay Kumar BA" event="Cubing" number="8754925976" />
         )}
         {eventNames.includes("Vinter Bowl-Out: Turf Cricket") && (
-          <ContactCard name="Acchudan" event="Vinter Bowl-Out: Turf Cricket" number="9487473532" />
+          <ContactCard name="Acchudan" event="Vinter Bowl-Out: Turf Cricket" number="9361497517" />
         )}
         {eventNames.includes("Vinter Kick-Off: 5-A Side Football") && (
-          <ContactCard name="Kishanth" event="Vinter Kick-Off: 5-A Side Football" number="7598858465" />
+          <ContactCard name="Aakash Charan" event="Vinter Kick-Off: 5-A Side Football" number="9150195165" />
         )}
-        {eventNames.includes("Coronation: Mr. & Ms. Vinterbash") && (
-          <ContactCard name="Megavarnan" event="Coronation: Mr. & Ms. Vinterbash" number="8270401198" />
+        {eventNames.includes("The One - Mr and Ms Vinterbash") && (
+          <ContactCard name="Jay Shrinivaas" event="The One - Mr and Ms Vinterbash" number="9087476555" />
         )}
-        {eventNames.includes("Chordially Yours!") && (
-          <ContactCard name="Sai Shravan" event="Chordially Yours!" number="8903293249" />
+        {eventNames.includes("Chordially yours") && (
+          <ContactCard name="Ekanath NC" event="Chordially yours" number="8015764279" />
+        )}
+        {eventNames.includes("Screenplay") && (
+          <ContactCard name="Tejasve Rengarajan" event="Screenplay" number="8610893934" />
+        )}
+        {eventNames.includes("CIPHER") && (
+          <ContactCard name="Janani" event="CIPHER" number="9943407111" />
+        )}
+        {eventNames.includes("Signal & Noise") && (
+          <ContactCard name="Kaavia" event="Signal & Noise" number="7395898802" />
+        )}
+        {eventNames.includes("Vinter Premiere League - Auction") && (
+          <ContactCard name="Srivatsan V" event="Vinter Premiere League - Auction" number="9489780407" />
+        )}
+        {eventNames.includes("Vector VOID") && (
+          <ContactCard name="Srivathsan Sriram" event="Vector VOID" number="6374465443" />
+        )}
+        {eventNames.includes("Aththinthom!") && (
+          <ContactCard name="Shridhanya" event="Aththinthom!" number="8667733907" />
+        )}
+        {eventNames.includes("Sakkarapongalukku vadacurry") && (
+          <ContactCard name="Prajesh Krishna MB" event="Sakkarapongalukku vadacurry" number="7548843662" />
+        )}
+        {eventNames.includes("Arangam Adhiratumae") && (
+          <ContactCard name="Prithuvi" event="Arangam Adhiratumae" number="9342640410" />
+        )}
+        {eventNames.includes("Thirai @180°") && (
+          <ContactCard name="Srivathsan Sriram" event="Thirai @180°" number= "6374465443" />
         )}
       </div>
 
