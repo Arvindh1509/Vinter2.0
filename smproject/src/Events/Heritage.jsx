@@ -1,16 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Box } from '@mui/material'
 import axios from '../axios';
 import './Triquizzard.css'
-
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
+import One_Member_Event from '../components/One_Member_Event';
 import { Navigate } from 'react-router-dom';
 import AnimatedPage from '../templates/AnimatedPage';
-import Two_Member_Event from '../components/Two_Member_Event';
 
-function EnglishLits() {
-  const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
+function Heritage() {
+  const [{ schoolName, activeEvent, schoolId,activeEventId }] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
 
@@ -20,7 +18,7 @@ function EnglishLits() {
     axios
       .post(`/vinterbash/events`, { schoolName, activeEvent })
       .then((response) => {
-        console.log('InsideTriquizzard-->', response.data);
+        console.log('InsideCubing-->', response.data);
         setRegisteredTeams(response.data.teams);
         setEventId(response.data.eventId);
       })
@@ -37,15 +35,15 @@ function EnglishLits() {
     <AnimatedPage>
      {schoolName != 'admin' ?
     <div className='ThreePEvent'>
-      {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
-    <Two_Member_Event
+      {Array.from({ length: 6 - registeredTeams.length }).map((_, i) => (
+    <One_Member_Event
       key={`new-team-${i + 1}`}
       eventId={activeEventId}
       eventName={activeEvent}
       registeredTeams={registeredTeams}
       schoolId={schoolId}
       teamIndex={registeredTeams.length + i + 1}
-      onTeamUpdate={fetchTeams} 
+      onTeamUpdate={fetchTeams}
     />
   ))}
   
@@ -54,10 +52,10 @@ function EnglishLits() {
       key={team.teamId}
       team={team}
       eventId={activeEventId}
-      schoolId={schoolId}
       eventName={activeEvent}
+      schoolId={schoolId}
       teamIndex={index + 1}
-      onTeamUpdate={fetchTeams} 
+      onTeamUpdate={fetchTeams}
     />
   ))}
     </div>
@@ -81,4 +79,4 @@ function EnglishLits() {
   );
 }
 
-export default EnglishLits;
+export default Heritage;

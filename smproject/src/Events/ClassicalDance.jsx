@@ -2,19 +2,18 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Box } from '@mui/material'
 import axios from '../axios';
 import './Triquizzard.css'
-import Three_Member_Team from '../components/Three_Member_Team';
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
-import One_Member_Event from '../components/One_Member_Event';
 import { Navigate } from 'react-router-dom';
 import AnimatedPage from '../templates/AnimatedPage';
+import Five_Member_Team from '../components/Five_Member_Event';
 
 function ClassicalDance() {
-  const [{ schoolName, activeEvent, schoolId,activeEventId }] = useStateValue();
+  const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
 
-  const fetchTeams = useCallback(() => {
+ const fetchTeams = useCallback(() => {
     if (!schoolName || !activeEvent) return;
 
     axios
@@ -37,14 +36,15 @@ function ClassicalDance() {
     <AnimatedPage>
      {schoolName != 'admin' ?
     <div className='ThreePEvent'>
-     {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
-    <One_Member_Event
+      {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
+    <Five_Member_Team
       key={`new-team-${i + 1}`}
       eventId={activeEventId}
       eventName={activeEvent}
       registeredTeams={registeredTeams}
       schoolId={schoolId}
       teamIndex={registeredTeams.length + i + 1}
+      minMember={4}
       onTeamUpdate={fetchTeams}
     />
   ))}
@@ -54,9 +54,10 @@ function ClassicalDance() {
       key={team.teamId}
       team={team}
       eventId={activeEventId}
-      eventName={activeEvent}
       schoolId={schoolId}
+      eventName={activeEvent}
       teamIndex={index + 1}
+      maxMember={5}
       onTeamUpdate={fetchTeams}
     />
   ))}

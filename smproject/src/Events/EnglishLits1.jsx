@@ -1,20 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Box } from '@mui/material'
 import axios from '../axios';
 import './Triquizzard.css'
-
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
 import { Navigate } from 'react-router-dom';
 import AnimatedPage from '../templates/AnimatedPage';
-import Two_Member_Event from '../components/Two_Member_Event';
+import Three_Member_Team from '../components/Three_Member_Team';
 
-function EnglishLits() {
+function EnglishLits1() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
 
-   const fetchTeams = useCallback(() => {
+  const fetchTeams = useCallback(() => {
     if (!schoolName || !activeEvent) return;
 
     axios
@@ -35,15 +33,17 @@ function EnglishLits() {
 
   return schoolName?(
     <AnimatedPage>
-     {schoolName != 'admin' ?
+      {schoolName != 'admin' ?
     <div className='ThreePEvent'>
-      {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
-    <Two_Member_Event
+
+  {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
+    <Three_Member_Team
       key={`new-team-${i + 1}`}
       eventId={activeEventId}
       eventName={activeEvent}
       registeredTeams={registeredTeams}
       schoolId={schoolId}
+      minMember={3}
       teamIndex={registeredTeams.length + i + 1}
       onTeamUpdate={fetchTeams} 
     />
@@ -55,13 +55,15 @@ function EnglishLits() {
       team={team}
       eventId={activeEventId}
       schoolId={schoolId}
-      eventName={activeEvent}
       teamIndex={index + 1}
+      eventName={activeEvent}
+      maxMember={3}
       onTeamUpdate={fetchTeams} 
     />
   ))}
-    </div>
-    : <div className='ThreePEvent'>
+  
+</div>
+: <div className='ThreePEvent'>
 
         {registeredTeams.map((team, index) => (
           <RegisteredTeam
@@ -76,9 +78,9 @@ function EnglishLits() {
         ))}
       </div>
     }
-    </AnimatedPage>
-    ):(<Navigate to={'/signIn'} replace={true}/>
+</AnimatedPage>
+  ):(<Navigate to={'/signIn'} replace={true}/>
   );
 }
 
-export default EnglishLits;
+export default EnglishLits1;

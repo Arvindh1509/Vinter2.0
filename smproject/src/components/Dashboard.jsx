@@ -12,7 +12,7 @@ import StaffContact from './StaffContact';
 
 function Dashboard() {
   const [{ schoolId, schoolName }, dispatch] = useStateValue();
-  const [totalEvents, setTotalEvents] = useState(17);
+  const [totalEvents, setTotalEvents] = useState(26);
   const [ToRegEvents, setToRegEvents] = useState();
   const [partiallyReg, setPartiallyRegistered] = useState();
   const [fullReg, setFullyReg] = useState();

@@ -46,6 +46,7 @@ function Triquizzard() {
                 registeredTeams={registeredTeams}
                 schoolId={schoolId}
                 teamIndex={registeredTeams.length + i + 1}
+                minMember={3}
                 onTeamUpdate={fetchTeams} 
               />
             </Box>
@@ -60,6 +61,7 @@ function Triquizzard() {
             schoolId={schoolId}
             eventName={activeEvent}
             teamIndex={index + 1}
+            maxMember={3}
             onTeamUpdate={fetchTeams} 
           />
         ))}

@@ -3,9 +3,9 @@ import axios from '../axios';
 import './Triquizzard.css'
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
-import Eight_Member_Team from '../components/Eight_Member_Event';
 import { Navigate } from 'react-router-dom';
 import AnimatedPage from '../templates/AnimatedPage';
+import Ten_Member_Team from '../components/Ten_Member_Team';
 
 function TurfFootball() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
@@ -36,7 +36,7 @@ function TurfFootball() {
     {schoolName != 'admin' ?
     <div className='ThreePEvent'>
   {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
-    <Eight_Member_Team
+    <Ten_Member_Team
       key={`new-team-${i + 1}`}
       eventId={activeEventId}
       eventName={activeEvent}

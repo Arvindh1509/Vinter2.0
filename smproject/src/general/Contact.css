@@ -1,4 +1,9 @@
 /* Existing styles untouched */
+
+.Contact{
+  color: white;
+}
+
 .contactCard {
   position: relative;
   display: flex;

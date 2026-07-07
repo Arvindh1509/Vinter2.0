@@ -46,42 +46,60 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
 
     let lcText=''
     
-   if (text === 'Chordially Yours!') {
+   if (text === 'Chordially yours') {
   lcText = 'groupmusic';
 } else if (text==="Teacher's Info"){
    lcText = 'teacherInfo';
 } else if (text === 'Acoustic Nirvana') {
   lcText = 'groupinst';
-} else if (text === 'Nalla Otrainga da Reel-uh!') {
+} else if (text === 'Sakkarapongalukku vadacurry') {
   lcText = 'groupdrama';
-} else if (text === 'Imitation Game') {
+} else if (text === 'Imitation game') {
   lcText = 'improv';
-} else if (text === 'Unnai Kaanathu..!!') {
+} else if (text === 'Aththinthom!') {
   lcText = 'classicaldance';
-} else if (text === 'Drop the Beat') {
+} else if (text === 'Naa ready dhan varava?') {
   lcText = 'westerndance';
+} else if (text === 'Arangam Adhiratumae') {
+  lcText = 'groupdance';
 } else if (text === 'Ar(T)elic!') {
-  lcText = 'art';
-} else if (text === 'DOOMSDAY: The Final Frame') {
-  lcText = 'poster';
-} else if (text === 'Koodu Vittu Koodu') {
-  lcText = 'tamillits';
-} else if (text === "Time Traveller's Theatre") {
-  lcText = 'elits';
-} else if (text === 'The Triquizzard Tournament 5.O') {
+  lcText = 'art1';
+} else if (text === 'Kaapé D Art') {
+  lcText = 'art2';
+} else if (text === 'Brand New Day: The First Frame') {
+  lcText = 'poster1';
+} else if (text === 'Vector VOID') {
+  lcText = 'poster2';
+} else if (text === 'வாயுள்ள பிள்ளை பிழைத்துக் கொள்ளும்') {
+  lcText = 'tamillits1';
+} else if (text === 'முடிவு இங்கே! கதை எங்கே?') {
+  lcText = 'tamillits2';
+} else if (text === 'Screenplay') {
+  lcText = 'screenplay';
+} else if (text === "Signal & Noise") {
+  lcText = 'elits1';
+} else if (text === "CIPHER") {
+  lcText = 'elits2';
+} else if (text === 'The Triquizzard Tournament 6.0') {
   lcText = 'triquizzard';
-} else if (text === 'Ctrl + Alt + Decrypt') {
+} else if (text === 'Vinter CTF – 2026') {
   lcText = 'code';
-} else if (text === 'No Time To Solve') {
-  lcText = 'cube';
-} else if (text === 'Cricket') {
+} else if (text === 'Cubing') {
+  lcText = 'cubing';
+} else if (text === 'Vinter Bowl-Out: Turf Cricket') {
   lcText = 'cricket';
 } else if (text === 'Vinter Kick-Off: 5-A Side Football') {
   lcText = 'football';
-} else if (text === 'Coronation: Mr. & Ms. Vinterbash') {
+} else if (text === 'The One - Mr and Ms Vinterbash') {
   lcText = 'titleevent';
-} else if (text === "Vinter Goal-Rush: FIFA '25") {
-  lcText = 'fifa';
+} else if (text === "Vinter Chess Tournament - 2026") {
+  lcText = 'chess';
+} else if (text === "Vinter Premiere League - Auction") {
+  lcText = 'auction';
+} else if (text === "Thirai @180°") {
+  lcText = 'shortfilm';
+} else if (text === "Heritage Quest - 2026") {
+  lcText = 'heritage';
 } else {
   lcText = text.toLowerCase(); // default fallback
 }

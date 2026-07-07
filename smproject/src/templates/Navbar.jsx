@@ -43,7 +43,7 @@ function Navbar({isSidebarOpen, setSidebarOpen }) {
                 </IconButton>
                 <Typography fontWeight={"bold"} fontSize={"0.9rem"}
                   sx={{color: "White", fontSize:"50px", marginLeft:'25px', fontFamily: `'nevis', sans-serif`}}>
-                    VINTERBASH 2025
+                    VINTERBASH 2026
                   </Typography>
             </FlexBetween>
 
