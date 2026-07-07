@@ -11,9 +11,12 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
+  background-color: #000000;
 }
 
 .vb-homepage-shell {
+  position: relative;
+  min-height: 100vh;
   background-image: var(--vb-home-bg-image);
   background-size: cover;
   background-position: center;
@@ -27,7 +30,7 @@
   justify-content: center;
   padding: 16px 16px 0 16px;
   position: relative;
-  z-index: 3;
+  z-index: 4;
 }
 
 .vb-nav-wrapper-homepage {
@@ -36,6 +39,7 @@
   left: 0;
   right: 0;
   padding-top: 20px;
+  pointer-events: none;
 }
 
 /* ===== the pill itself ===== */
@@ -44,14 +48,15 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
-  background: rgba(245, 243, 238, 0.92);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.32);
   border-radius: 999px;
   padding: 8px 24px;
   width: 100%;
   max-width: 1100px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+  pointer-events: auto;
 }
 
 @media (max-width: 599.98px) {
@@ -64,7 +69,7 @@
 /* ===== logo ===== */
 .vb-nav-logo {
   width: 60px;
-  transform: rotate(80deg);
+  
   cursor: pointer;
   margin-top: 0;
   margin-bottom: 0;
@@ -97,18 +102,18 @@
 }
 
 .vb-nav-button:hover {
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .vb-nav-button-label {
   font-weight: bold;
-  font-size: 0.9rem;
-  color: #000000;
+  font-size: 0.6rem;
+  color: #ffffff;
 }
 
 /* ===== mobile hamburger ===== */
 .vb-nav-hamburger {
-  color: #000000;
+  color: #ffffff;
 }
 
 /* ===== page shell ===== */
@@ -119,6 +124,8 @@
 .vb-page-shell-homepage {
   position: relative;
   z-index: 1;
+  min-height: 100vh;
+  background: transparent;
 }
 
 /* ===== mobile dropdown menu ===== */

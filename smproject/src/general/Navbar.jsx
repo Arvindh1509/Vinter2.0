@@ -13,7 +13,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import FlexBetween from "../templates/FlexBetween";
-import logo from "../assets/vinter_logo_1.png";
+import logo from "../assets/vbash_logo.png";
 import bgImage from "../assets/vbash_bg.jpeg";
 import "./Navbar.css";
 

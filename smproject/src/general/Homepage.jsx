@@ -51,11 +51,9 @@ function Homepage() {
             </Typography>
 
             <Typography className="vb-subtitle" component="div">
-              <span>CATCH-UP</span>
+              <span>From the greatest</span>
               <span className="vb-dot" aria-hidden="true">•</span>
-              <span>RISE</span>
-              <span className="vb-dot" aria-hidden="true">•</span>
-              <span>TAKE-OVER</span>
+              <span>To the greatest</span>
             </Typography>
           </Box>
         </Box>
