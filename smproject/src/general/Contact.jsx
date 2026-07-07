@@ -93,13 +93,13 @@ function Contact() {
       <div className="contactgrid">
         <ContactCard name="Srivasthan" number="7010184600" />
         <ContactCard name="Amruthavarshan" number="7010089170" />
+        <ContactCard name="Arvindh Lakshman" number="8300475270" />
       </div>
 
       <h1 className="Contact">Technical Coordinators:</h1>
       <div className="contactgrid">
       <ContactCard name="Arvindh Lakshman" number="8300475270" />
         <ContactCard name="Shrihari" number="8220532903" />
-        <ContactCard name="Jayavanth" number="9080832022" />
       </div>
     </div>
     </AnimatedPage>

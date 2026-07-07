@@ -4,9 +4,11 @@ import './SignIn.css';
 import axios from '../axios';
 import { useStateValue } from '../StateProvider';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/vinterbash_2025_logo.png';
+import logo from '../assets/vbash_logo.png';
 import AnimatedPage from '../templates/AnimatedPage';
 import { useEffect } from 'react';
+import bgImage from "../assets/vbash_bg.jpeg";
+import { Box } from '@mui/material';
 
 
 function SignIn() {
@@ -39,7 +41,8 @@ function SignIn() {
     }
     return (
         <AnimatedPage>
-        <div className='login'>
+            <Box style={{ "--vb-bg-image": `url(${bgImage})` }}>
+        <div className='login' style={{ "--vb-bg-image": `url(${bgImage})` }}>
            
                 <img className='login_logo' src={logo} alt="Logo" onClick={()=>{
                     navigate(`/homepage`)
@@ -63,6 +66,7 @@ function SignIn() {
                 <p>For further queries contact : 7010089170</p>
             </div>
         </div>
+        </Box>
         </AnimatedPage>
     );
 }
