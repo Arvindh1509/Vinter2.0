@@ -177,18 +177,21 @@
 .vb-footer-toolbar {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   background-color: #291611;
   margin-top: 32px; /* mt: 4 */
   padding-left: 24px; /* px: 3 */
   padding-right: 24px;
   padding-top: 24px; /* py: 3 */
   padding-bottom: 24px;
-  gap: 0;
+  gap: 2rem;
 }
 
 @media (max-width: 599.98px) {
   .vb-footer-toolbar {
     flex-direction: column;
+    align-items: flex-start;
     gap: 16px; /* gap: 2 */
   }
 }
@@ -196,27 +199,32 @@
 .vb-footer-left {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
 }
 
 .vb-footer-credit {
   font-weight: 700;
   color: white;
-  text-align: center;
+  text-align: left;
   font-size: 1.5rem;
   font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  margin-bottom: 0.5rem;
 }
 
 @media (max-width: 599.98px) {
   .vb-footer-credit {
     font-size: 1.1rem;
+    text-align: left;
   }
 }
 
 .vb-footer-names-row {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin-top: 2.5%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-top: 0.4rem;
 }
 
 .vb-footer-name {
@@ -224,6 +232,8 @@
   color: white;
   font-size: 1.5rem;
   font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  white-space: nowrap;
+  padding: 0.2rem 0;
 }
 
 @media (max-width: 599.98px) {

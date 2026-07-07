@@ -154,6 +154,18 @@ function Homepage() {
           <Typography className="vb-footer-name">
             Shrihari
           </Typography>
+          <Typography className="vb-footer-name">
+            Barath Srinivas
+          </Typography>
+          <Typography className="vb-footer-name">
+            Arun Meyappan
+          </Typography>
+          <Typography className="vb-footer-name">
+            Vishal V S
+          </Typography>
+          <Typography className="vb-footer-name">
+            Deepak 
+          </Typography>
           </Box>
             </Box>
           <FlexBetween className="vb-footer-logos">
