@@ -38,7 +38,7 @@ function Navbar() {
     { label: "Events & Venues", to: "/events" },
     {
       label: "2026 Rule Book",
-      href: "https://drive.google.com/file/d/19yIQmbFQa8O7OOrL5MQYW7ba-uEuQO1l/view?usp=sharing",
+      href: "https://drive.google.com/file/d/1yuaTzUJUm1Qgg4zLfkjlvkF2bDGfsXA7/view?usp=sharing",
     },
     { label: "Point of Contact", to: "/POC" },
     //{ label: "Register for Events", to: "/signIn" },
