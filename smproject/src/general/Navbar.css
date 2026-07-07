@@ -57,6 +57,15 @@
   max-width: 1100px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
   pointer-events: auto;
+  transition:
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vb-nav-toolbar:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.26);
 }
 
 @media (max-width: 599.98px) {
@@ -73,6 +82,16 @@
   cursor: pointer;
   margin-top: 0;
   margin-bottom: 0;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vb-nav-logo:hover {
+  transform: scale(1.06);
+}
+
+.vb-nav-logo:active {
+  transform: scale(0.97);
+  transition-duration: 0.15s;
 }
 
 @media (max-width: 599.98px) {
@@ -98,22 +117,43 @@
   gap: 1rem;
   border-radius: 999px;
   padding: 6px 18px;
-  transition: background-color 0.2s ease;
+  transition:
+    background-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .vb-nav-button:hover {
   background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.vb-nav-button:active {
+  transform: translateY(0) scale(0.97);
+  transition-duration: 0.15s;
 }
 
 .vb-nav-button-label {
   font-weight: bold;
   font-size: 0.6rem;
   color: #ffffff;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ===== mobile hamburger ===== */
 .vb-nav-hamburger {
   color: #ffffff;
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s ease;
+}
+
+.vb-nav-hamburger:hover {
+  opacity: 0.8;
+}
+
+.vb-nav-hamburger:active {
+  transform: scale(0.9);
+  transition-duration: 0.15s;
 }
 
 /* ===== page shell ===== */
@@ -134,8 +174,31 @@
   color: #000000;
   border-radius: 16px;
   margin-top: 8px;
+  transform-origin: top center;
+  transition:
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vb-nav-menu-item {
+  transition:
+    background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    padding-left 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .vb-nav-menu-item:hover {
   background-color: rgba(0, 0, 0, 0.08);
+  padding-left: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vb-nav-toolbar,
+  .vb-nav-logo,
+  .vb-nav-button,
+  .vb-nav-button-label,
+  .vb-nav-hamburger,
+  .vb-nav-menu-paper,
+  .vb-nav-menu-item {
+    transition-duration: 0.01ms !important;
+  }
 }

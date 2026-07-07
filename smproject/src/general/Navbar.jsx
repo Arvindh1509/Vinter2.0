@@ -24,7 +24,8 @@ function Navbar() {
   const downSm = useMediaQuery(theme.breakpoints.down("sm")); // <600 px
   const isHomepage = location.pathname === "/homepage";
   const isEventsPage = location.pathname === "/events";
-  const useHomepageStyle = isHomepage || isEventsPage;
+  const isContactPage = location.pathname === "/POC";
+  const useHomepageStyle = isHomepage || isEventsPage || isContactPage;
 
   /* mobile-menu state */
   const [anchorEl, setAnchorEl] = useState(null);

@@ -3,6 +3,7 @@ import axios from "../axios";
 import "./Contact.css"; // Optional: Include custom styles if needed
 import Navbar from "./Navbar";
 import AnimatedPage from "../templates/AnimatedPage";
+import bgImage from "../assets/vbash_bg.jpeg";
 
 function Contact() {
   const [eventNames, setEventNames] = useState([]);
@@ -29,7 +30,10 @@ function Contact() {
 
   return (
     <AnimatedPage>
-    <div>
+    <div
+      className="vb-contact-page"
+      style={{ "--vb-bg-image": `url(${bgImage})` }}
+    >
       <h1 className="Contacttext">Our organizers are just a call away!</h1>
 
       <h1 className="Contact">Event Organizers:</h1>
