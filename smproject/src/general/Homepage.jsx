@@ -183,7 +183,7 @@ function Homepage() {
             Vishal V S
           </Typography>
           <Typography className="vb-footer-name">
-            Deepak 
+            Deepak Kumar
           </Typography>
           </Box>
             </Box>
