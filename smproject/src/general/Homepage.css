@@ -1,0 +1,290 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+/* ============================================================
+   Homepage.css
+   Extracted from the inline `sx` props in Homepage.jsx
+   Breakpoints used (matching the component's useMediaQuery calls):
+     downMd  -> max-width: 959.98px   (theme.breakpoints.down("md"))
+     downSm  -> max-width: 599.98px   (theme.breakpoints.down("sm"))
+   ============================================================ */
+
+/* ===== page wrapper ===== */
+.vb-page {
+  animation: vb-fadeIn 1.5s ease-in-out;
+  padding-left: 0;
+  padding-right: 0;
+  background: transparent;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 599.98px) {
+  .vb-page {
+    padding-left: 8px;   /* px: 1 (theme spacing unit = 8px) */
+    padding-right: 8px;
+  }
+}
+
+@keyframes vb-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ===== hero ===== */
+.vb-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  padding-top: 110px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 599.98px) {
+  .vb-hero {
+    min-height: 50vh;
+    padding-top: 90px;
+  }
+
+  .vb-main-title {
+    font-size: clamp(2.6rem, 8vw, 3.4rem);
+  }
+
+  .vb-subtitle {
+    font-size: clamp(0.85rem, 3.2vw, 1.1rem);
+    letter-spacing: 0.12em;
+  }
+}
+
+/* ===== title ===== */
+.vb-title-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+.vb-main-title {
+  font-weight: 800;
+  font-family: "Anton", "Arial Black", Impact, sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  color: #000000;
+  font-size: clamp(3rem, 8.8vw, 7.6rem);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-shadow:
+    1px 0 0 #000000,
+    -1px 0 0 #000000,
+    0 1px 0 #000000,
+    0 -1px 0 #000000,
+    1px 1px 0 #000000,
+    -1px -1px 0 #000000;
+  margin: 0;
+  font-display: swap;
+}
+
+.vb-main-title .vb-year {
+  color: #000000;
+}
+
+.vb-subtitle {
+  font-weight: 700;
+  font-family: "Anton", "Arial Black", Impact, sans-serif;
+  text-transform: uppercase;
+  color: #000000;
+  font-size: clamp(1rem, 2.8vw, 1.8rem);
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-shadow: 0.5px 0 0 #000000, -0.5px 0 0 #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  margin: 0;
+  font-display: swap;
+}
+
+.vb-subtitle .vb-dot {
+  color: #000000;
+  font-size: 1.4em;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+/* ===== carousel ===== */
+.vb-carousel-wrapper {
+  width: 100%;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 16px; /* mt: 2 */
+  border: 0.3rem solid #000000;
+  border-radius: 12px; /* borderRadius: 3 (theme units, 4px each) */
+}
+
+@media (max-width: 959.98px) {
+  .vb-carousel-wrapper {
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 599.98px) {
+  .vb-carousel-wrapper {
+    max-width: 320px;
+  }
+}
+
+.vb-carousel-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* borderRadius: 2 */
+}
+
+/* ===== about section ===== */
+.vb-about-heading {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 800;
+  color: #111111;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: 0.02em;
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+}
+
+.vb-about-text {
+  width: min(78%, 900px);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify;
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
+  font-weight: 500;
+  line-height: 1.8;
+  color: #111111;
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+}
+
+.vb-about-paragraph {
+  margin: 0 0 1rem;
+}
+
+.vb-about-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 599.98px) {
+  .vb-about-text {
+    width: 90%;
+  }
+}
+
+.vb-about-section {
+  margin-top: 32px; /* mt: 4 */
+}
+
+/* ===== footer ===== */
+.vb-footer-toolbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #291611;
+  margin-top: 32px; /* mt: 4 */
+  padding-left: 24px; /* px: 3 */
+  padding-right: 24px;
+  padding-top: 24px; /* py: 3 */
+  padding-bottom: 24px;
+  gap: 2rem;
+}
+
+@media (max-width: 599.98px) {
+  .vb-footer-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px; /* gap: 2 */
+  }
+}
+
+.vb-footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+}
+
+.vb-footer-credit {
+  font-weight: 700;
+  color: white;
+  text-align: left;
+  font-size: 1.5rem;
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 599.98px) {
+  .vb-footer-credit {
+    font-size: 1.1rem;
+    text-align: left;
+  }
+}
+
+.vb-footer-names-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-top: 0.4rem;
+}
+
+.vb-footer-name {
+  font-weight: 700;
+  color: white;
+  font-size: 1.5rem;
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  white-space: nowrap;
+  padding: 0.2rem 0;
+}
+
+@media (max-width: 599.98px) {
+  .vb-footer-name {
+    font-size: 1.1rem;
+  }
+}
+
+.vb-footer-logos {
+  display: flex;
+  gap: 16px; /* gap={2} */
+  margin-left: auto; /* ml: "auto" on desktop */
+}
+
+@media (max-width: 599.98px) {
+  .vb-footer-logos {
+    margin-left: 0;
+  }
+}
+
+.vb-logo1 {
+  width: 100px;
+  height: auto;
+}
+
+@media (max-width: 599.98px) {
+  .vb-logo1 {
+    width: 120px;
+  }
+}
+
+.vb-logo2 {
+  width: 200px;
+  height: auto;
+}
+
+@media (max-width: 599.98px) {
+  .vb-logo2 {
+    width: 120px;
+  }
+}

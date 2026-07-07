@@ -1,0 +1,141 @@
+/* ============================================================
+   Navbar.css
+   Extracted from the inline `sx` props in Navbar.jsx.
+   Gradient background removed -> solid black.
+   Redesigned as a minimalist, Apple-style floating pill.
+   Breakpoint: downSm -> max-width: 599.98px (theme.breakpoints.down("sm"))
+   ============================================================ */
+
+/* ===== overall shell ===== */
+.vb-app-shell {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #000000;
+}
+
+.vb-homepage-shell {
+  position: relative;
+  min-height: 100vh;
+  background-image: var(--vb-home-bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* ===== outer wrapper: creates the floating pill effect ===== */
+.vb-nav-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 16px 16px 0 16px;
+  position: relative;
+  z-index: 4;
+}
+
+.vb-nav-wrapper-homepage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-top: 20px;
+  pointer-events: none;
+}
+
+/* ===== the pill itself ===== */
+.vb-nav-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  padding: 8px 24px;
+  width: 100%;
+  max-width: 1100px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+  pointer-events: auto;
+}
+
+@media (max-width: 599.98px) {
+  .vb-nav-toolbar {
+    flex-wrap: wrap;
+    padding: 8px 16px;
+  }
+}
+
+/* ===== logo ===== */
+.vb-nav-logo {
+  width: 60px;
+  
+  cursor: pointer;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (max-width: 599.98px) {
+  .vb-nav-logo {
+    width: 45px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+/* ===== desktop links ===== */
+.vb-nav-links {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1rem;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.vb-nav-button {
+  text-transform: none;
+  display: flex;
+  gap: 1rem;
+  border-radius: 999px;
+  padding: 6px 18px;
+  transition: background-color 0.2s ease;
+}
+
+.vb-nav-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.vb-nav-button-label {
+  font-weight: bold;
+  font-size: 0.6rem;
+  color: #ffffff;
+}
+
+/* ===== mobile hamburger ===== */
+.vb-nav-hamburger {
+  color: #ffffff;
+}
+
+/* ===== page shell ===== */
+.vb-page-shell {
+  width: 100%;
+}
+
+.vb-page-shell-homepage {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  background: transparent;
+}
+
+/* ===== mobile dropdown menu ===== */
+.vb-nav-menu-paper {
+  background: #F5F3EE;
+  color: #000000;
+  border-radius: 16px;
+  margin-top: 8px;
+}
+
+.vb-nav-menu-item:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}

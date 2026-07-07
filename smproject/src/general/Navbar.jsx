@@ -11,14 +11,18 @@ import {
   useTheme,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate, Outlet } from "react-router-dom";
+import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import FlexBetween from "../templates/FlexBetween";
-import logo from "../assets/vinter_logo_1.png";
+import logo from "../assets/vbash_logo.png";
+import bgImage from "../assets/vbash_bg.jpeg";
+import "./Navbar.css";
 
 function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
   const theme = useTheme();
   const downSm = useMediaQuery(theme.breakpoints.down("sm")); // <600 px
+  const isHomepage = location.pathname === "/homepage";
 
   /* mobile-menu state */
   const [anchorEl, setAnchorEl] = useState(null);
@@ -38,100 +42,83 @@ function Navbar() {
   ];
 
   return (
-    <div>
-      <Toolbar
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          background: "linear-gradient(200deg, #FEC000, #F37D00)",
-          px: 2,
-          flexWrap: downSm ? "wrap" : "nowrap",
-        }}
-      >
-        {/* ==== Logo ==== */}
-        <Box
-          component="img"
-          src={logo}
-          alt="logo"
-          onClick={() => navigate("/homepage")}
-          sx={{
-            width: downSm ? 45 : 60,
-            transform: "rotate(80deg)",
-            cursor: "pointer",
-            my: downSm ? 1 : 0,
-          }}
-        />
+    <Box
+      className={`vb-app-shell ${isHomepage ? "vb-homepage-shell" : ""}`}
+      style={isHomepage ? { "--vb-home-bg-image": `url(${bgImage})` } : undefined}
+    >
+      <Box className={`vb-nav-wrapper ${isHomepage ? "vb-nav-wrapper-homepage" : ""}`}>
+        <Toolbar className="vb-nav-toolbar">
+          {/* ==== Logo ==== */}
+          <Box
+            component="img"
+            src={logo}
+            alt="logo"
+            onClick={() => navigate("/homepage")}
+            className="vb-nav-logo"
+          />
 
-        {/* ==== Desktop Buttons ==== */}
-        {!downSm && (
-          <FlexBetween gap="1.5rem" ml="10rem">
-            {links.map(({ label, to, href }) => (
-              <Button
-                key={label}
-                onClick={to ? () => navigate(to) : undefined}
-                href={href}
-                sx={{
-                  textTransform: "none",
-                  display: "flex",
-                  gap: "1rem",
+          {/* ==== Desktop Buttons ==== */}
+          {!downSm && (
+            <FlexBetween className="vb-nav-links">
+              {links.map(({ label, to, href }) => (
+                <Button
+                  key={label}
+                  onClick={to ? () => navigate(to) : undefined}
+                  href={href}
+                  className="vb-nav-button"
+                >
+                  <Typography className="vb-nav-button-label">
+                    {label}
+                  </Typography>
+                </Button>
+              ))}
+            </FlexBetween>
+          )}
+
+          {/* ==== Mobile Hamburger ==== */}
+          {downSm && (
+            <>
+              <IconButton onClick={handleOpen} className="vb-nav-hamburger">
+                <MenuIcon />
+              </IconButton>
+
+              <Menu
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                transformOrigin={{ vertical: "top", horizontal: "right" }}
+                PaperProps={{
+                  className: "vb-nav-menu-paper",
                 }}
               >
-                <Typography fontWeight="bold" fontSize="0.9rem" color="white">
-                  {label}
-                </Typography>
-              </Button>
-            ))}
-          </FlexBetween>
-        )}
-
-        {/* ==== Mobile Hamburger ==== */}
-        {downSm && (
-          <>
-            <IconButton onClick={handleOpen} sx={{ color: "white" }}>
-              <MenuIcon />
-            </IconButton>
-
-            <Menu
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-              transformOrigin={{ vertical: "top", horizontal: "right" }}
-              /* gradient dropdown + white text */
-              PaperProps={{
-                sx: {
-                  background: "linear-gradient(200deg, #FEC000, #F37D00)",
-                  color: "white",
-                },
-              }}
-            >
-              {links.map(({ label, to, href }) => (
-                <MenuItem
-                  key={label}
-                  onClick={() => {
-                    handleClose();
-                    if (to) navigate(to);
-                  }}
-                  component={href ? "a" : "div"}
-                  href={href}
-                  target={href ? "_blank" : undefined}
-                  rel={href ? "noopener noreferrer" : undefined}
-                  sx={{
-                    color: "inherit",
-                    "&:hover": { backgroundColor: "rgba(255,255,255,0.15)" },
-                  }}
-                >
-                  {label}
-                </MenuItem>
-              ))}
-            </Menu>
-          </>
-        )}
-      </Toolbar>
+                {links.map(({ label, to, href }) => (
+                  <MenuItem
+                    key={label}
+                    onClick={() => {
+                      handleClose();
+                      if (to) navigate(to);
+                    }}
+                    component={href ? "a" : "div"}
+                    href={href}
+                    target={href ? "_blank" : undefined}
+                    rel={href ? "noopener noreferrer" : undefined}
+                    className="vb-nav-menu-item"
+                  >
+                    {label}
+                  </MenuItem>
+                ))}
+              </Menu>
+            </>
+          )}
+        </Toolbar>
+      </Box>
 
       {/* render nested routes */}
-      <Outlet />
-    </div>
+      <Box className={`vb-page-shell ${isHomepage ? "vb-page-shell-homepage" : ""}`}>
+        <Outlet />
+      </Box>
+    </Box>
   );
 }
 
