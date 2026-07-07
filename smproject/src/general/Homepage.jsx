@@ -143,7 +143,7 @@ function Homepage() {
 
           <Box className="vb-about-text">
             <p className="vb-about-paragraph">
-              With the blessings of the Almighty, the Old Students Association of Sri Vageesha Vidhyashram proudly presents the fifth edition of Vinterbash – our flagship inter-school fest that has lit up Trichy with talent, creativity, and youthful spirit for the past four years.
+              With the blessings of the Almighty, the Old Students Association of Sri Vageesha Vidhyashram proudly presents the sixth edition of Vinterbash – our flagship inter-school fest that has lit up Trichy with talent, creativity, and youthful spirit for the past five years.
             </p>
             <p className="vb-about-paragraph">
               What began as a celebration of excellence has now grown into one of the city’s most anticipated events, drawing the brightest students from schools across the region. From fierce debates and captivating performances to high-octane sports and mind-bending intellectual challenges, Vinterbash is where brilliance takes centre stage.
