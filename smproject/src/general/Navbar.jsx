@@ -23,6 +23,8 @@ function Navbar() {
   const theme = useTheme();
   const downSm = useMediaQuery(theme.breakpoints.down("sm")); // <600 px
   const isHomepage = location.pathname === "/homepage";
+  const isEventsPage = location.pathname === "/events";
+  const useHomepageStyle = isHomepage || isEventsPage;
 
   /* mobile-menu state */
   const [anchorEl, setAnchorEl] = useState(null);
@@ -43,10 +45,10 @@ function Navbar() {
 
   return (
     <Box
-      className={`vb-app-shell ${isHomepage ? "vb-homepage-shell" : ""}`}
-      style={isHomepage ? { "--vb-home-bg-image": `url(${bgImage})` } : undefined}
+      className={`vb-app-shell ${useHomepageStyle ? "vb-homepage-shell" : ""}`}
+      style={useHomepageStyle ? { "--vb-home-bg-image": `url(${bgImage})` } : undefined}
     >
-      <Box className={`vb-nav-wrapper ${isHomepage ? "vb-nav-wrapper-homepage" : ""}`}>
+      <Box className={`vb-nav-wrapper ${useHomepageStyle ? "vb-nav-wrapper-homepage" : ""}`}>
         <Toolbar className="vb-nav-toolbar">
           {/* ==== Logo ==== */}
           <Box
@@ -115,7 +117,7 @@ function Navbar() {
       </Box>
 
       {/* render nested routes */}
-      <Box className={`vb-page-shell ${isHomepage ? "vb-page-shell-homepage" : ""}`}>
+      <Box className={`vb-page-shell ${useHomepageStyle ? "vb-page-shell-homepage" : ""}`}>
         <Outlet />
       </Box>
     </Box>

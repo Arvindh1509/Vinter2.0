@@ -70,9 +70,9 @@ function Homepage() {
                 lineHeight: 1.2,
               }}
             >
-              <span>From the greatest</span>
+              <span>For the greatest</span>
               <span className="vb-dot" aria-hidden="true">•</span>
-              <span>To the greatest</span>
+              <span>From the greatest</span>
             </Typography>
           </Box>
         </Box>

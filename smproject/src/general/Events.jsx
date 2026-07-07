@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import axios from "../axios";
 import AnimatedPage from "../templates/AnimatedPage";
+import bgImage from "../assets/vbash_bg.jpeg";
+import "./Events.css";
 
 /* images */
 import art from "../assets/org_pics/assets/ART.png";
@@ -107,10 +109,11 @@ function Events() {
   const downMd = useMediaQuery(theme.breakpoints.down("md"));  // < 960 px
   const downSm = useMediaQuery(theme.breakpoints.down("sm"));  // < 600 px
 
-  /* size helpers */
-  const cardSize   = downSm ? 180 : downMd ? 220 : 250;
-  const imgSize    = downSm ?  90 : downMd ? 100 : 120;
-  const sideMargin = downSm ? "4%" : downMd ? "10%" : "20%";
+  const pageClassName = downSm ? "events-page events-page--sm" : downMd ? "events-page events-page--md" : "events-page";
+  const titleClassName = downSm ? "events-title events-title--sm" : downMd ? "events-title events-title--md" : "events-title";
+  const cardClassName = downSm ? "event-card event-card--sm" : downMd ? "event-card event-card--md" : "event-card";
+  const mediaClassName = downSm ? "event-card-media event-card-media--sm" : downMd ? "event-card-media event-card-media--md" : "event-card-media";
+  const textClassName = downSm ? "event-card-text event-card-text--sm" : downMd ? "event-card-text event-card-text--md" : "event-card-text";
 
   useEffect(() => {
     axios
@@ -124,87 +127,28 @@ function Events() {
 
   return (
     <AnimatedPage>
-      <Box sx={{ px: sideMargin, py: 4 }}>
-        <Typography
-          variant="h4"
-          align="center"
-          gutterBottom
-          sx={{
-            fontFamily: "nevis, sans-serif",
-            fontSize: downSm ? "1.8rem" : downMd ? "2.2rem" : "2.5rem",
-          }}
-        >
+      <Box className={pageClassName} style={{ "--vb-bg-image": `url(${bgImage})` }}>
+        <Typography variant="h4" align="center" gutterBottom className={titleClassName}>
           Events & Venues
         </Typography>
 
-        <Grid
-          container
-          spacing={3}
-          justifyContent="center"
-          columns={downSm ? 1 : downMd ? 8 : 12}
-        >
+        <Grid container spacing={3} justifyContent="center" columns={downSm ? 1 : downMd ? 8 : 12} className="events-grid">
           {events.map((event, i) => (
-            <Grid
-              item
-              xs={downSm ? 1 : 4}
-              sm={4}
-              md={4}
-              key={i}
-              sx={{ display: "flex", justifyContent: "center" }}
-            >
-              <Card
-                sx={{
-                  width: cardSize,
-                  height: cardSize,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  p: 2,
-                  boxShadow: 3,
-                  borderRadius: 3,
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  src={imgMap[event]}
-                  alt={event}
-                  sx={{
-                    paddingTop : "20px",
-                    width: imgSize,
-                    height: imgSize,
-                    borderRadius: 2,
-                    objectFit: "cover",
-                    mb: 1,
-                  }}
-                />
-                <CardContent sx={{ p: 0 }}>
-                  <Typography
-                    variant="h6"
-                    fontWeight={600}
-                    textAlign="center"
-                    sx={{ fontSize: downSm ? "0.95rem" : "1.05rem" }}
-                  >
+            <Grid item xs={downSm ? 1 : 4} sm={4} md={4} key={i} className="events-grid-item">
+              <Card className={cardClassName}>
+                <CardMedia component="img" src={imgMap[event]} alt={event} className={mediaClassName} />
+                <CardContent className="event-card-content">
+                  <Typography variant="h6" className={textClassName}>
                     {event}
                   </Typography>
                 </CardContent>
-                <CardContent sx={{ p: 0 }}>
-                  <Typography
-                    variant="h6"
-                    fontWeight={600}
-                    textAlign="center"
-                    sx={{ fontSize: downSm ? "0.95rem" : "1.05rem" }}
-                  >
+                <CardContent className="event-card-content">
+                  <Typography variant="h6" className={textClassName}>
                     {timeMap[event]}
                   </Typography>
                 </CardContent>
-                <CardContent sx={{ p: 0 }}>
-                  <Typography
-                    variant="h6"
-                    fontWeight={600}
-                    textAlign="center"
-                    sx={{ fontSize: downSm ? "0.95rem" : "1.05rem" }}
-                  >
+                <CardContent className="event-card-content">
+                  <Typography variant="h6" className={textClassName}>
                     {venueMap[event]}
                   </Typography>
                 </CardContent>

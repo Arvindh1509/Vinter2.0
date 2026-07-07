@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+
+.events-page {
+  position: relative;
+  min-height: 100vh;
+  padding: clamp(6.5rem, 8vw, 8rem) 18% 4rem;
+  background-image: var(--vb-bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.events-page--sm {
+  padding: 6rem 4% 4rem;
+}
+
+.events-page--md {
+  padding: 6.5rem 10% 4rem;
+}
+
+.events-title {
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  font-size: 2.7rem;
+  font-weight: 800;
+  margin-top: 1.2rem;
+  margin-bottom: 2.3rem;
+  color: #111827;
+  letter-spacing: -0.04em;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.38);
+}
+
+.events-title--sm {
+  font-size: 1.8rem;
+}
+
+.events-title--md {
+  font-size: 2.2rem;
+}
+
+.events-grid {
+  width: 100%;
+  gap: 1.25rem;
+}
+
+.events-grid-item {
+  display: flex;
+  justify-content: center;
+}
+
+.event-card {
+  width: 250px;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 16px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.24));
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+}
+
+.event-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.42), transparent 42%, rgba(255, 255, 255, 0.12));
+  pointer-events: none;
+  z-index: -1;
+}
+
+.event-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 58px rgba(15, 23, 42, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
+.event-card.MuiCard-root {
+  background-color: transparent;
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.24));
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.event-card--sm {
+  width: 180px;
+  min-height: 180px;
+}
+
+.event-card--md {
+  width: 220px;
+  min-height: 220px;
+}
+
+.event-card-media {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
+  object-fit: contain;
+  object-position: center;
+  margin-bottom: 12px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+}
+
+.event-card-media--sm {
+  width: 90px;
+  height: 90px;
+}
+
+.event-card-media--md {
+  width: 100px;
+  height: 100px;
+}
+
+.event-card-content {
+  padding: 0 !important;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.event-card-text {
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-align: center;
+  color: #111827;
+  line-height: 1.35;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.event-card-text--sm {
+  font-size: 0.95rem;
+}
