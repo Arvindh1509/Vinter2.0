@@ -11,12 +11,13 @@ const app = express();
 const PORT = 8000;
 
 app.use(cors({
-    // origin: [
+    origin: [
     //     "http://ec2-184-73-128-194.compute-1.amazonaws.com",
     //     "http://ec2-184-73-128-194.compute-1.amazonaws.com:3000",
+    "https://vinter2-0.onrender.com/vinterbash"
     //     "http://vinterbash.in:3000", "vinterbash.in:3000",
     //     "https://vinterbash.in", "http://vinterbash.in", "http://localhost:3000/"
-    // ]
+    ]
 }));
 app.use(express.json());
 

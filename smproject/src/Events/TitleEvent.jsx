@@ -37,7 +37,7 @@ function TitleEvent() {
     <AnimatedPage>
      {schoolName != 'admin' ?
     <div className='ThreePEvent'>
-      {Array.from({ length: 4 - registeredTeams.length }).map((_, i) => (
+      {Array.from({ length: 6 - registeredTeams.length }).map((_, i) => (
     <One_Member_Event
       key={`new-team-${i + 1}`}
       eventId={activeEventId}

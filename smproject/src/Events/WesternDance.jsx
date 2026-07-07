@@ -1,18 +1,21 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react';
+import { Box } from '@mui/material';
 import axios from '../axios';
-import './Triquizzard.css'
+import './Triquizzard.css';
+import Three_Member_Team from '../components/Three_Member_Team';
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
-import Eight_Member_Team from '../components/Eight_Member_Event';
 import { Navigate } from 'react-router-dom';
 import AnimatedPage from '../templates/AnimatedPage';
+import Two_Member_Event from '../components/Two_Member_Event';
 
 function WesternDance() {
-  const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
+  const [{ schoolName, activeEvent, schoolId, activeEventId }] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
-  const [eventId, setEventId] = useState();
+    const [eventId, setEventId] = useState();
+  
 
-   const fetchTeams = useCallback(() => {
+  const fetchTeams = useCallback(() => {
     if (!schoolName || !activeEvent) return;
 
     axios
@@ -30,38 +33,41 @@ function WesternDance() {
   useEffect(() => {
     fetchTeams(); // only runs on mount or when schoolName/activeEvent changes
   }, [fetchTeams]);
+
+  if (!schoolName) return <Navigate to="/signIn" replace />;
+
   return schoolName?(
-    
     <AnimatedPage>
-      {schoolName != 'admin' ?
-    <div className='ThreePEvent'>
-  {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
-    <Eight_Member_Team
-      key={`new-team-${i + 1}`}
-      eventId={activeEventId}
-      eventName={activeEvent}
-      registeredTeams={registeredTeams}
-      schoolId={schoolId}
-      teamIndex={registeredTeams.length + i + 1}
-      minMember={6}
-      onTeamUpdate={fetchTeams} 
-    />
-  ))}
-  
-  {registeredTeams.map((team, index) => (
-    <RegisteredTeam
-      key={team.teamId}
-      team={team}
-      eventId={activeEventId}
-      schoolId={schoolId}
-      eventName={activeEvent}
-      teamIndex={index + 1}
-      maxMember={8}
-      onTeamUpdate={fetchTeams} 
-    />
-  ))}
-</div>
-: <div className='ThreePEvent'>
+    {schoolName != 'admin' ?
+      <div className="ThreePEvent">
+        {/* Render unregistered team forms */}
+        {Array.from({ length: Math.max(0, 2 - registeredTeams.length) }).map((_, i) => (
+          <Two_Member_Event
+            key={`new-team-${i + 1}`}
+            eventId={activeEventId}
+            eventName={activeEvent}
+            registeredTeams={registeredTeams}
+            schoolId={schoolId}
+            teamIndex={registeredTeams.length + i + 1}
+            onTeamUpdate={fetchTeams} 
+          />
+        ))}
+
+        {/* Render registered teams */}
+        {registeredTeams.map((team, index) => (
+          <RegisteredTeam
+            key={team.teamId}
+            team={team}
+            eventId={activeEventId}
+            schoolId={schoolId}
+            eventName={activeEvent}
+            teamIndex={index + 1}
+            onTeamUpdate={fetchTeams} 
+          />
+        ))}
+      </div>
+       : <div className='ThreePEvent'>
+
         {registeredTeams.map((team, index) => (
           <RegisteredTeam
             key={team.teamId}
@@ -75,8 +81,8 @@ function WesternDance() {
         ))}
       </div>
     }
-</AnimatedPage>
-):(<Navigate to={'/signIn'} replace={true}/>
+    </AnimatedPage>
+  ):(<Navigate to={'/signIn'} replace={true}/>
   );
 }
 

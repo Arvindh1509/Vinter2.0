@@ -1,17 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Box } from '@mui/material'
 import axios from '../axios';
 import './Triquizzard.css'
 import { useStateValue } from '../StateProvider';
-import Two_Member_Event from '../components/Two_Member_Event'
 import RegisteredTeam from '../components/RegisteredTeam';
 import One_Member_Event from '../components/One_Member_Event';
 import { Navigate } from 'react-router-dom';
 import AnimatedPage from '../templates/AnimatedPage';
 
 function Chess() {
-  console.log('inside Chess')
-  const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
+  const [{ schoolName, activeEvent, schoolId,activeEventId }] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
 
@@ -21,7 +18,7 @@ function Chess() {
     axios
       .post(`/vinterbash/events`, { schoolName, activeEvent })
       .then((response) => {
-        console.log('InsideTriquizzard-->', response.data);
+        console.log('InsideCubing-->', response.data);
         setRegisteredTeams(response.data.teams);
         setEventId(response.data.eventId);
       })
@@ -38,7 +35,7 @@ function Chess() {
     <AnimatedPage>
      {schoolName != 'admin' ?
     <div className='ThreePEvent'>
-      {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
+      {Array.from({ length: 3 - registeredTeams.length }).map((_, i) => (
     <One_Member_Event
       key={`new-team-${i + 1}`}
       eventId={activeEventId}
@@ -46,7 +43,7 @@ function Chess() {
       registeredTeams={registeredTeams}
       schoolId={schoolId}
       teamIndex={registeredTeams.length + i + 1}
-      onTeamUpdate={fetchTeams} 
+      onTeamUpdate={fetchTeams}
     />
   ))}
   
@@ -55,10 +52,10 @@ function Chess() {
       key={team.teamId}
       team={team}
       eventId={activeEventId}
-      schoolId={schoolId}
       eventName={activeEvent}
+      schoolId={schoolId}
       teamIndex={index + 1}
-      onTeamUpdate={fetchTeams} 
+      onTeamUpdate={fetchTeams}
     />
   ))}
     </div>

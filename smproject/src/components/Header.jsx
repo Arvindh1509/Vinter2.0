@@ -9,7 +9,7 @@ function Header() {
   return (
     <div>
     <div className='header'>
-      <h1>Hi {schoolName}, Welcome to Vinterbash 2025 Event Registration</h1>
+      <h1>Hi {schoolName}, Welcome to Vinterbash 2026 Event Registration</h1>
       </div>
     </div>
   )

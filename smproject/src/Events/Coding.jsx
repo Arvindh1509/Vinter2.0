@@ -4,9 +4,9 @@ import axios from '../axios';
 import './Triquizzard.css'
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
-import Two_Member_Event from '../components/Two_Member_Event';
 import { Navigate } from 'react-router-dom';
 import AnimatedPage from '../templates/AnimatedPage';
+import Five_Member_Team from '../components/Five_Member_Event';
 
 function Coding() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
@@ -36,14 +36,15 @@ function Coding() {
     <AnimatedPage>
      {schoolName != 'admin' ?
     <div className='ThreePEvent'>
-      {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
-    <Two_Member_Event
+      {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
+    <Five_Member_Team
       key={`new-team-${i + 1}`}
       eventId={activeEventId}
       eventName={activeEvent}
       registeredTeams={registeredTeams}
       schoolId={schoolId}
       teamIndex={registeredTeams.length + i + 1}
+      minMember={5}
       onTeamUpdate={fetchTeams}
     />
   ))}
@@ -56,6 +57,7 @@ function Coding() {
       schoolId={schoolId}
       eventName={activeEvent}
       teamIndex={index + 1}
+      maxMember={5}
       onTeamUpdate={fetchTeams}
     />
   ))}

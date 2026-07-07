@@ -6,7 +6,7 @@ import AnimatedPage from '../templates/AnimatedPage';
 import { useEffect } from 'react';
 import RegisteredTeam from './RegisteredTeam';
 
-function Three_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamIndex, onTeamUpdate }) {
+function Three_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamIndex, minMember,onTeamUpdate }) {
   const [p1, setP1] = useState('');
   const [p2, setP2] = useState('');
   const [p3, setP3] = useState('');
@@ -14,34 +14,38 @@ function Three_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
 
   const handleEvent = async (e) => {
     e.preventDefault();
-    if (p1 && p2 && p3) {
-      const teamId = `${schoolId}${eventId}t${teamIndex}`;
-      const participantId1 = `${teamId}p1`;
-      const participantId2 = `${teamId}p2`;
-      const participantId3 = `${teamId}p3`;
-      const participantObj= {
-        p1: { participantId: participantId1, participantName: p1 },
-        p2: { participantId: participantId2, participantName: p2 },
-        p3: { participantId: participantId3, participantName: p3 },
-        };
-      const participants=Object.values(participantObj);
-        try {
-          await axios.post('/vinterbash/register', {participants,eventId,schoolId,schoolName,teamId})
-        
-          setP1('');
-          setP2('');
-          setP3('');
-          alert('Added Successfully');
-          if (onTeamUpdate) {
-            onTeamUpdate();
-          }
-        
-        } catch (error) {
-          alert(error.response?.data || 'Error updating participants');
-        }
-    } else {
-      alert('Fill all required participant details');
+
+    const participantNames = [p1, p2, p3];
+
+    const filledParticipants = participantNames
+      .map((name, index) => ({ name: name.trim(), index }))
+      .filter(participant => participant.name !== '');
+
+    if (filledParticipants.length < minMember) {
+      alert(`Please enter at least ${minMember} participant(s).`);
+      return;
     }
+
+    const teamId = `${schoolId}${eventId}t${teamIndex}`;
+
+    // Create participants array
+    const participantArray = filledParticipants.map(({ name, index }) => ({
+      participantId: `${teamId}p${index + 1}`,
+      participantName: name
+    }));
+      try {
+        await axios.post('/vinterbash/register', {participants: participantArray,eventId,schoolId,schoolName,teamId})
+        // Reset fields
+        setP1('');
+        setP2('');
+        setP3('');
+        alert('Added Successfully');
+        if (onTeamUpdate) {
+            onTeamUpdate();
+          }       
+      } catch (error) {
+        alert(error.response?.data || 'Error updating participants');
+      }
   }
 
   return (

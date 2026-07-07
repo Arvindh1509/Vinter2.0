@@ -1,20 +1,18 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Box } from '@mui/material';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from '../axios';
 import './Triquizzard.css';
-import Three_Member_Team from '../components/Three_Member_Team';
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
+import One_Member_Event from '../components/One_Member_Event';
 import { Navigate } from 'react-router-dom';
 import AnimatedPage from '../templates/AnimatedPage';
-import Two_Member_Event from '../components/Two_Member_Event';
 
-function TamilLits() {
+function Art() {
   const [{ schoolName, activeEvent, schoolId, activeEventId }] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
-    const [eventId, setEventId] = useState();
-  
+  const [eventId, setEventId] = useState();
 
+  // Create fetch function and memoize it
   const fetchTeams = useCallback(() => {
     if (!schoolName || !activeEvent) return;
 
@@ -34,26 +32,24 @@ function TamilLits() {
     fetchTeams(); // only runs on mount or when schoolName/activeEvent changes
   }, [fetchTeams]);
 
-  if (!schoolName) return <Navigate to="/signIn" replace />;
-
-  return schoolName?(
+  // Pass fetchTeams to child components if they need to refresh the list
+  return schoolName ? (
     <AnimatedPage>
     {schoolName != 'admin' ?
-      <div className="ThreePEvent">
-        {/* Render unregistered team forms */}
-        {Array.from({ length: Math.max(0, 2 - registeredTeams.length) }).map((_, i) => (
-          <Two_Member_Event
+      <div className='ThreePEvent'>
+        {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
+          <One_Member_Event
             key={`new-team-${i + 1}`}
             eventId={activeEventId}
             eventName={activeEvent}
             registeredTeams={registeredTeams}
             schoolId={schoolId}
             teamIndex={registeredTeams.length + i + 1}
-            onTeamUpdate={fetchTeams} 
+            title={`Team: ` + (registeredTeams.length + i + 1)}
+            onTeamUpdate={fetchTeams} // optional: trigger refresh from inside child
           />
         ))}
 
-        {/* Render registered teams */}
         {registeredTeams.map((team, index) => (
           <RegisteredTeam
             key={team.teamId}
@@ -62,11 +58,11 @@ function TamilLits() {
             schoolId={schoolId}
             eventName={activeEvent}
             teamIndex={index + 1}
-            onTeamUpdate={fetchTeams} 
+            onTeamUpdate={fetchTeams} // optional: same here
           />
         ))}
       </div>
-       : <div className='ThreePEvent'>
+      : <div className='ThreePEvent'>
 
         {registeredTeams.map((team, index) => (
           <RegisteredTeam
@@ -82,8 +78,9 @@ function TamilLits() {
       </div>
     }
     </AnimatedPage>
-  ):(<Navigate to={'/signIn'} replace={true}/>
+  ) : (
+    <Navigate to={'/signIn'} replace={true} />
   );
 }
 
-export default TamilLits;
+export default Art;

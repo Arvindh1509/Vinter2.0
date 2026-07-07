@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import axios from '../axios';
-import './Three_Member_Team.css';
+import './Three_Member_Team.css'
 import { useStateValue } from '../StateProvider';
 import AnimatedPage from '../templates/AnimatedPage';
 import { useEffect } from 'react';
 import RegisteredTeam from './RegisteredTeam';
 
-function Eight_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamIndex, minMember, onTeamUpdate }) {
+function Seven_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamIndex , minMember,onTeamUpdate}) {
   const [p1, setP1] = useState('');
   const [p2, setP2] = useState('');
   const [p3, setP3] = useState('');
@@ -14,13 +14,12 @@ function Eight_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
   const [p5, setP5] = useState('');
   const [p6, setP6] = useState('');
   const [p7, setP7] = useState('');
-  const [p8, setP8] = useState('');
   const[{schoolName},dispatch]=useStateValue();
 
   const handleEvent = async (e) => {
     e.preventDefault();
 
-    const participantNames = [p1, p2, p3, p4, p5, p6, p7, p8];
+    const participantNames = [p1, p2, p3, p4, p5, p6,p7];
 
     const filledParticipants = participantNames
       .map((name, index) => ({ name: name.trim(), index }))
@@ -33,14 +32,13 @@ function Eight_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
 
     const teamId = `${schoolId}${eventId}t${teamIndex}`;
 
-    // Create participants array
     const participantArray = filledParticipants.map(({ name, index }) => ({
       participantId: `${teamId}p${index + 1}`,
       participantName: name
     }));
-      try {
-        await axios.post('/vinterbash/register', {participants: participantArray,eventId,schoolId,schoolName,teamId})
-        // Reset fields
+    try {
+      await axios.post('/vinterbash/register', {participants: participantArray,eventId,schoolId,schoolName,teamId})
+      
         setP1('');
         setP2('');
         setP3('');
@@ -48,14 +46,16 @@ function Eight_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
         setP5('');
         setP6('');
         setP7('');
-        setP8('');
         alert('Added Successfully');
         if (onTeamUpdate) {
             onTeamUpdate();
-          }       
-      } catch (error) {
-        alert(error.response?.data || 'Error updating participants');
-      }
+          }
+      
+    } catch (error) {
+      alert(error.response?.data || 'Error updating participants');
+    }
+      
+  
   }
 
   return (
@@ -104,20 +104,13 @@ function Eight_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
               if (!isValid) { alert("Only alphabets are allowed");
                 return; }
               setP6(value);}} placeholder="Type Candidate's Name" className='register_form' />
-
+          
           <h5>Participant 7</h5>
           <input type='text' value={p7} onChange={(e) => {
               const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
               if (!isValid) { alert("Only alphabets are allowed");
                 return; }
               setP7(value);}} placeholder="Type Candidate's Name" className='register_form' />
-
-          <h5>Participant 8</h5>
-          <input type='text' value={p8} onChange={(e) => {
-              const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
-              if (!isValid) { alert("Only alphabets are allowed");
-                return; }
-              setP8(value);}} placeholder="Type Candidate's Name" className='register_form' />
 
           <button className='login_signin' type='submit' onClick={handleEvent}>
             Click to add the team
@@ -129,4 +122,4 @@ function Eight_Member_Team({ eventId, eventName, registeredTeams, schoolId, team
   );
 }
 
-export default Eight_Member_Team;
+export default Seven_Member_Team;

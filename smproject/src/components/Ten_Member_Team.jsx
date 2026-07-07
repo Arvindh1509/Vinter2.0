@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import axios from '../axios';
-import './Three_Member_Team.css'
+import './Three_Member_Team.css';
 import { useStateValue } from '../StateProvider';
 import AnimatedPage from '../templates/AnimatedPage';
 import { useEffect } from 'react';
 import RegisteredTeam from './RegisteredTeam';
 
-function Nine_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamIndex, minMember, onTeamUpdate }) {
+function Ten_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamIndex, minMember, onTeamUpdate }) {
   const [p1, setP1] = useState('');
   const [p2, setP2] = useState('');
   const [p3, setP3] = useState('');
@@ -15,13 +15,12 @@ function Nine_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamI
   const [p6, setP6] = useState('');
   const [p7, setP7] = useState('');
   const [p8, setP8] = useState('');
-  const [p9, setP9] = useState('');
   const[{schoolName},dispatch]=useStateValue();
 
   const handleEvent = async (e) => {
     e.preventDefault();
 
-    const participantNames = [p1, p2, p3, p4, p5, p6, p7, p8,p9];
+    const participantNames = [p1, p2, p3, p4, p5, p6, p7, p8];
 
     const filledParticipants = participantNames
       .map((name, index) => ({ name: name.trim(), index }))
@@ -50,7 +49,6 @@ function Nine_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamI
         setP6('');
         setP7('');
         setP8('');
-        setP9('');
         alert('Added Successfully');
         if (onTeamUpdate) {
             onTeamUpdate();
@@ -66,7 +64,6 @@ function Nine_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamI
       <div className='register_container'>
       <h3><u>Team: {teamIndex}</u></h3>
         <form>
-          <h5>Participant 1</h5>
           <input type='text' value={p1} onChange={(e) => {
               const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
               if (!isValid) { alert("Only alphabets are allowed");
@@ -122,13 +119,6 @@ function Nine_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamI
                 return; }
               setP8(value);}} placeholder="Type Candidate's Name" className='register_form' />
 
-          <h5>Participant 9</h5>
-          <input type='text' value={p9} onChange={(e) => {
-              const value = e.target.value; const isValid = /^[a-zA-Z\s]*$/.test(value); // allows alphabets and spaces
-              if (!isValid) { alert("Only alphabets are allowed");
-                return; }
-              setP9(value);}} placeholder="Type Candidate's Name" className='register_form' />
-
           <button className='login_signin' type='submit' onClick={handleEvent}>
             Click to add the team
           </button>
@@ -139,4 +129,4 @@ function Nine_Member_Team({ eventId, eventName, registeredTeams, schoolId, teamI
   );
 }
 
-export default Nine_Member_Team;
+export default Ten_Member_Team;

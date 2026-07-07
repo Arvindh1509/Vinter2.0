@@ -44,6 +44,7 @@ function TurfCricket() {
       registeredTeams={registeredTeams}
       schoolId={schoolId}
       teamIndex={registeredTeams.length + i + 1}
+      minMember={7}
       onTeamUpdate={fetchTeams} 
     />
   ))}
@@ -56,6 +57,7 @@ function TurfCricket() {
       eventName={activeEvent}
       schoolId={schoolId}
       teamIndex={index + 1}
+      maxMember={9}
       onTeamUpdate={fetchTeams} 
     />
   ))}

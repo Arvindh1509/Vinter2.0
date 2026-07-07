@@ -16,11 +16,19 @@ const RegisteredTeam = ({ eventId,eventName, team, schoolId, teamIndex, maxMembe
   const [{ activeEvent, schoolName }] = useStateValue();
 
   const allowedEvents = [
-    "Vinter Kick-Off: 5-A Side Football",
-    "Drop the Beat",
-    "Nalla Otrainga da Reel-uh!",
-    "Acoustic Nirvana",
-    "Chordially Yours!"
+    "Naa ready dhan varava?",
+    "Signal & Noise",
+    "Vinter Premiere League - Auction",
+    "Brand New Day: The First Frame",
+    "Vector VOID",
+    "Unnai kaanandhu",
+    "Vinter CTF – 2026",
+    "Sakkarapongalukku vadacurry",
+    "Arangam Adhiratumae",
+    "Thirai @180°",
+    "Chordially yours",
+    "Vinter Bowl-Out: Truf Cricket",
+    "Vinter Kick-Off: 5-A Side Football"
   ];
 
   const [participants, setParticipants] = useState(
