@@ -182,8 +182,9 @@ resource "aws_lb_listener_rule" "backend_http" {
   }
 
   condition {
-    field  = "path-pattern"
-    values = ["/vinterbash/*", "/vinterbash"]
+    path_pattern {
+      values = ["/vinterbash/*", "/vinterbash"]
+    }
   }
 }
 
@@ -198,8 +199,9 @@ resource "aws_lb_listener_rule" "backend_https" {
   }
 
   condition {
-    field  = "path-pattern"
-    values = ["/vinterbash/*", "/vinterbash"]
+    path_pattern {
+      values = ["/vinterbash/*", "/vinterbash"]
+    }
   }
 }
 

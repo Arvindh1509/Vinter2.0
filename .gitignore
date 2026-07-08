@@ -1,6 +1,19 @@
 /node_modules
 
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Terraform
+infrastructure/.terraform/
+infrastructure/.terraform.lock.hcl
+infrastructure/terraform.tfstate
+infrastructure/terraform.tfstate.backup
+infrastructure/*.tfstate
+infrastructure/*.tfstate.backup
+
+# Terraform crash logs
+crash.log
+infrastructure/crash.log

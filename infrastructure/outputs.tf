@@ -17,4 +17,3 @@ output "ecs_service_backend_name" {
 output "ecs_service_frontend_name" {
   value = aws_ecs_service.frontend.name
 }
-}
