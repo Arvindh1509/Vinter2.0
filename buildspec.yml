@@ -1,0 +1,29 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      docker: 20
+    commands:
+      - echo "Starting Docker daemon..."
+      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay2 &
+      - timeout 15 sh -c "until docker info >/dev/null 2>&1; do echo 'Waiting for Docker...'; sleep 1; done"
+      - docker version
+  pre_build:
+    commands:
+      - echo "Preparing build"
+  build:
+    commands:
+      - echo "Building backend image"
+      - docker build -f server/Dockerfile -t $BACKEND_IMAGE:$IMAGE_TAG .
+      - echo "Building frontend image"
+      - docker build -f smproject/Dockerfile -t $FRONTEND_IMAGE:$IMAGE_TAG .
+  post_build:
+    commands:
+      - echo "Pushing backend image"
+      - docker push $BACKEND_IMAGE:$IMAGE_TAG
+      - echo "Pushing frontend image"
+      - docker push $FRONTEND_IMAGE:$IMAGE_TAG
+      - echo "Build and push completed"
+artifacts:
+  files:
+    - '**/*'

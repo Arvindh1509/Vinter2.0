@@ -285,6 +285,15 @@ router.get('/getAllEvents', async (req, res) => {
     } catch (error) { res.status(500).json({ error: "Internal Server Error" }); }
 });
 
+router.get('/health', async (req, res) => {
+    try {
+        await pool.query('SELECT 1');
+        res.status(200).json({ status: 'ok' });
+    } catch (error) {
+        res.status(500).json({ status: 'error' });
+    }
+});
+
 router.post('/teacherInfo', async (req, res) => {
     try {
         const { schoolId } = req.body;
