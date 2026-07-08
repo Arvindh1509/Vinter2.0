@@ -166,7 +166,7 @@ function Homepage() {
           <Typography className="vb-footer-credit">
             © Developed by Tech Team Of SriVV OSA
           </Typography>
-          <Box className="vb-footer-names-row">
+          {/* <Box className="vb-footer-names-row">
           <Typography className="vb-footer-name">
             Arvindh Lakshman
           </Typography>
@@ -185,7 +185,7 @@ function Homepage() {
           <Typography className="vb-footer-name">
             Deepak Kumar
           </Typography>
-          </Box>
+          </Box> */}
             </Box>
           <FlexBetween className="vb-footer-logos">
             <Box
