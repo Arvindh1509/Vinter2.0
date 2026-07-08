@@ -11,7 +11,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import FlexBetween from './FlexBetween';
-import logo from '../assets/vinter_logo_1.png';
+import logo from "../assets/vbash_logo.png";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -104,7 +104,7 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
   lcText = text.toLowerCase(); // default fallback
 }
     const isActive = active === lcText;
-       
+        
 
     return (
       <AnimatedPage key={text}>
@@ -120,16 +120,16 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
                     })
           }}
           sx={{
-            backgroundColor: isActive ? 'white' : 'transparent',
+            backgroundColor: isActive ? 'rgba(0, 0, 0, 0.08)' : 'transparent',
             color: isActive ? 'black' : 'black',
             '&:hover': {
-              backgroundColor: '#f5f5f5',
-            },
+  backgroundColor: 'rgba(0, 0, 0, 0.08)',
+},
             fontFamily: `'nevis', sans-serif`,fontWeight:'600',fontSize:'24px'
           }}
         >
           <ListItemText primary={text} sx={{ ml: "1rem" }} />
-          {isActive && <ChevronRightIcon sx={{ ml: "auto" }} />}
+          {isActive && <ChevronRightIcon sx={{ ml: "auto", color: 'black' }} />}
         </ListItemButton>
       </ListItem>
       </AnimatedPage>
@@ -149,10 +149,13 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
           sx={{
             width: drawerWidth,
             "& .MuiDrawer-paper": {  
-              backgroundColor: '#F68F04',
+              backgroundColor: 'rgba(255, 255, 255, 0.25)',
+              backdropFilter: 'blur(15px)',
+              WebkitBackdropFilter: 'blur(15px)',
               boxSizing: "border-box",
               width: drawerWidth,
-              borderRight: "2px solid #ccc",
+              borderRight: "1px solid rgba(255, 255, 255, 0.3)",
+              boxShadow: "none",
             },
           }}
           transitionDuration={{ enter: 400, exit: 300 }}
@@ -165,14 +168,14 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
                     src={logo}
                     alt="logo"
                     width="140px"
-                    style={{ transform: 'rotate(70deg)',marginLeft:'10px' }}
+                    style={{ marginLeft:'10px', filter: 'brightness(0) saturate(100%)', width: '120px', height: 'auto' }}
                     onClick={() => {
                       navigate(`/dashboard`);
                     }}
                   />
                 </Box>
                 <IconButton onClick={() => setSidebarOpen(!isSidebarOpen)}>
-                  <ChevronLeftIcon />
+                  <ChevronLeftIcon sx={{ color: 'black' }} />
                 </IconButton>
               </FlexBetween>
             </Box>
@@ -191,8 +194,8 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
               {/* Events main item */}
               <ListItem disablePadding>
                 <ListItemButton onClick={handleEventsToggle}>
-                  <ListItemText primary="Events" sx={{ ml: "1rem" }} />
-                  {eventsOpen ? <ExpandLess /> : <ExpandMore />}
+                  <ListItemText primary="Events" sx={{ ml: "1rem", color: 'black' }} />
+                  {eventsOpen ? <ExpandLess sx={{ color: 'black' }} /> : <ExpandMore sx={{ color: 'black' }} />}
                 </ListItemButton>
               </ListItem>
 

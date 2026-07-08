@@ -82,20 +82,47 @@ const RegisteredTeam = ({ eventId,eventName, team, schoolId, teamIndex, maxMembe
 
   return (
     <AnimatedPage>
-    <Card sx={{ background: 'linear-gradient(135deg, #F37D00, #FEC000 )', borderRadius: '0.55rem', color: 'white', marginTop: '20px', mb: 3, }}>
+    <Card 
+      sx={{ 
+        background: 'rgba(255, 255, 255, 0.25) !important', 
+        backgroundColor: 'rgba(255, 255, 255, 0.25) !important', 
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        borderRadius: '12px', 
+        color: '#000000', 
+        marginTop: '20px', 
+        mb: 3,
+        border: 'none !important',
+        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.05) !important'
+      }}
+    >
       <CardContent>
-        <Box sx={{ backgroundColor: 'white', borderRadius: '9px', width: 'fit-content', px: 2, py: 1, mb: 2, color: 'black',fontFamily: `'nevis', sans-serif` }}>
-          <Typography fontSize={14}>{eventName}</Typography>
+        <Box 
+          sx={{ 
+            backgroundColor: 'rgba(255, 255, 255, 0.3)', 
+            backdropFilter: 'blur(4px)',
+            WebkitBackdropFilter: 'blur(4px)',
+            borderRadius: '6px', 
+            width: 'fit-content', 
+            px: 2, 
+            py: 0.5, 
+            mb: 2, 
+            color: '#000000',
+            border: 'none',
+            fontFamily: `'nevis', sans-serif` 
+          }}
+        >
+          <Typography fontSize={14} fontWeight="600">{eventName}</Typography>
         </Box>
 
-        <Typography variant="h6" gutterBottom sx={{fontFamily: `'nevis', sans-serif`, fontWeight:'600'}}>
+        <Typography variant="h6" gutterBottom sx={{fontFamily: `'nevis', sans-serif`, fontWeight:'600', color: '#000000'}}>
           Team {teamIndex}
         </Typography>
 
         {/* Participant fields */}
         {participants.map((p, index) => (
-          <Box key={p.participantId} sx={{ mb: 1 }}>
-            <h5 style={{ marginBottom: '4px' }}>{`Participant ${index + 1}`}</h5>
+          <Box key={p.participantId} sx={{ mb: 1.5 }}>
+            <h5 style={{ marginBottom: '4px', color: '#000000' }}>{`Participant ${index + 1}`}</h5>
             {isEditing ? (
               <input
                 type="text"
@@ -105,18 +132,27 @@ const RegisteredTeam = ({ eventId,eventName, team, schoolId, teamIndex, maxMembe
                 className="register_form"
               />
             ) : (
-              <Typography sx={{fontFamily: `'nevis', sans-serif`, fontSize:'20px'}}>{`${p.participantName}`}</Typography>
+              <Typography sx={{fontFamily: `'nevis', sans-serif`, fontSize:'18px', color: '#000000'}}>{`${p.participantName}`}</Typography>
             )}
           </Box>
         ))}
 
         {/* Action Buttons */}
         {schoolId != '999'?
-        <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+        <Box sx={{ display: 'flex', gap: 2, mt: 3 }}>
           {!isEditing ?  (
             <Button
               variant="contained"
-              sx={{ backgroundColor: 'white', color: 'black' }}
+              sx={{ 
+                backgroundColor: 'rgba(255, 255, 255, 0.4)', 
+                color: '#000000',
+                fontWeight: '600',
+                border: 'none',
+                boxShadow: '0 4px 12px 0 rgba(0, 0, 0, 0.03)',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.6)'
+                }
+              }}
               onClick={() => setIsEditing(true)}
             >
               Edit Participants
@@ -124,7 +160,16 @@ const RegisteredTeam = ({ eventId,eventName, team, schoolId, teamIndex, maxMembe
           ) : (
             <Button
               variant="contained"
-              sx={{ backgroundColor: 'white', color: 'black' }}
+              sx={{ 
+                backgroundColor: 'rgba(255, 255, 255, 0.4)', 
+                color: '#000000',
+                fontWeight: '600',
+                border: 'none',
+                boxShadow: '0 4px 12px 0 rgba(0, 0, 0, 0.03)',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.6)'
+                }
+              }}
               onClick={handleSubmit}
             >
               Submit
@@ -135,7 +180,16 @@ const RegisteredTeam = ({ eventId,eventName, team, schoolId, teamIndex, maxMembe
           {isEditing && allowedEvents.includes(activeEvent) && participants.length < maxMember && (
             <Button
               variant="contained"
-              sx={{ color: 'black', backgroundColor: 'white' }}
+              sx={{ 
+                backgroundColor: 'rgba(255, 255, 255, 0.4)', 
+                color: '#000000',
+                fontWeight: '600',
+                border: 'none',
+                boxShadow: '0 4px 12px 0 rgba(0, 0, 0, 0.03)',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.6)'
+                }
+              }}
               onClick={handleAddParticipant}
             >
               Add Team Member
