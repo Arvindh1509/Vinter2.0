@@ -41,7 +41,19 @@ variable "create_vpc" {
 }
 
 variable "certificate_arn" {
-  description = "Optional ACM certificate ARN for HTTPS listener"
+  description = "Optional ACM certificate ARN for HTTPS listener. If set, this certificate is used directly for the HTTPS ALB listener."
+  type        = string
+  default     = ""
+}
+
+variable "domain_name" {
+  description = "Optional custom domain name for ACM certificate creation when certificate_arn is not provided."
+  type        = string
+  default     = ""
+}
+
+variable "hosted_zone_id" {
+  description = "Optional Route53 hosted zone ID for DNS validation"
   type        = string
   default     = ""
 }

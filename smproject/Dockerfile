@@ -9,6 +9,7 @@ COPY smproject/ ./
 RUN npm run build
 
 FROM nginx:stable-alpine AS runtime
+ENV NGINX_ENTRYPOINT_QUIET_LOGS=1
 COPY --from=build /app/build /usr/share/nginx/html
 COPY smproject/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80

@@ -147,7 +147,52 @@ resource "aws_lb_target_group" "backend" {
   }
 }
 
-resource "aws_lb_listener" "http" {
+locals {
+  https_enabled = var.certificate_arn != "" || (var.domain_name != "" && var.hosted_zone_id != "")
+  acm_auto = var.certificate_arn == "" && var.domain_name != "" && var.hosted_zone_id != ""
+  selected_certificate_arn = var.certificate_arn != "" ? var.certificate_arn : (length(aws_acm_certificate.frontend) > 0 ? aws_acm_certificate.frontend[0].arn : "")
+}
+
+resource "aws_acm_certificate" "frontend" {
+  count      = var.certificate_arn == "" && var.domain_name != "" && var.hosted_zone_id != "" ? 1 : 0
+  domain_name               = var.domain_name
+  validation_method         = "DNS"
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_route53_record" "certificate_validation" {
+  count   = length(aws_acm_certificate.frontend) > 0 ? length(aws_acm_certificate.frontend[0].domain_validation_options) : 0
+  zone_id = var.hosted_zone_id
+
+  name    = aws_acm_certificate.frontend[0].domain_validation_options[count.index].resource_record_name
+  type    = aws_acm_certificate.frontend[0].domain_validation_options[count.index].resource_record_type
+  records = [aws_acm_certificate.frontend[0].domain_validation_options[count.index].resource_record_value]
+  ttl     = 60
+}
+
+resource "aws_acm_certificate_validation" "frontend" {
+  count                   = length(aws_acm_certificate.frontend) > 0 ? 1 : 0
+  certificate_arn         = aws_acm_certificate.frontend[0].arn
+  validation_record_fqdns = aws_route53_record.certificate_validation[*].fqdn
+}
+
+resource "aws_route53_record" "frontend_alias" {
+  count   = var.domain_name != "" && var.hosted_zone_id != "" ? 1 : 0
+  zone_id = var.hosted_zone_id
+  name    = var.domain_name
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.alb.dns_name
+    zone_id                = aws_lb.alb.zone_id
+    evaluate_target_health = true
+  }
+}
+
+resource "aws_lb_listener" "http_forward" {
+  count             = local.https_enabled ? 0 : 1
   load_balancer_arn = aws_lb.alb.arn
   port              = 80
   protocol          = "HTTP"
@@ -158,13 +203,32 @@ resource "aws_lb_listener" "http" {
   }
 }
 
+resource "aws_lb_listener" "http_redirect" {
+  count             = local.https_enabled ? 1 : 0
+  load_balancer_arn = aws_lb.alb.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
 resource "aws_lb_listener" "https" {
-  count             = var.certificate_arn != "" ? 1 : 0
+  count             = local.https_enabled ? 1 : 0
   load_balancer_arn = aws_lb.alb.arn
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = var.certificate_arn
+  certificate_arn   = local.selected_certificate_arn
+
+  depends_on = local.acm_auto ? [aws_acm_certificate_validation.frontend] : []
 
   default_action {
     type             = "forward"
@@ -173,7 +237,8 @@ resource "aws_lb_listener" "https" {
 }
 
 resource "aws_lb_listener_rule" "backend_http" {
-  listener_arn = aws_lb_listener.http.arn
+  count        = local.https_enabled ? 0 : 1
+  listener_arn = aws_lb_listener.http_forward[0].arn
   priority     = 100
 
   action {
@@ -189,7 +254,7 @@ resource "aws_lb_listener_rule" "backend_http" {
 }
 
 resource "aws_lb_listener_rule" "backend_https" {
-  count        = var.certificate_arn != "" ? 1 : 0
+  count        = local.https_enabled ? 1 : 0
   listener_arn = aws_lb_listener.https[0].arn
   priority     = 100
 

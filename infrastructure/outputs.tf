@@ -17,3 +17,7 @@ output "ecs_service_backend_name" {
 output "ecs_service_frontend_name" {
   value = aws_ecs_service.frontend.name
 }
+
+output "alb_dns_name" {
+  value = aws_lb.alb.dns_name
+}

@@ -76,6 +76,25 @@ If the deployment needs the database secret value, pass it explicitly:
 terraform apply -auto-approve -var "database_url=postgresql://YOUR_DB_CONNECTION_STRING"
 ```
 
+### HTTPS with ACM certificate
+
+If you already have an ACM certificate ARN, pass it as:
+
+```powershell
+terraform apply -auto-approve \
+  -var "database_url=postgresql://YOUR_DB_CONNECTION_STRING" \
+  -var "certificate_arn=arn:aws:acm:us-east-1:123456789012:certificate/abcd-1234..."
+```
+
+If you do not have a certificate ARN but do have a domain in Route53, pass:
+
+```powershell
+terraform apply -auto-approve \
+  -var "database_url=postgresql://YOUR_DB_CONNECTION_STRING" \
+  -var "domain_name=app.example.com" \
+  -var "hosted_zone_id=Z123456ABCDEF"
+```
+
 ---
 
 ## Stop services to save cost
