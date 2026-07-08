@@ -1,12 +1,17 @@
 name: AWS CI/CD
 
 on:
-  push:
-    branches:
-      - dev
-  pull_request:
-    branches:
-      - dev
+  workflow_dispatch:
+    inputs:
+      service:
+        description: 'Select which service to build and deploy'
+        required: true
+        default: 'both'
+        type: choice
+        options:
+          - backend
+          - frontend
+          - both
 
 jobs:
   build-and-publish:
@@ -37,21 +42,25 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build backend image
+        if: inputs.service == 'backend' || inputs.service == 'both'
         run: |
           docker build -f server/Dockerfile -t $BACKEND_IMAGE:$IMAGE_TAG .
           docker tag $BACKEND_IMAGE:$IMAGE_TAG $BACKEND_IMAGE:latest
 
       - name: Build frontend image
+        if: inputs.service == 'frontend' || inputs.service == 'both'
         run: |
           docker build -f smproject/Dockerfile -t $FRONTEND_IMAGE:$IMAGE_TAG .
           docker tag $FRONTEND_IMAGE:$IMAGE_TAG $FRONTEND_IMAGE:latest
 
       - name: Push backend images
+        if: inputs.service == 'backend' || inputs.service == 'both'
         run: |
           docker push $BACKEND_IMAGE:$IMAGE_TAG
           docker push $BACKEND_IMAGE:latest
 
       - name: Push frontend images
+        if: inputs.service == 'frontend' || inputs.service == 'both'
         run: |
           docker push $FRONTEND_IMAGE:$IMAGE_TAG
           docker push $FRONTEND_IMAGE:latest
@@ -62,7 +71,6 @@ jobs:
   deploy:
     needs: build-and-publish
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev'
     env:
       AWS_REGION: ${{ secrets.AWS_REGION }}
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
@@ -82,9 +90,11 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Force backend redeploy
+        if: inputs.service == 'backend' || inputs.service == 'both'
         run: |
           aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE_BACKEND --force-new-deployment
 
       - name: Force frontend redeploy
+        if: inputs.service == 'frontend' || inputs.service == 'both'
         run: |
           aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE_FRONTEND --force-new-deployment
