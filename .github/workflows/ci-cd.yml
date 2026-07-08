@@ -8,50 +8,6 @@ on:
     branches:
       - dev
 
-x-checkout-step: &checkout-step
-  name: Checkout repository
-  uses: actions/checkout@v4
-
-x-aws-credentials-step: &aws-credentials-step
-  name: Configure AWS credentials
-  uses: aws-actions/configure-aws-credentials@v3
-  with:
-    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    aws-region: ${{ secrets.AWS_REGION }}
-
-x-ecr-login-step: &ecr-login-step
-  name: Log in to Amazon ECR
-  uses: aws-actions/amazon-ecr-login@v1
-
-x-buildx-step: &buildx-step
-  name: Set up Docker Buildx
-  uses: docker/setup-buildx-action@v3
-
-x-build-backend-step: &build-backend-step
-  name: Build backend image
-  run: |
-    docker build -f server/Dockerfile -t $BACKEND_IMAGE:$IMAGE_TAG .
-    docker tag $BACKEND_IMAGE:$IMAGE_TAG $BACKEND_IMAGE:latest
-
-x-build-frontend-step: &build-frontend-step
-  name: Build frontend image
-  run: |
-    docker build -f smproject/Dockerfile -t $FRONTEND_IMAGE:$IMAGE_TAG .
-    docker tag $FRONTEND_IMAGE:$IMAGE_TAG $FRONTEND_IMAGE:latest
-
-x-push-backend-step: &push-backend-step
-  name: Push backend images
-  run: |
-    docker push $BACKEND_IMAGE:$IMAGE_TAG
-    docker push $BACKEND_IMAGE:latest
-
-x-push-frontend-step: &push-frontend-step
-  name: Push frontend images
-  run: |
-    docker push $FRONTEND_IMAGE:$IMAGE_TAG
-    docker push $FRONTEND_IMAGE:latest
-
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
@@ -64,14 +20,42 @@ jobs:
       BACKEND_IMAGE: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY_BACKEND }}
       FRONTEND_IMAGE: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPOSITORY_FRONTEND }}
     steps:
-      - *checkout-step
-      - *aws-credentials-step
-      - *ecr-login-step
-      - *buildx-step
-      - *build-backend-step
-      - *build-frontend-step
-      - *push-backend-step
-      - *push-frontend-step
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Log in to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build backend image
+        run: |
+          docker build -f server/Dockerfile -t $BACKEND_IMAGE:$IMAGE_TAG .
+          docker tag $BACKEND_IMAGE:$IMAGE_TAG $BACKEND_IMAGE:latest
+
+      - name: Build frontend image
+        run: |
+          docker build -f smproject/Dockerfile -t $FRONTEND_IMAGE:$IMAGE_TAG .
+          docker tag $FRONTEND_IMAGE:$IMAGE_TAG $FRONTEND_IMAGE:latest
+
+      - name: Push backend images
+        run: |
+          docker push $BACKEND_IMAGE:$IMAGE_TAG
+          docker push $BACKEND_IMAGE:latest
+
+      - name: Push frontend images
+        run: |
+          docker push $FRONTEND_IMAGE:$IMAGE_TAG
+          docker push $FRONTEND_IMAGE:latest
+
       - name: Output published image tags
         run: echo "Published $BACKEND_IMAGE:$IMAGE_TAG and $FRONTEND_IMAGE:$IMAGE_TAG"
 
@@ -87,11 +71,20 @@ jobs:
       ECS_SERVICE_FRONTEND: ${{ secrets.ECS_SERVICE_FRONTEND }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
     steps:
-      - *checkout-step
-      - *aws-credentials-step
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
       - name: Force backend redeploy
         run: |
           aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE_BACKEND --force-new-deployment
+
       - name: Force frontend redeploy
         run: |
           aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE_FRONTEND --force-new-deployment
