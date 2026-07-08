@@ -34,12 +34,7 @@
 }
 
 .vb-nav-wrapper-homepage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   padding-top: 20px;
-  pointer-events: none;
 }
 
 /* ===== the pill itself ===== */
