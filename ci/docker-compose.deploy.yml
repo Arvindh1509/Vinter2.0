@@ -1,4 +1,15 @@
 version: '3.9'
+
+x-common-environment: &common-environment
+  - NODE_ENV=production
+
+x-backend-healthcheck: &backend-healthcheck
+  test: ["CMD", "curl", "-f", "http://localhost:8000/vinterbash/health"]
+  interval: 30s
+  timeout: 10s
+  retries: 3
+  start_period: 15s
+
 services:
   backend:
     image: ${BACKEND_IMAGE}:${IMAGE_TAG}
@@ -8,17 +19,11 @@ services:
       - DATABASE_URL=${DATABASE_URL}
     expose:
       - "8000"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/vinterbash/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 15s
+    healthcheck: *backend-healthcheck
 
   frontend:
     image: ${FRONTEND_IMAGE}:${IMAGE_TAG}
-    environment:
-      - NODE_ENV=production
+    environment: *common-environment
     expose:
       - "80"
     depends_on:
