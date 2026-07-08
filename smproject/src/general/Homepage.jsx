@@ -14,6 +14,7 @@ import AnimatedPage from "../templates/AnimatedPage";
 import FlexBetween from "../templates/FlexBetween";
 import logo1 from "../assets/srivv_logo_2.png";
 import logo2 from "../assets/srivv_osa_logo.png";
+import logo3 from "../assets/vinterbashgoatlogo26.png";
 import bgImage from "../assets/vbash_bg.jpeg";
 import "./Homepage.css";
 
@@ -45,25 +46,25 @@ function Homepage() {
       >
         {/* ===== hero (title centered over background) ===== */}
         <Box className="vb-hero">
-          <Box className="vb-title-box">
+          {/* <Box className="vb-title-box">
             <Typography
               className="vb-main-title"
               sx={{
-                fontFamily: '"Anton", "Arial Black", Impact, sans-serif',
+                fontFamily: '"Georgia",serif',
                 fontSize: 'clamp(2rem, 8.8vw, 7.6rem)',
                 fontWeight: 500,
                 lineHeight: 0.95,
                 letterSpacing: '0.7rem',
               }}
             >
-              VINTERBASH <span className="vb-year">’26</span>
+              VINTERBASH 
             </Typography>
 
             <Typography
               className="vb-subtitle"
               component="div"
               sx={{
-                fontFamily: '"Anton", "Arial Black", Impact, sans-serif',
+                fontFamily:'"Georgia",serif',
                 fontSize: 'clamp(1rem, 2.8vw, 1.8rem)',
                 fontWeight: 100,
                 letterSpacing: '0.16em',
@@ -74,7 +75,8 @@ function Homepage() {
               <span className="vb-dot" aria-hidden="true">•</span>
               <span>From the greatest</span>
             </Typography>
-          </Box>
+          </Box> */}
+        <img className="logo3" src={logo3}/>
         </Box>
 
         {/* ===== carousel ===== */}
