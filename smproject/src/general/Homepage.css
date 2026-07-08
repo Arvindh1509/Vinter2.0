@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 35vh;
+  min-height: 65vh;
   width: 100%;
   padding-top: 24px;
   box-sizing: border-box;
@@ -44,7 +44,7 @@
 
 @media (max-width: 599.98px) {
   .vb-hero {
-    min-height: 25vh;
+    min-height: 36vh;
     padding-top: 16px;
   }
 
@@ -116,7 +116,7 @@
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2px; /* mt: 2 */
+  margin-top: 16px; /* mt: 2 */
   border: 0.3rem solid #000000;
   border-radius: 12px; /* borderRadius: 3 (theme units, 4px each) */
 }

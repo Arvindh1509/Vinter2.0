@@ -14,7 +14,7 @@ import AnimatedPage from "../templates/AnimatedPage";
 import FlexBetween from "../templates/FlexBetween";
 import logo1 from "../assets/srivv_logo_2.png";
 import logo2 from "../assets/srivv_osa_logo.png";
-import logo3 from "../assets/vinterbashgoatlogo26.png";
+import logo3 from "../assets/logo3.png";
 import bgImage from "../assets/vbash_bg.jpeg";
 import "./Homepage.css";
 
