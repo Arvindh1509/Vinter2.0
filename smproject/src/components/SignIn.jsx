@@ -13,16 +13,17 @@ import { Box } from '@mui/material';
 
 
 function SignIn() {
-    const [schoolName, setSchoolName] = useState('');
+    const [schoolId, setSchoolId] = useState('');
     const [password, setPassword] = useState('');
     const [{school},dispatch]=useStateValue();
     const navigate=useNavigate();
-
+  
     function signin(e) {
         e.preventDefault();
-        axios.post('/vinterbash/validate',{schoolName,password})
+        console.log(schoolId,password);
+        axios.post('/vinterbash/validate',{schoolId,password})
         .then((response)=>{
-         setSchoolName("");
+         setSchoolId("");
          setPassword("");
          alert("Logged In");
          console.log("School Name --->", response.data);
@@ -72,8 +73,8 @@ function SignIn() {
                 <h1 style={{ color: '#000000' }}> Sign In </h1>
 
                 <form>
-                    <h5 style={{ color: '#000000' }}>School Name</h5>
-                    <input type='text' value={schoolName} onChange={(e) => setSchoolName(e.target.value)}/>
+                    <h5 style={{ color: '#000000' }}>School ID</h5>
+                    <input type='text' value={schoolId} onChange={(e) => setSchoolId(e.target.value)}/>
                     <h5 style={{ color: '#000000' }}>Password</h5>
                     <input type='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
                     <button 
