@@ -13,14 +13,17 @@ const PORT = process.env.PORT || 8000;
 app.use(cors({
     origin: [
     //     "http://ec2-184-73-128-194.compute-1.amazonaws.com",
-    "https://vinter2-0.onrender.com/vinterbash","http://localhost:3001",
+    // "https://vinter2-0.onrender.com/vinterbash","http://localhost:3001",
     //     "http://ec2-184-73-128-194.compute-1.amazonaws.com:3000",
-    "https://vinter2-0.onrender.com/vinterbash",
-    "https://vinter2-0-xtdb.vercel.app",
-    //     "http://vinterbash.in:3000", "vinterbash.in:3000",
+    // "https://vinter2-0.onrender.com/vinterbash",
+    // "https://vinter2-0-xtdb.vercel.app",
+    //     "http://vinterbash.in:3000", "vinterbash.in:3001",
         "https://www.vinterbash.co.in",
         "https://vinterbash.co.in"
-    // , "http://vinterbash.in", "http://localhost:3000/"
+        // "https://vinterbash.in"
+    // , "http://vinterbash.in"
+      , "http://localhost:3001/"
+    "http://vinterbash-alb-1429442373.us-east-1.elb.amazonaws.com/"
     ]
 }));
 app.use(express.json());
@@ -287,6 +290,15 @@ router.get('/getAllEvents', async (req, res) => {
         const { rows } = await pool.query(Queries.GET_ALL_EVENTS);
         res.status(200).json({ eventNames: rows.map(r => r.eventName) }); // Note: aliased in SQL query
     } catch (error) { res.status(500).json({ error: "Internal Server Error" }); }
+});
+
+router.get('/health', async (req, res) => {
+    try {
+        await pool.query('SELECT 1');
+        res.status(200).json({ status: 'ok' });
+    } catch (error) {
+        res.status(500).json({ status: 'error' });
+    }
 });
 
 router.post('/teacherInfo', async (req, res) => {

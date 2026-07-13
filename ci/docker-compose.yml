@@ -1,0 +1,46 @@
+version: '3.9'
+
+x-common-environment: &common-environment
+  - NODE_ENV=production
+
+x-backend-healthcheck: &backend-healthcheck
+  test: ["CMD", "curl", "-f", "http://localhost:8000/vinterbash/health"]
+  interval: 30s
+  timeout: 10s
+  retries: 3
+  start_period: 15s
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=8000
+      - DATABASE_URL=${DATABASE_URL}
+    expose:
+      - "8000"
+    healthcheck: *backend-healthcheck
+
+  frontend:
+    build:
+      context: .
+      dockerfile: smproject/Dockerfile
+    environment: *common-environment
+    expose:
+      - "80"
+    depends_on:
+      - backend
+
+  proxy:
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/proxy.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+    depends_on:
+      - frontend
+      - backend
