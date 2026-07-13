@@ -16,11 +16,14 @@ app.use(cors({
     // "https://vinter2-0.onrender.com/vinterbash","http://localhost:3001",
     //     "http://ec2-184-73-128-194.compute-1.amazonaws.com:3000",
     // "https://vinter2-0.onrender.com/vinterbash",
-    // "https://vinter2-0-xtdb.vercel.app",
-    //     "http://vinterbash.in:3000", "vinterbash.in:3000",
+    "https://vinter2-0-xtdb.vercel.app",
+    //     "http://vinterbash.in:3000", "vinterbash.in:3001",
+        "https://www.vinterbash.co.in",
+        "https://vinterbash.co.in",
         // "https://vinterbash.in"
-    // , "http://vinterbash.in", "http://localhost:3000/"
-    "http://vinterbash-alb-1429442373.us-east-1.elb.amazonaws.com/"
+    // , "http://vinterbash.in"
+        "http://localhost:3001",
+        "http://vinterbash-alb-1429442373.us-east-1.elb.amazonaws.com/"
     ]
 }));
 app.use(express.json());
@@ -107,10 +110,10 @@ app.use(express.json());
 // 3. Database Queries
 // ============================================================================
 const Queries = {
-    VALIDATE_SCHOOL: `SELECT school_id FROM schools WHERE school_name = $1 AND password = $2`,
+    VALIDATE_SCHOOL: `SELECT school_id, school_name FROM schools WHERE school_id = $1 AND password = $2`,
     GET_ALL_EVENTS: `SELECT event_name AS "eventName", event_id AS "eventId" FROM events`,
     GET_SCHOOL_EVENT_REGISTRATION_STATUS: `
-        SELECT s.school_id, s.school_name, e.event_id, e.max_teams_per_school, COUNT(t.team_id) AS registered_teams
+        SELECT s.school_id, s.school_name, e.event_id, e.max_teams_per_school, COUNT(t.team_id) AS registered_teams,teacher1name,teacher2name,teacher1number,teacher2number
         FROM schools s CROSS JOIN events e LEFT JOIN teams t ON t.school_id = s.school_id AND t.event_id = e.event_id
         WHERE s.school_id = $1 GROUP BY s.school_id, s.school_name, e.event_id, e.max_teams_per_school
     `,
@@ -173,17 +176,20 @@ const router = express.Router();
 router.post('/validate', async (req, res) => {
     try {
         /** @type {ValidateRequest} */
-        const { schoolName, password } = req.body;
-        console.log('requests:',req.body);
+        const { schoolId, password } = req.body;
+        console.log(schoolId, password);
+        const schoolRes = await pool.query(Queries.VALIDATE_SCHOOL,[schoolId, password]);
         
-        const schoolRes = await pool.query(Queries.VALIDATE_SCHOOL, [schoolName, password]);
-        if (schoolRes.rows.length === 0) return res.status(401).json({ error: "Invalid" });
+        if (schoolRes.rows.length === 0)
+        return res.status(401).json({ error: "Invalid" });
 
         const eventsRes = await pool.query(Queries.GET_ALL_EVENTS);
 
-        /** @type {ValidateResponse} */
-        const responseData = { schoolId: schoolRes.rows[0].school_id, schoolName, events: eventsRes.rows };
-        return res.status(200).json(responseData);
+        const responseData = {
+        schoolId: schoolRes.rows[0].school_id,
+        schoolName: schoolRes.rows[0].school_name,
+        events: eventsRes.rows
+        }; return res.status(200).json(responseData);
     } catch (error) { res.status(500).json({ error: "Internal Server Error" }); }
 });
 
@@ -199,9 +205,13 @@ router.post('/registeredEvents', async (req, res) => {
             const max = parseInt(row.max_teams_per_school, 10);
             if (registered === 0) none++; else if (registered < max) partially++; else fully++;
             schoolName = row.school_name;
+            teacher1name =row.teacher1name;
+            teacher2name =row.teacher2name;
+            teacher1number=row.teacher1number;
+            teacher2number=row.teacher2number;
         });
 
-        res.status(200).json({ schoolId, schoolName, fullyRegistered: fully, partiallyRegistered: partially, notRegistered: none });
+        res.status(200).json({ schoolId,teacher1name,teacher2name,teacher1number,teacher2number, schoolName, fullyRegistered: fully, partiallyRegistered: partially, notRegistered: none });
     } catch (error) { res.status(500).json({ error: "Internal Server Error" }); }
 });
 

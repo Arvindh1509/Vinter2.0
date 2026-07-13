@@ -7,15 +7,20 @@ import FlexBetween from '../templates/FlexBetween';
 import { Navigate } from 'react-router-dom';
 import axios from '../axios';
 import AnimatedPage from '../templates/AnimatedPage';
-import logo from '../assets/Vinterbash_2025_first_page.png';
+import logo from '../assets/RuleBook-2026.png';
 import StaffContact from './StaffContact';
 
 function Dashboard() {
-  const [{ schoolId, schoolName }, dispatch] = useStateValue();
+  const [{ schoolName, schoolId,staffName1,staffName2,staffNumber1,staffNumber2 }, dispatch] = useStateValue();
   const [totalEvents, setTotalEvents] = useState(26);
   const [ToRegEvents, setToRegEvents] = useState();
   const [partiallyReg, setPartiallyRegistered] = useState();
   const [fullReg, setFullyReg] = useState();
+  const [staff1Name, setStaff1Name] = useState('');
+  const [staff1Number, setStaff1Number] = useState('');
+  const [staff2Name, setStaff2Name] = useState('');
+  const [staff2Number, setStaff2Number] = useState('');
+
 
   useEffect(() => {
     axios.post('/vinterbash/registeredEvents', { schoolId })
@@ -24,6 +29,19 @@ function Dashboard() {
         setToRegEvents(response.data.notRegistered);
         setPartiallyRegistered(response.data.partiallyRegistered);
         setFullyReg(response.data.fullyRegistered);
+        setStaff1Name(response.data.teacher1name);
+        setStaff1Number(response.data.teacher1number);
+        setStaff2Name(response.data.teacher2name);
+        setStaff2Number(response.data.teacher2number);
+        dispatch({
+              type: 'staff',
+              payload: {
+                staffName1: response.data.teacher1name,
+                staffName2: response.data.teacher2name,
+                staffNumber1: response.data.teacher1number,
+                staffNumber2: response.data.teacher2number
+              }
+            });
       });
   }, [schoolId]);
 
