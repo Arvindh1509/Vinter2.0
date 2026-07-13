@@ -12,11 +12,15 @@ import bg from '../assets/vbash_bg.jpeg';
 import StaffContact from './StaffContact';
 
 function Dashboard() {
-  const [{ schoolId, schoolName }, dispatch] = useStateValue();
   const [totalEvents, setTotalEvents] = useState(26);
   const [ToRegEvents, setToRegEvents] = useState();
   const [partiallyReg, setPartiallyRegistered] = useState();
   const [fullReg, setFullyReg] = useState();
+  const [staff1Name, setStaff1Name] = useState('');
+  const [staff2Name, setStaff2Name] = useState('');
+  const [staff1Number, setStaff1Number] = useState('');
+  const [staff2Number, setStaff2Number] = useState('');
+  const [{ schoolId, schoolName,staffName1,staffName2,staffNumber1,staffNumber2}, dispatch] = useStateValue();
 
   useEffect(() => {
     axios.post('/vinterbash/registeredEvents', { schoolId })
@@ -25,6 +29,19 @@ function Dashboard() {
         setToRegEvents(response.data.notRegistered);
         setPartiallyRegistered(response.data.partiallyRegistered);
         setFullyReg(response.data.fullyRegistered);
+        setStaff1Name(response.data.teacher1name);
+        setStaff2Name(response.data.teacher2name);
+        setStaff1Number(response.data.teacher1number);
+        setStaff2Number(response.data.teacher2number);
+        dispatch({
+              type: 'staff',
+              payload: {
+                staff1Name: response.data.teacher1Name,
+                staff2Name: response.data.teacher2Name,
+                staff1Number: response.data.teacher1Phone,
+                staff2Number: response.data.teacher2Phone,
+              }
+            });
       });
   }, [schoolId]);
 
