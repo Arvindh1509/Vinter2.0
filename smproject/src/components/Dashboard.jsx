@@ -18,9 +18,10 @@ function Dashboard() {
   const [partiallyReg, setPartiallyRegistered] = useState();
   const [fullReg, setFullyReg] = useState();
   const [staff1Name, setStaff1Name] = useState('');
-    const [staff1Number, setStaff1Number] = useState('');
-    const [staff2Name, setStaff2Name] = useState('');
-    const [staff2Number, setStaff2Number] = useState('');
+  const [staff1Number, setStaff1Number] = useState('');
+  const [staff2Name, setStaff2Name] = useState('');
+  const [staff2Number, setStaff2Number] = useState('');
+
 
   useEffect(() => {
     axios.post('/vinterbash/registeredEvents', { schoolId })

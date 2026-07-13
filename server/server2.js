@@ -21,9 +21,9 @@ app.use(cors({
         "https://www.vinterbash.co.in",
         "https://vinterbash.co.in",
         // "https://vinterbash.in"
-    // , "http://vinterbash.in", 
-    "http://localhost:3001",
-    "http://vinterbash-alb-1429442373.us-east-1.elb.amazonaws.com/"
+    // , "http://vinterbash.in"
+        "http://localhost:3001",
+        "http://vinterbash-alb-1429442373.us-east-1.elb.amazonaws.com/"
     ]
 }));
 app.use(express.json());
