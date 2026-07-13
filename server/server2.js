@@ -107,7 +107,7 @@ app.use(express.json());
 // 3. Database Queries
 // ============================================================================
 const Queries = {
-    VALIDATE_SCHOOL: `SELECT school_id FROM schools WHERE school_name = $1 AND password = $2`,
+    VALIDATE_SCHOOL: `SELECT school_id, school_name FROM schools WHERE school_id = $1 AND password = $2`,
     GET_ALL_EVENTS: `SELECT event_name AS "eventName", event_id AS "eventId" FROM events`,
     GET_SCHOOL_EVENT_REGISTRATION_STATUS: `
         SELECT s.school_id, s.school_name, e.event_id, e.max_teams_per_school, COUNT(t.team_id) AS registered_teams
@@ -173,17 +173,20 @@ const router = express.Router();
 router.post('/validate', async (req, res) => {
     try {
         /** @type {ValidateRequest} */
-        const { schoolName, password } = req.body;
-        console.log('requests:',req.body);
+        const { schoolId, password } = req.body;
+        console.log(schoolId, password);
+        const schoolRes = await pool.query(Queries.VALIDATE_SCHOOL,[schoolId, password]);
         
-        const schoolRes = await pool.query(Queries.VALIDATE_SCHOOL, [schoolName, password]);
-        if (schoolRes.rows.length === 0) return res.status(401).json({ error: "Invalid" });
+        if (schoolRes.rows.length === 0)
+        return res.status(401).json({ error: "Invalid" });
 
         const eventsRes = await pool.query(Queries.GET_ALL_EVENTS);
 
-        /** @type {ValidateResponse} */
-        const responseData = { schoolId: schoolRes.rows[0].school_id, schoolName, events: eventsRes.rows };
-        return res.status(200).json(responseData);
+        const responseData = {
+        schoolId: schoolRes.rows[0].school_id,
+        schoolName: schoolRes.rows[0].school_name,
+        events: eventsRes.rows
+        }; return res.status(200).json(responseData);
     } catch (error) { res.status(500).json({ error: "Internal Server Error" }); }
 });
 
