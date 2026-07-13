@@ -41,11 +41,11 @@ function Navbar() {
       href: "https://drive.google.com/file/d/1yuaTzUJUm1Qgg4zLfkjlvkF2bDGfsXA7/view?usp=sharing",
     },
     { label: "Point of Contact", to: "/POC" },
-    //{ label: "Register for Events", to: "/signIn" },
-    {
-      label: "Register for Events",
-      href: "https://vinterbash2k26-loading-57ug.vercel.app/",
-    },
+    { label: "Register for Events", to: "/signIn" },
+    // {
+    //   label: "Register for Events",
+    //   href: "https://vinterbash2k26-loading-57ug.vercel.app/",
+    // },
   ];
 
   return (
@@ -68,13 +68,13 @@ function Navbar() {
           {!downSm && (
             <FlexBetween className="vb-nav-links">
               {links.map(({ label, to, href }) => (
-                // <Button
-                //   key={label}
-                //   onClick={to ? () => navigate(to) : undefined}
-                //   href={href}
-                //   className="vb-nav-button"
-                // >
                 <Button
+                  key={label}
+                  onClick={to ? () => navigate(to) : undefined}
+                  href={href}
+                  className="vb-nav-button"
+                >
+                {/* <Button
                     key={label}
                     onClick={() => {
                       if (to) {
@@ -84,7 +84,7 @@ function Navbar() {
                       }
                     }}
                     className="vb-nav-button"
-                  > 
+                  >  */}
                   {/* untill this to be removed */}
                   <Typography className="vb-nav-button-label">
                     {label}
@@ -112,36 +112,36 @@ function Navbar() {
                 }}
               >
                 {links.map(({ label, to, href }) => (
-                  // <MenuItem
-                  //   key={label}
-                  //   onClick={() => {
-                  //     handleClose();
-                  //     if (to) navigate(to);
-                  //   }}
-                  //   component={href ? "a" : "div"}
-                  //   href={href}
-                  //   target={href ? "_blank" : undefined}
-                  //   rel={href ? "noopener noreferrer" : undefined}
-                  //   className="vb-nav-menu-item"
-                  // >
-                  //   {label}
-                  // </MenuItem>
-
                   <MenuItem
                     key={label}
                     onClick={() => {
                       handleClose();
-
-                      if (to) {
-                        navigate(to);
-                      } else if (href) {
-                        window.location.href = href;
-                      }
+                      if (to) navigate(to);
                     }}
+                    component={href ? "a" : "div"}
+                    href={href}
+                    target={href ? "_blank" : undefined}
+                    rel={href ? "noopener noreferrer" : undefined}
                     className="vb-nav-menu-item"
                   >
                     {label}
                   </MenuItem>
+
+                  // <MenuItem
+                  //   key={label}
+                  //   onClick={() => {
+                  //     handleClose();
+
+                  //     if (to) {
+                  //       navigate(to);
+                  //     } else if (href) {
+                  //       window.location.href = href;
+                  //     }
+                  //   }}
+                  //   className="vb-nav-menu-item"
+                  // >
+                  //   {label}
+                  // </MenuItem>
                 ))}
               </Menu>
             </>
