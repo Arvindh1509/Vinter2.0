@@ -16,7 +16,7 @@ app.use(cors({
     // "https://vinter2-0.onrender.com/vinterbash","http://localhost:3001",
     //     "http://ec2-184-73-128-194.compute-1.amazonaws.com:3000",
     // "https://vinter2-0.onrender.com/vinterbash",
-    "https://vinter2-0-xtdb.vercel.app/",
+    "https://vinter2-0-xtdb.vercel.app",
     //     "http://vinterbash.in:3000", "vinterbash.in:3001",
         "https://www.vinterbash.co.in",
         "https://vinterbash.co.in"
