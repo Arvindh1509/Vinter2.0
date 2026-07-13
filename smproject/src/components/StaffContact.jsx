@@ -11,7 +11,6 @@ import {
   Box,
   Button
 } from '@mui/material';
-// import { type } from 'os';
 
 function StaffContact() {
   const [staff1Name, setStaff1Name] = useState('');
@@ -50,8 +49,6 @@ function StaffContact() {
     }
   },[staffName1,staffName2,staffNumber1,staffNumber2]);
 
-  
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -77,7 +74,6 @@ function StaffContact() {
 
     try {
       await axios.post('/vinterbash/teacherRegister', {
-        
         schoolId,
         teacher1Name:staff1Name,
         teacher2Name:staff2Name,
@@ -101,31 +97,81 @@ function StaffContact() {
 
   return (
     <AnimatedPage>
-      <div className="loginONE">
-        <div className="register_container">
-          <h3><u>Staff Contact</u></h3>
+      <div 
+        className="loginONE"
+        style={{
+          background: 'transparent',
+          backgroundColor: 'transparent',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '80vh',
+          width: '100%'
+        }}
+      >
+        <div 
+          className="register_container"
+          style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            background: 'rgba(255, 255, 255, 0.2)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: 'none',
+            color: '#000000',
+            borderRadius: '16px',
+            boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.05)',
+            padding: '2.5rem',
+            width: '100%',
+            maxWidth: '500px',
+            boxSizing: 'border-box'
+          }}
+        >
+          <h3 style={{ color: '#000000', marginBottom: '25px', textAlign: 'center' }}><u>Staff Contact</u></h3>
 
           {existingContact && !isEditing ? (
-            <Card sx={{ background: 'linear-gradient(135deg, #F37D00, #FEC000)', borderRadius: '12px', color: 'white', padding: 2 }}>
-              <CardContent>
-                <Typography variant="h6" sx={{ fontFamily: `'nevis', sans-serif`, fontSize: '20px' }}>
+            <Card 
+              sx={{ 
+                background: 'rgba(255, 255, 255, 0.25) !important', 
+                backgroundColor: 'rgba(255, 255, 255, 0.25) !important',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+                borderRadius: '12px', 
+                color: '#000000', 
+                padding: 1,
+                border: 'none !important',
+                boxShadow: 'none !important'
+              }}
+            >
+              <CardContent style={{ textAlign: 'center' }}>
+                <Typography variant="h6" sx={{ fontFamily: `'nevis', sans-serif`, fontSize: '18px', color: '#000000', marginY: '8px' }}>
                   Staff Name 1: {staffName1}
                 </Typography>
-                <Typography variant="h6" sx={{ fontFamily: `'nevis', sans-serif`, fontSize: '20px' }}>
+                <Typography variant="h6" sx={{ fontFamily: `'nevis', sans-serif`, fontSize: '18px', color: '#000000', marginY: '8px' }}>
                   Staff Contact 1: {staffNumber1}
                 </Typography>
-                 <Typography variant="h6" sx={{ fontFamily: `'nevis', sans-serif`, fontSize: '20px' }}>
+                 <Typography variant="h6" sx={{ fontFamily: `'nevis', sans-serif`, fontSize: '18px', color: '#000000', marginY: '8px' }}>
                   Staff Name 2: {staffName2}
                 </Typography>
-                <Typography variant="h6" sx={{ fontFamily: `'nevis', sans-serif`, fontSize: '20px' }}>
+                <Typography variant="h6" sx={{ fontFamily: `'nevis', sans-serif`, fontSize: '18px', color: '#000000', marginY: '8px' }}>
                   Staff Contact 2: {staffNumber2}
                 </Typography>
 
                 <Button
-                 onClick={() => setIsEditing(true)} sx={{color:'white', backgroundColor:'transparent',marginTop:"10px",border:'3px solid white',borderColor:'white', fontFamily: `'nevis', sans-serif`,fontWeight:'600',fontSize:'15px', '&:hover': {
-                  backgroundColor: '#f0f0f0',
-                  color:'black' // light gray on hover
-                },}}
+                  onClick={() => setIsEditing(true)} 
+                  sx={{
+                    color: '#000000', 
+                    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+                    marginTop: "20px",
+                    border: 'none',
+                    fontFamily: `'nevis', sans-serif`,
+                    fontWeight: '600',
+                    fontSize: '14px', 
+                    boxShadow: '0 4px 12px 0 rgba(0, 0, 0, 0.05)',
+                    textTransform: 'uppercase',
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                    },
+                  }}
                 >
                   Edit Contact
                 </Button>
@@ -133,7 +179,7 @@ function StaffContact() {
             </Card>
           ) : (
             <form onSubmit={handleSubmit}>
-              <h5>Staff Name 1</h5>
+              <h5 style={{ color: '#000000', marginY: '4px' }}>Staff Name 1</h5>
               <input
                 type='text'
                 value={staff1Name}
@@ -149,7 +195,7 @@ function StaffContact() {
                 className='register_form'
               />
 
-              <h5>Staff Contact Number 1</h5>
+              <h5 style={{ color: '#000000', marginY: '4px' }}>Staff Contact Number 1</h5>
               <input
                 type='tel'
                 value={staff1Number}
@@ -165,7 +211,7 @@ function StaffContact() {
                 className='register_form'
                 maxLength={10}
               />
-               <h5>Staff Name 2</h5>
+               <h5 style={{ color: '#000000', marginY: '4px' }}>Staff Name 2</h5>
               <input
                 type='text'
                 value={staff2Name}
@@ -181,7 +227,7 @@ function StaffContact() {
                 className='register_form'
               />
 
-              <h5>Staff Contact Number 2</h5>
+              <h5 style={{ color: '#000000', marginY: '4px' }}>Staff Contact Number 2</h5>
               <input
                 type='tel'
                 value={staff2Number}
@@ -198,11 +244,20 @@ function StaffContact() {
                 maxLength={10}
               />
 
-              <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+              <Box sx={{ display: 'flex', gap: 2, mt: 3, justifyContent: 'center' }}>
                 <Button
                   variant="contained"
                   type="submit"
-                  sx={{ backgroundColor: 'white', color: 'black' }}
+                  sx={{ 
+                    backgroundColor: 'rgba(255, 255, 255, 0.4)', 
+                    color: '#000000',
+                    fontWeight: '600',
+                    border: 'none',
+                    boxShadow: '0 4px 12px 0 rgba(0, 0, 0, 0.03)',
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.6)'
+                    }
+                  }}
                 >
                   Submit
                 </Button>
@@ -210,9 +265,16 @@ function StaffContact() {
                 {existingContact && (
                   <Button
                     variant="outlined"
-                    sx={{ color: 'white', borderColor: 'white' }}
+                    sx={{ 
+                      color: '#000000', 
+                      borderColor: 'rgba(0, 0, 0, 0.2)',
+                      border: '1px solid rgba(0, 0, 0, 0.2)',
+                      '&:hover': {
+                        borderColor: '#000000',
+                        backgroundColor: 'rgba(0, 0, 0, 0.05)'
+                      }
+                    }}
                     onClick={() => {
-                      // Cancel editing and reset fields
                       setStaff1Name(existingContact.teacher1name);
                       setStaff1Number(existingContact.teacher1number);
                       setStaff2Name(existingContact.teacher2name);
