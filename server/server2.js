@@ -19,11 +19,11 @@ app.use(cors({
     // "https://vinter2-0-xtdb.vercel.app",
     //     "http://vinterbash.in:3000", "vinterbash.in:3001",
         "https://www.vinterbash.co.in",
-        "https://vinterbash.co.in"
+        "https://vinterbash.co.in",
         // "https://vinterbash.in"
     // , "http://vinterbash.in"
-      , "http://localhost:3001/"
-    "http://vinterbash-alb-1429442373.us-east-1.elb.amazonaws.com/"
+        "http://localhost:3001/",
+        "http://vinterbash-alb-1429442373.us-east-1.elb.amazonaws.com/"
     ]
 }));
 app.use(express.json());
