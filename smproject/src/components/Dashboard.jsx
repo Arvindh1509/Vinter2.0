@@ -7,7 +7,7 @@ import FlexBetween from '../templates/FlexBetween';
 import { Navigate } from 'react-router-dom';
 import axios from '../axios';
 import AnimatedPage from '../templates/AnimatedPage';
-import logo from '../assets/Vinterbash_2025_first_page.png';
+import logo from '../assets/RuleBook-2026.png';
 import bg from '../assets/vbash_bg.jpeg';
 import StaffContact from './StaffContact';
 
