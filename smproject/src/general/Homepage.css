@@ -36,20 +36,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 65vh;
   width: 100%;
-  padding-top: 110px;
+  padding-top: 24px;
   box-sizing: border-box;
 }
 
 @media (max-width: 599.98px) {
   .vb-hero {
-    min-height: 50vh;
-    padding-top: 90px;
+    min-height: 36vh;
+    padding-top: 16px;
   }
 
   .vb-main-title {
-    font-size: clamp(2.6rem, 8vw, 3.4rem);
+    font-size: clamp(1.8rem, 9vw, 3.4rem);
+    white-space: nowrap;
+    letter-spacing: 0.01em;
   }
 
   .vb-subtitle {
@@ -76,13 +78,6 @@
   font-size: clamp(3rem, 8.8vw, 7.6rem);
   line-height: 0.95;
   letter-spacing: 0.02em;
-  text-shadow:
-    1px 0 0 #000000,
-    -1px 0 0 #000000,
-    0 1px 0 #000000,
-    0 -1px 0 #000000,
-    1px 1px 0 #000000,
-    -1px -1px 0 #000000;
   margin: 0;
   font-display: swap;
 }
@@ -99,7 +94,6 @@
   font-size: clamp(1rem, 2.8vw, 1.8rem);
   letter-spacing: 0.16em;
   line-height: 1.2;
-  text-shadow: 0.5px 0 0 #000000, -0.5px 0 0 #000000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -184,6 +178,13 @@
 
 .vb-about-section {
   margin-top: 32px; /* mt: 4 */
+}
+
+
+.logo3{
+  width:40%;
+  object-fit :contain;
+  height:40%;
 }
 
 /* ===== footer ===== */

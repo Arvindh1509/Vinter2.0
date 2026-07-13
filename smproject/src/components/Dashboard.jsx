@@ -8,6 +8,7 @@ import { Navigate } from 'react-router-dom';
 import axios from '../axios';
 import AnimatedPage from '../templates/AnimatedPage';
 import logo from '../assets/RuleBook-2026.png';
+import bg from '../assets/vbash_bg.jpeg';
 import StaffContact from './StaffContact';
 
 function Dashboard() {
@@ -30,16 +31,16 @@ function Dashboard() {
         setPartiallyRegistered(response.data.partiallyRegistered);
         setFullyReg(response.data.fullyRegistered);
         setStaff1Name(response.data.teacher1name);
-        setStaff1Number(response.data.teacher1number);
-        setStaff2Name(response.data.teacher2name);
-        setStaff2Number(response.data.teacher2number);
+            setStaff1Number(response.data.teacher1number);
+            setStaff2Name(response.data.teacher2name);
+            setStaff2Number(response.data.teacher2number);
         dispatch({
               type: 'staff',
               payload: {
-                staffName1: response.data.teacher1name,
-                staffName2: response.data.teacher2name,
-                staffNumber1: response.data.teacher1number,
-                staffNumber2: response.data.teacher2number
+                staff1Name: response.data.teacher1name,
+                staff2Name: response.data.teacher2name,
+                staff1Number: response.data.teacher1number,
+                staff2Number: response.data.teacher2number
               }
             });
       });
@@ -51,14 +52,18 @@ function Dashboard() {
     {schoolName === 'admin' ? (
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: { xs: '10px', sm: '20px', md: '40px' },
-          textAlign: 'center',
-          boxSizing: 'border-box',
-        }}
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: { xs: '10px', sm: '20px', md: '40px' },
+    textAlign: 'center',
+    boxSizing: 'border-box',
+    minHeight: '100vh',
+    backgroundImage: `url(${bg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }}
       >
         <FlexBetween sx={{ width: '100%', justifyContent: 'center' }}>
           <Header />
@@ -67,14 +72,18 @@ function Dashboard() {
     ) : (
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: { xs: '10px', sm: '20px', md: '40px' },
-          textAlign: 'center',
-          boxSizing: 'border-box',
-        }}
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: { xs: '10px', sm: '20px', md: '40px' },
+    textAlign: 'center',
+    boxSizing: 'border-box',
+    minHeight: '100vh',
+    backgroundImage: `url(${bg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }}
       >
         <FlexBetween sx={{ width: '100%', justifyContent: 'center' }}>
           <Header />

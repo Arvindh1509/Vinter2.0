@@ -205,13 +205,13 @@ router.post('/registeredEvents', async (req, res) => {
             const max = parseInt(row.max_teams_per_school, 10);
             if (registered === 0) none++; else if (registered < max) partially++; else fully++;
             schoolName = row.school_name;
-            teacher1name =row.teacher1name;
-            teacher2name =row.teacher2name;
+            teacher1name=row.teacher1name;
+            teacher2name=row.teacher2name;
             teacher1number=row.teacher1number;
             teacher2number=row.teacher2number;
         });
 
-        res.status(200).json({ schoolId,teacher1name,teacher2name,teacher1number,teacher2number, schoolName, fullyRegistered: fully, partiallyRegistered: partially, notRegistered: none });
+        res.status(200).json({ schoolId, schoolName,teacher1name,teacher2name,teacher1number,teacher2number, fullyRegistered: fully, partiallyRegistered: partially, notRegistered: none });
     } catch (error) { res.status(500).json({ error: "Internal Server Error" }); }
 });
 

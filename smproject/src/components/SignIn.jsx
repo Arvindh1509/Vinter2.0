@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
-// import { Link, Navigate,useNavigate } from 'react-router-dom';
-import './SignIn.css';
-import axios from '../axios';
-import { useStateValue } from '../StateProvider';
-import { useNavigate } from 'react-router-dom';
-import logo from '../assets/vbash_logo.png';
-import AnimatedPage from '../templates/AnimatedPage';
-import { useEffect } from 'react';
+import React, { useState } from "react";
+import "./SignIn.css";
+import axios from "../axios";
+import { useStateValue } from "../StateProvider";
+import { useNavigate } from "react-router-dom";
+import logo from "../assets/vbash_logo.png";
+import bg from "../assets/vbash_bg.jpeg";
 import bgImage from "../assets/vbash_bg.jpeg";
-import { Box } from '@mui/material';
-
+import AnimatedPage from "../templates/AnimatedPage";
+import { Box } from "@mui/material";
 
 function SignIn() {
     const [schoolId, setSchoolId] = useState('');
@@ -67,9 +65,9 @@ function SignIn() {
                 <p>For further queries contact : 7010089170</p>
             </div>
         </div>
-        </Box>
-        </AnimatedPage>
-    );
+      </Box>
+    </AnimatedPage>
+  );
 }
 
 export default SignIn;
