@@ -87,7 +87,7 @@ function Dashboard() {
         </Typography>
 
         <a
-          href="https://drive.google.com/file/d/19yIQmbFQa8O7OOrL5MQYW7ba-uEuQO1l/view?usp=sharing"
+          href="https://drive.google.com/file/d/1yuaTzUJUm1Qgg4zLfkjlvkF2bDGfsXA7/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           style={{
