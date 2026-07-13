@@ -33,8 +33,19 @@ function Chess() {
 
   return schoolName?(
     <AnimatedPage>
-     {schoolName != 'admin' ?
-    <div className='ThreePEvent'>
+     {schoolName !== 'admin' ?
+    <div 
+      className='ThreePEvent'
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '20px',
+        width: '100%',
+        padding: '20px 0',
+        boxSizing: 'border-box'
+      }}
+    >
       {Array.from({ length: 3 - registeredTeams.length }).map((_, i) => (
     <One_Member_Event
       key={`new-team-${i + 1}`}
@@ -59,7 +70,18 @@ function Chess() {
     />
   ))}
     </div>
-    : <div className='ThreePEvent'>
+    : <div 
+        className='ThreePEvent'
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '20px',
+          width: '100%',
+          padding: '20px 0',
+          boxSizing: 'border-box'
+        }}
+      >
 
         {registeredTeams.map((team, index) => (
           <RegisteredTeam

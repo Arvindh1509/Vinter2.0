@@ -34,12 +34,7 @@
 }
 
 .vb-nav-wrapper-homepage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   padding-top: 20px;
-  pointer-events: none;
 }
 
 /* ===== the pill itself ===== */
@@ -133,9 +128,10 @@
 }
 
 .vb-nav-button-label {
-  font-weight: bold;
+  font-weight: 800;
   font-size: 0.6rem;
-  color: #ffffff;
+  color: #252525;
+  font-family: Georgia, serif;
   transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

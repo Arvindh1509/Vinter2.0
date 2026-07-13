@@ -1,3 +1,4 @@
+import bg from '../assets/vbash_bg.jpeg';
 import { Box } from '@mui/material'
 import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
@@ -7,7 +8,7 @@ import Sidebar from './Sidebar';
 function Layout() {
     const [isSidebarOpen,setSidebarOpen]=useState(false);
   return (
-   <Box display='block' width="100%" hright="100%">
+  <Box display='block' width="100%" height="100%" sx={{backgroundImage: `url(${bg})`, backgroundSize:'cover', backgroundPosition:'center', minHeight:'100vh'}}>
     <Box>
         <Sidebar drawerWidth='250px' 
         isSidebarOpen={isSidebarOpen} 

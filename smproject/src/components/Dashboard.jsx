@@ -12,11 +12,15 @@ import bg from '../assets/vbash_bg.jpeg';
 import StaffContact from './StaffContact';
 
 function Dashboard() {
-  const [{ schoolId, schoolName }, dispatch] = useStateValue();
+  const [{ schoolName, schoolId,staffName1,staffName2,staffNumber1,staffNumber2 }, dispatch] = useStateValue();
   const [totalEvents, setTotalEvents] = useState(26);
   const [ToRegEvents, setToRegEvents] = useState();
   const [partiallyReg, setPartiallyRegistered] = useState();
   const [fullReg, setFullyReg] = useState();
+  const [staff1Name, setStaff1Name] = useState('');
+    const [staff1Number, setStaff1Number] = useState('');
+    const [staff2Name, setStaff2Name] = useState('');
+    const [staff2Number, setStaff2Number] = useState('');
 
   useEffect(() => {
     axios.post('/vinterbash/registeredEvents', { schoolId })
@@ -25,6 +29,19 @@ function Dashboard() {
         setToRegEvents(response.data.notRegistered);
         setPartiallyRegistered(response.data.partiallyRegistered);
         setFullyReg(response.data.fullyRegistered);
+        setStaff1Name(response.data.teacher1name);
+            setStaff1Number(response.data.teacher1number);
+            setStaff2Name(response.data.teacher2name);
+            setStaff2Number(response.data.teacher2number);
+        dispatch({
+              type: 'staff',
+              payload: {
+                staff1Name: response.data.teacher1name,
+                staff2Name: response.data.teacher2name,
+                staff1Number: response.data.teacher1number,
+                staff2Number: response.data.teacher2number
+              }
+            });
       });
   }, [schoolId]);
 
@@ -34,14 +51,18 @@ function Dashboard() {
     {schoolName === 'admin' ? (
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: { xs: '10px', sm: '20px', md: '40px' },
-          textAlign: 'center',
-          boxSizing: 'border-box',
-        }}
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: { xs: '10px', sm: '20px', md: '40px' },
+    textAlign: 'center',
+    boxSizing: 'border-box',
+    minHeight: '100vh',
+    backgroundImage: `url(${bg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }}
       >
         <FlexBetween sx={{ width: '100%', justifyContent: 'center' }}>
           <Header />
@@ -50,14 +71,18 @@ function Dashboard() {
     ) : (
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: { xs: '10px', sm: '20px', md: '40px' },
-          textAlign: 'center',
-          boxSizing: 'border-box',
-        }}
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: { xs: '10px', sm: '20px', md: '40px' },
+    textAlign: 'center',
+    boxSizing: 'border-box',
+    minHeight: '100vh',
+    backgroundImage: `url(${bg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  }}
       >
         <FlexBetween sx={{ width: '100%', justifyContent: 'center' }}>
           <Header />
