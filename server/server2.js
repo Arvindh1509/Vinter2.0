@@ -289,11 +289,13 @@ router.post('/teacherRegister', async (req, res) => {
     } catch (error) { res.status(500).json({ error: "Internal Server Error" }); }
 });
 
-router.get('/getAllEvents', async (req, res) => {
-    try {
-        const { rows } = await pool.query(Queries.GET_ALL_EVENTS);
-        res.status(200).json({ eventNames: rows.map(r => r.eventName) }); // Note: aliased in SQL query
-    } catch (error) { res.status(500).json({ error: "Internal Server Error" }); }
+router.get("/getAllEvents", async (req, res) => {
+  try {
+    const { rows } = await pool.query(Queries.GET_ALL_EVENTS);
+    res.status(200).json({ events: rows }); // Note: aliased in SQL query
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 router.get('/health', async (req, res) => {
