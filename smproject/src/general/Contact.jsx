@@ -9,16 +9,17 @@ function Contact() {
   const [eventNames, setEventNames] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("/vinterbash/getAllEvents")
-      .then((response) => {
-        setEventNames(response.data.eventNames);
-        console.log("Event Names:", response.data.eventNames);
-      })
-      .catch((error) => {
-        console.error("Error fetching events:", error);
-      });
-  }, []);
+  axios
+    .get("/vinterbash/getAllEvents")
+    .then((response) => {
+      const names = response.data.events.map((e) => e.eventName);
+      setEventNames(names);
+      console.log("Event Names:", names);
+    })
+    .catch((error) => {
+      console.error("Error fetching events:", error);
+    });
+}, []);
 
   const ContactCard = ({ name, event, number }) => (
     <div className="contactCard">

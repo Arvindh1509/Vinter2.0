@@ -111,7 +111,7 @@ app.use(express.json());
 // ============================================================================
 const Queries = {
     VALIDATE_SCHOOL: `SELECT school_id, school_name FROM schools WHERE school_id = $1 AND password = $2`,
-    GET_ALL_EVENTS: `SELECT event_name AS "eventName", event_id AS "eventId" FROM events`,
+    GET_ALL_EVENTS: `SELECT event_name AS "eventName", event_id AS "eventId", venue AS "venue", timings AS "timings" FROM events`,
     GET_SCHOOL_EVENT_REGISTRATION_STATUS: `
         SELECT s.school_id, s.school_name, e.event_id, e.max_teams_per_school, COUNT(t.team_id) AS registered_teams,teacher1name,teacher2name,teacher1number,teacher2number
         FROM schools s CROSS JOIN events e LEFT JOIN teams t ON t.school_id = s.school_id AND t.event_id = e.event_id
