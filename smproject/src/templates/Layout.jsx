@@ -8,7 +8,14 @@ import Sidebar from './Sidebar';
 function Layout() {
     const [isSidebarOpen,setSidebarOpen]=useState(false);
   return (
-  <Box display='block' width="100%" height="100%" sx={{backgroundImage: `url(${bg})`, backgroundSize:'cover', backgroundPosition:'center', minHeight:'100vh'}}>
+  <Box display='block' width="100%" height="100%" sx={{
+    backgroundImage: `url(${bg})`,
+    backgroundSize:'cover',
+    backgroundPosition:'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'fixed',
+    minHeight:'100vh'
+  }}>
     <Box>
         <Sidebar drawerWidth='250px' 
         isSidebarOpen={isSidebarOpen} 

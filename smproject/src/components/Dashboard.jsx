@@ -60,9 +60,9 @@ function Dashboard() {
     textAlign: 'center',
     boxSizing: 'border-box',
     minHeight: '100vh',
-    backgroundImage: `url(${bg})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    //backgroundImage: `url(${bg})`,
+    //backgroundSize: 'cover',
+    //backgroundPosition: 'center',
   }}
       >
         <FlexBetween sx={{ width: '100%', justifyContent: 'center' }}>
@@ -80,9 +80,11 @@ function Dashboard() {
     textAlign: 'center',
     boxSizing: 'border-box',
     minHeight: '100vh',
-    backgroundImage: `url(${bg})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    //backgroundImage: `url(${bg})`,
+    //backgroundSize: 'cover',
+    //backgroundPosition: 'center',
+    //backgroundRepeat: 'no-repeat',
+    //backgroundAttachment: 'fixed',
   }}
       >
         <FlexBetween sx={{ width: '100%', justifyContent: 'center' }}>
@@ -109,6 +111,7 @@ function Dashboard() {
           mt={5}
           mb={2}
           fontFamily="'nevis', sans-serif"
+          sx={{ fontSize: 'clamp(1rem, 3vw, 1.25rem)' }}
         >
           View the Rulebook here ⬇
         </Typography>

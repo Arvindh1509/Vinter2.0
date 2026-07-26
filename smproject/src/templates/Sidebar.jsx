@@ -6,7 +6,9 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  Collapse
+  Collapse,
+  useMediaQuery,
+  useTheme
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -33,6 +35,8 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
   const navigate = useNavigate();
   const[{events,activeEvent,activeEventId},dispatch]=useStateValue();
   const eventItems = events;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     setactive(pathname.substring(1));
@@ -118,6 +122,9 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
               activeEvent:text,
               activeEventId:Id
                     })
+            if (isMobile) {
+              setSidebarOpen(false);
+            }
           }}
           sx={{
             backgroundColor: isActive ? 'rgba(0, 0, 0, 0.08)' : 'transparent',
@@ -171,6 +178,9 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
                     style={{ marginLeft:'10px', filter: 'brightness(0) saturate(100%)', width: '120px', height: 'auto' }}
                     onClick={() => {
                       navigate(`/dashboard`);
+                      if (isMobile) {
+                        setSidebarOpen(false);
+                      }
                     }}
                   />
                 </Box>
