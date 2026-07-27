@@ -10,6 +10,8 @@ const crypto = require('crypto');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+const VERIFY_TOKEN='EAAcxtu93wDIBSOibba0vFpZBr9rFOSMm9hIgBFJZBreaB7gIPzPciZB6j2RUO0S9zbMwVcdDZCpu0rNHWMxYyxfqVFC05A1NJID9a3DXl6QUZAD8kv5VSktw5DpmZAiUEV9il94scnxaNRlZBusaVDj0DuUUo98LbgVJJlH4EvhlYmjhtGdXejAZAt8cr1rvhGXAm4r07ykKZBREUlOFcoNDKrM16QPOKk33w2eMN9mmtUk7HftLpjF5bBuAYvv2nEwbAZC6ONOjTm4vrWHYbFs3ZBhD8r65QZDZD';
+
 app.use(cors({
     origin: [
     //     "http://ec2-184-73-128-194.compute-1.amazonaws.com",
@@ -317,6 +319,18 @@ router.post('/teacherInfo', async (req, res) => {
         res.status(200).json(rows[0]);
     } catch (error) { res.status(500).json({ error: "Internal Server Error" }); }
 });
+
+router.get('/whatsapp',async(req,res)=>{
+    const mode = req.query['hub.mode'];
+  const token = req.query['hub.verify_token'];
+  const challenge = req.query['hub.challenge'];
+
+  if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+    console.log('Webhook verified');
+    return res.status(200).send(challenge);
+  }
+  res.sendStatus(403);
+})
 
 app.use('/vinterbash', router);
 
