@@ -12,6 +12,7 @@ function TurfCricket() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }, dispatch] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
+  const maxTeams=1;
 
   const fetchTeams = useCallback(() => {
     if (!schoolName || !activeEvent) return;
@@ -28,6 +29,18 @@ function TurfCricket() {
       });
   }, [schoolName, activeEvent]);
 
+  const occupiedTeamNumbers = registeredTeams.map(team =>
+  parseInt(team.teamId.match(/t(\d+)$/)?.[1] || "0", 10)
+  );
+
+  const availableTeamNumbers = [];
+
+  for (let i = 1; i <= maxTeams; i++) {
+    if (!occupiedTeamNumbers.includes(i)) {
+      availableTeamNumbers.push(i);
+    }
+  }
+
   useEffect(() => {
     fetchTeams(); // only runs on mount or when schoolName/activeEvent changes
   }, [fetchTeams]);
@@ -36,41 +49,41 @@ function TurfCricket() {
     <AnimatedPage>
     {schoolName != 'admin' ?
     <div className='ThreePEvent'>
-  {Array.from({ length: 1 - registeredTeams.length }).map((_, i) => (
+  {availableTeamNumbers.map((teamNo) => (
     <Nine_Member_Team
-      key={`new-team-${i + 1}`}
+      key={`team-${teamNo}`}
       eventId={activeEventId}
       eventName={activeEvent}
       registeredTeams={registeredTeams}
       schoolId={schoolId}
-      teamIndex={registeredTeams.length + i + 1}
+      teamIndex={teamNo}
       minMember={7}
       onTeamUpdate={fetchTeams} 
     />
   ))}
   
-  {registeredTeams.map((team, index) => (
+  {registeredTeams.map((team) => (
     <RegisteredTeam
       key={team.teamId}
       team={team}
       eventId={activeEventId}
       eventName={activeEvent}
       schoolId={schoolId}
-      teamIndex={index + 1}
+      teamIndex={parseInt(team.teamId.match(/t(\d+)$/)?.[1] || "0", 10)}
       maxMember={9}
       onTeamUpdate={fetchTeams} 
     />
   ))}
 </div>
 : <div className='ThreePEvent'>
-        {registeredTeams.map((team, index) => (
+        {registeredTeams.map((team) => (
           <RegisteredTeam
             key={team.teamId}
             team={team}
             eventId={activeEventId}
             schoolId={schoolId}
             eventName={team.schoolName}
-            teamIndex={index + 1}
+            teamIndex={parseInt(team.teamId.match(/t(\d+)$/)?.[1] || "0", 10)}
             onTeamUpdate={fetchTeams} // optional: same here
           />
         ))}

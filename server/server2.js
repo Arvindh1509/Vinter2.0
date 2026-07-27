@@ -131,8 +131,8 @@ const Queries = {
         INSERT INTO participants (participant_id, participant_name, team_id) VALUES ($1, $2, $3) 
         ON CONFLICT (participant_id) DO UPDATE SET participant_name = EXCLUDED.participant_name, team_id = EXCLUDED.team_id
     `,
-    GET_EVENT_DETAILS: `
-        SELECT e.event_id, e.event_name, t.team_id, t.team_name, p.participant_id, p.participant_name, s.school_name
+  GET_EVENT_DETAILS: `
+        SELECT e.event_id, e.event_name,e.max_teams_per_school, t.team_id, t.team_name, p.participant_id, p.participant_name, s.school_name
         FROM schools s JOIN teams t ON s.school_id = t.school_id JOIN events e ON t.event_id = e.event_id
         JOIN participants p ON t.team_id = p.team_id WHERE s.school_name = $1 AND e.event_name = $2
         ORDER BY t.team_id, p.participant_id
@@ -146,28 +146,49 @@ const Queries = {
     GET_TEACHER_INFO: `SELECT teacher1name, teacher1number, teacher2name, teacher2number FROM schools WHERE school_id = $1`
 };
 
+const VERIFY_TOKEN='EAAcxtu93wDIBSOibba0vFpZBr9rFOSMm9hIgBFJZBreaB7gIPzPciZB6j2RUO0S9zbMwVcdDZCpu0rNHWMxYyxfqVFC05A1NJID9a3DXl6QUZAD8kv5VSktw5DpmZAiUEV9il94scnxaNRlZBusaVDj0DuUUo98LbgVJJlH4EvhlYmjhtGdXejAZAt8cr1rvhGXAm4r07ykKZBREUlOFcoNDKrM16QPOKk33w2eMN9mmtUk7HftLpjF5bBuAYvv2nEwbAZC6ONOjTm4vrWHYbFs3ZBhD8r65QZDZD';
+
+
 // ============================================================================
 // 4. Helper Methods (Replaces Spring Data Logic)
 // ============================================================================
 function buildEventWithTeams(rows, eventName) {
-    const event = { eventId: null, eventName: eventName, teams: [] };
-    if (rows.length === 0) return event;
-    const teamMap = new Map();
+  const event = { eventId: null, eventName: eventName, teams: [],maxTeams:null };
+  if (rows.length === 0) return event;
+  const teamMap = new Map();
 
-    rows.forEach(row => {
-        if (!event.eventId) { event.eventId = row.event_id; event.eventName = row.event_name; }
-        const { team_id, team_name, participant_id, participant_name, school_name } = row;
+  rows.forEach((row) => {
+    if (!event.eventId) {
+      event.eventId = row.event_id;
+      event.eventName = row.event_name;
+      event.maxTeams=row.max_teams_per_school;
+    }
+    const {
+      team_id,
+      team_name,
+      participant_id,
+      participant_name,
+      school_name,
+    } = row;
 
-        if (team_id && !teamMap.has(team_id)) {
-            const team = { teamId: team_id, teamName: team_name, schoolName: school_name, participants: [] };
-            teamMap.set(team_id, team);
-            event.teams.push(team);
-        }
-        if (participant_id) {
-            teamMap.get(team_id).participants.push({ participantId: participant_id, participantName: participant_name });
-        }
-    });
-    return event;
+    if (team_id && !teamMap.has(team_id)) {
+      const team = {
+        teamId: team_id,
+        teamName: team_name,
+        schoolName: school_name,
+        participants: [],
+      };
+      teamMap.set(team_id, team);
+      event.teams.push(team);
+    }
+    if (participant_id) {
+      teamMap.get(team_id).participants.push({
+        participantId: participant_id,
+        participantName: participant_name,
+      });
+    }
+  });
+  return event;
 }
 
 // ============================================================================
@@ -238,19 +259,25 @@ router.post('/register', async (req, res) => {
     } finally { client.release(); }
 });
 
-router.post('/events', async (req, res) => {
-    try {
-        /** @type {EventsRequest} */
-        const { schoolName, activeEvent } = req.body;
-        let queryStr = schoolName === "admin" ? Queries.GET_ADMIN_EVENT_DETAILS : Queries.GET_EVENT_DETAILS;
-        let queryParams = schoolName === "admin" ? [activeEvent] : [schoolName, activeEvent];
+router.post("/events", async (req, res) => {
+  try {
+    /** @type {EventsRequest} */
+    const { schoolName, activeEvent } = req.body;
+    let queryStr =
+      schoolName === "admin"
+        ? Queries.GET_ADMIN_EVENT_DETAILS
+        : Queries.GET_EVENT_DETAILS;
+    let queryParams =
+      schoolName === "admin" ? [activeEvent] : [schoolName, activeEvent];
 
-        const { rows } = await pool.query(queryStr, queryParams);
-        
-        /** @type {EventWithTeamsDTO} */
-        const eventResponse = buildEventWithTeams(rows, activeEvent);
-        res.status(200).json(eventResponse);
-    } catch (error) { res.status(500).json({ error: "Internal Server Error" }); }
+    const { rows } = await pool.query(queryStr, queryParams);
+
+    /** @type {EventWithTeamsDTO} */
+    const eventResponse = buildEventWithTeams(rows, activeEvent);
+    res.status(200).json(eventResponse);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 router.post('/eventParticipantMap', async (req, res) => {

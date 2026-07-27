@@ -11,6 +11,7 @@ function Art() {
   const [{ schoolName, activeEvent, schoolId, activeEventId }] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
+  const maxTeams=2;
 
   // Create fetch function and memoize it
   const fetchTeams = useCallback(() => {
@@ -28,6 +29,18 @@ function Art() {
       });
   }, [schoolName, activeEvent]);
 
+  const occupiedTeamNumbers = registeredTeams.map(team =>
+  parseInt(team.teamId.match(/t(\d+)$/)?.[1] || "0", 10)
+  );
+
+  const availableTeamNumbers = [];
+
+  for (let i = 1; i <= maxTeams; i++) {
+    if (!occupiedTeamNumbers.includes(i)) {
+      availableTeamNumbers.push(i);
+    }
+  }
+
   useEffect(() => {
     fetchTeams(); // only runs on mount or when schoolName/activeEvent changes
   }, [fetchTeams]);
@@ -37,41 +50,40 @@ function Art() {
     <AnimatedPage>
     {schoolName != 'admin' ?
       <div className='ThreePEvent'>
-        {Array.from({ length: 2 - registeredTeams.length }).map((_, i) => (
+        {availableTeamNumbers.map((teamNo) => (
           <One_Member_Event
-            key={`new-team-${i + 1}`}
+            key={`team-${teamNo}`}
             eventId={activeEventId}
             eventName={activeEvent}
             registeredTeams={registeredTeams}
             schoolId={schoolId}
-            teamIndex={registeredTeams.length + i + 1}
-            title={`Team: ` + (registeredTeams.length + i + 1)}
+            teamIndex={teamNo}
             onTeamUpdate={fetchTeams} // optional: trigger refresh from inside child
           />
         ))}
 
-        {registeredTeams.map((team, index) => (
+        {registeredTeams.map((team) => (
           <RegisteredTeam
             key={team.teamId}
             team={team}
             eventId={activeEventId}
             schoolId={schoolId}
             eventName={activeEvent}
-            teamIndex={index + 1}
+            teamIndex={parseInt(team.teamId.match(/t(\d+)$/)?.[1] || "0", 10)}
             onTeamUpdate={fetchTeams} // optional: same here
           />
         ))}
       </div>
       : <div className='ThreePEvent'>
 
-        {registeredTeams.map((team, index) => (
+        {registeredTeams.map((team) => (
           <RegisteredTeam
             key={team.teamId}
             team={team}
             eventId={activeEventId}
             schoolId={schoolId}
             eventName={team.schoolName}
-            teamIndex={index + 1}
+            teamIndex={parseInt(team.teamId.match(/t(\d+)$/)?.[1] || "0", 10)}
             onTeamUpdate={fetchTeams} // optional: same here
           />
         ))}

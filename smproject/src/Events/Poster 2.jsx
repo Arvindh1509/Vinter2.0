@@ -13,7 +13,7 @@ function Poster2() {
   const [{ schoolName, activeEvent, schoolId,activeEventId }] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
   const [eventId, setEventId] = useState();
-
+  const maxTeams=3
    const fetchTeams = useCallback(() => {
     if (!schoolName || !activeEvent) return;
 
@@ -29,6 +29,18 @@ function Poster2() {
       });
   }, [schoolName, activeEvent]);
 
+  const occupiedTeamNumbers = registeredTeams.map(team =>
+  parseInt(team.teamId.match(/t(\d+)$/)?.[1] || "0", 10)
+  );
+
+  const availableTeamNumbers = [];
+
+  for (let i = 1; i <= maxTeams; i++) {
+    if (!occupiedTeamNumbers.includes(i)) {
+      availableTeamNumbers.push(i);
+    }
+  }
+
   useEffect(() => {
     fetchTeams(); // only runs on mount or when schoolName/activeEvent changes
   }, [fetchTeams]);
@@ -37,43 +49,43 @@ function Poster2() {
     <AnimatedPage>
      {schoolName != 'admin' ?
     <div className='ThreePEvent'>
-      {Array.from({ length: 3 - registeredTeams.length }).map((_, i) => (
+  {availableTeamNumbers.map((teamNo) => (
     <One_Member_Event
-      key={`new-team-${i + 1}`}
+      key={`team-${teamNo}`}
       eventId={activeEventId}
       eventName={activeEvent}
       registeredTeams={registeredTeams}
       schoolId={schoolId}
-      teamIndex={registeredTeams.length + i + 1}
-      onTeamUpdate={fetchTeams} 
+      teamIndex={teamNo}
+      onTeamUpdate={fetchTeams}
     />
-  ))}
+      ))}
   
-  {registeredTeams.map((team, index) => (
-    <RegisteredTeam
-      key={team.teamId}
-      team={team}
-      eventId={activeEventId}
-      schoolId={schoolId}
-      eventName={activeEvent}
-      teamIndex={index + 1}
-      onTeamUpdate={fetchTeams} 
-    />
-  ))}
+  {registeredTeams.map((team) => (
+  <RegisteredTeam
+    key={team.teamId}
+    team={team}
+    eventId={activeEventId}
+    schoolId={schoolId}
+    eventName={activeEvent}
+    teamIndex={parseInt(team.teamId.match(/t(\d+)$/)?.[1] || "0", 10)}
+    onTeamUpdate={fetchTeams}
+  />
+))}
     </div>
     : <div className='ThreePEvent'>
 
-        {registeredTeams.map((team, index) => (
-          <RegisteredTeam
-            key={team.teamId}
-            team={team}
-            eventId={activeEventId}
-            schoolId={schoolId}
-            eventName={team.schoolName}
-            teamIndex={index + 1}
-            onTeamUpdate={fetchTeams} // optional: same here
-          />
-        ))}
+        {registeredTeams.map((team) => (
+  <RegisteredTeam
+    key={team.teamId}
+    team={team}
+    eventId={activeEventId}
+    schoolId={schoolId}
+    eventName={team.schoolName}
+    teamIndex={parseInt(team.teamId.match(/t(\d+)$/)?.[1] || "0", 10)}
+    onTeamUpdate={fetchTeams}
+  />
+))}
       </div>
     }
     </AnimatedPage>
