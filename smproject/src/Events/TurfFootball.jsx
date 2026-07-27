@@ -3,7 +3,6 @@ import axios from '../axios';
 import './Triquizzard.css'
 import { useStateValue } from '../StateProvider';
 import RegisteredTeam from '../components/RegisteredTeam';
-import Eight_Member_Team from '../components/Eight_Member_Event';
 import { Navigate } from 'react-router-dom';
 import AnimatedPage from '../templates/AnimatedPage';
 import Ten_Member_Team from '../components/Ten_Member_Team';
