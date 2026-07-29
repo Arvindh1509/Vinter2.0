@@ -13,7 +13,7 @@ function WesternDance() {
   const [{ schoolName, activeEvent, schoolId, activeEventId }] = useStateValue();
   const [registeredTeams, setRegisteredTeams] = useState([]);
     const [eventId, setEventId] = useState();
-    const maxTeams = 2;
+    const maxTeams = 1;
   
 
   const fetchTeams = useCallback(() => {
