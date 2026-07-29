@@ -78,7 +78,7 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
   lcText = 'tamillits1';
 } else if (text === 'முடிவு இங்கே! கதை எங்கே?') {
   lcText = 'tamillits2';
-} else if (text === 'Screenplay') {
+} else if (text === 'Draft Final Finally') {
   lcText = 'screenplay';
 } else if (text === "Signal & Noise") {
   lcText = 'elits1';
