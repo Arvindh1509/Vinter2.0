@@ -12,7 +12,7 @@ function Leaderboard() {
     setLoading(true);
     try {
       const res = await axios.get(
-        "http://localhost:8000/vinterbash/leaderboard",
+        "/vinterbash/leaderboard",
       );
       console.log(res.data.scores);
       setScores(res.data);
