@@ -92,8 +92,8 @@ function Contact() {
         {eventNames.includes("Chordially yours") && (
           <ContactCard name="Ekanath NC" event="Chordially yours" number="8015764279" />
         )}
-        {eventNames.includes("Screenplay") && (
-          <ContactCard name="Tejasve Rengarajan" event="Screenplay" number="8610893934" />
+        {eventNames.includes("Draft Final Finally") && (
+          <ContactCard name="Tejasve Rengarajan" event="Draft Final Finally" number="8610893934" />
         )}
         {eventNames.includes("CIPHER") && (
           <ContactCard name="Janani" event="CIPHER" number="9943407111" />

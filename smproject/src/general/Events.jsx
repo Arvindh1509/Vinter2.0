@@ -45,7 +45,7 @@ const imgMap = {
   "Vinter Kick-Off: 5-A Side Football": football,
   "The One - Mr and Ms Vinterbash": title,
   "Vinter Goal-Rush: FIFA '25": gaming,
-  "Screenplay":drama,
+  "Draft Final Finally":drama,
   "Heritage Quest - 2026":quiz,
   "Kaapé D Art":art,
   "வாயுள்ள பிள்ளை பிழைத்துக் கொள்ளும்":tamillits,

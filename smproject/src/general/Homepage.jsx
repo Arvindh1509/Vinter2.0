@@ -17,6 +17,23 @@ import logo2 from "../assets/srivv_osa_logo.png";
 import logo3 from "../assets/logo3.png";
 import bgImage from "../assets/vbash_bg.jpeg";
 import "./Homepage.css";
+import sponsor1 from "../assets/org_pics/assets/SPONSER_2k26/sp1.png";
+import sponsor2 from "../assets/org_pics/assets/SPONSER_2k26/sp2.png";
+import sponsor3 from "../assets/org_pics/assets/SPONSER_2k26/sp3.png";
+import sponsor4 from "../assets/org_pics/assets/SPONSER_2k26/sp4.png";
+import sponsor5 from "../assets/org_pics/assets/SPONSER_2k26/sp5.png";
+import sponsor6 from "../assets/org_pics/assets/SPONSER_2k26/sp6.png";
+import sponsor7 from "../assets/org_pics/assets/SPONSER_2k26/sp7.png";
+import sponsor8 from "../assets/org_pics/assets/SPONSER_2k26/sp8.png";
+import sponsor9 from "../assets/org_pics/assets/SPONSER_2k26/sp9.png";
+import sponsor10 from "../assets/org_pics/assets/SPONSER_2k26/sp10.png";
+import sponsor11 from "../assets/org_pics/assets/SPONSER_2k26/sp11.png";
+import sponsor12 from "../assets/org_pics/assets/SPONSER_2k26/sp12.png";
+import sponsor13 from "../assets/org_pics/assets/SPONSER_2k26/sp13.png";
+import sponsor14 from "../assets/org_pics/assets/SPONSER_2k26/sp14.png";
+import sponsor15 from "../assets/org_pics/assets/SPONSER_2k26/sp15.png";
+import sponsor16 from "../assets/org_pics/assets/SPONSER_2k26/sp16.png";
+import sponsor17 from "../assets/org_pics/assets/SPONSER_2k26/sp17.png";
 
 function Homepage() {
   const navigate = useNavigate();
@@ -34,6 +51,26 @@ function Homepage() {
     autoplaySpeed: 4000,
     pauseOnHover: true,
   };
+
+const galleryImages = [
+  sponsor1,
+  sponsor2,
+  sponsor3,
+  sponsor4,
+  sponsor5,
+  sponsor6,
+  sponsor7,
+  sponsor8,
+  sponsor9,
+  sponsor10,
+  sponsor11,
+  sponsor12,
+  sponsor13,
+  sponsor14,
+  sponsor15,
+  sponsor16,
+  sponsor17,
+];
 
   /* helper widths */
   const sideMargin = downSm ? "4%" : downMd ? "8%" : "17%";
@@ -159,6 +196,70 @@ function Homepage() {
             <p className="vb-about-paragraph">
               Let the countdown begin. Let the spirit ignite. Let Vinterbash roar!
             </p>
+
+            {/* ===== Sponsors ===== */}
+<Box
+  sx={{
+    mt: 6,
+    mb: 6,
+  }}
+>
+  <Typography
+    variant="h4"
+    sx={{
+      textAlign: "center",
+      color: "black",
+      fontWeight: "bold",
+      mb: 4,
+      fontFamily: "nevis, sans-serif",
+    }}
+  >
+    Our Sponsors
+  </Typography>
+
+  <Box
+    sx={{
+      display: "grid",
+      gridTemplateColumns: {
+        xs: "repeat(2, 1fr)",
+        sm: "repeat(3, 1fr)",
+        md: "repeat(4, 1fr)",
+      },
+      gap: 3,
+    }}
+  >
+    {galleryImages.map((img, index) => (
+      <Box
+        key={index}
+        sx={{
+          backgroundColor: "#fff",
+          borderRadius: "16px",
+          p: 2,
+          height: 180,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+          transition: "0.3s",
+          "&:hover": {
+            transform: "scale(1.05)",
+          },
+        }}
+      >
+        <Box
+          component="img"
+          src={img}
+          alt={`Sponsor ${index + 1}`}
+          sx={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+          }}
+        />
+      </Box>
+    ))}
+  </Box>
+</Box>
           </Box>
         </Box>
 
