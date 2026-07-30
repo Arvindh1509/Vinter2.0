@@ -185,9 +185,146 @@
   color: #ef4444;
 }
 
-@media (max-width: 600px) {
+/* ==========================================
+   Mobile Responsive Styles
+   ========================================== */
+@media (max-width: 900px) {
+  .enter-results-page {
+    padding: 24px 12px;
+  }
+
   .enter-results-card {
-    padding: 20px;
+    padding: 24px;
+  }
+
+  .enter-results-form {
+    padding: 16px;
+    gap: 12px;
   }
 }
 
+@media (max-width: 600px) {
+  .enter-results-page {
+    padding: 16px 8px;
+  }
+
+  .enter-results-title {
+    font-size: 1.5rem !important;
+    margin-bottom: 16px;
+  }
+
+  .enter-results-card {
+    padding: 16px;
+    border-radius: 18px !important;
+  }
+
+  .enter-results-form {
+    padding: 12px;
+    gap: 10px;
+    border-radius: 14px;
+  }
+
+  .section-title {
+    font-size: 1.1rem !important;
+    margin-bottom: 14px;
+  }
+
+  .input-label {
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+  }
+
+  .event-banner {
+    padding: 10px 14px;
+    border-radius: 12px;
+  }
+
+  .event-banner-name {
+    font-size: 1rem !important;
+  }
+
+  .members-preview {
+    padding: 10px 12px;
+    margin-top: 12px !important;
+  }
+
+  .participant-card {
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    border-radius: 14px !important;
+  }
+
+  .section-divider {
+    margin: 16px 0;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .section-label {
+    font-size: 0.95rem !important;
+  }
+
+  .form-actions {
+    margin-top: 16px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-actions .primary-button,
+  .form-actions .secondary-button {
+    width: 100%;
+    padding: 0.7em 1.2em;
+  }
+
+  .primary-button {
+    padding: 0.7em 1.2em;
+    font-size: 0.9rem;
+  }
+
+  .secondary-button {
+    width: 100%;
+    padding: 0.6em 1.2em;
+    font-size: 0.9rem;
+  }
+
+  .empty-state {
+    font-size: 0.85rem;
+  }
+
+  .message-success,
+  .message-error {
+    font-size: 0.85rem;
+  }
+
+  .points-label {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .enter-results-page {
+    padding: 12px 6px;
+  }
+
+  .enter-results-card {
+    padding: 12px;
+    border-radius: 16px !important;
+  }
+
+  .enter-results-form {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .participant-card {
+    padding: 10px 12px;
+  }
+
+  .event-banner {
+    padding: 8px 12px;
+  }
+}
