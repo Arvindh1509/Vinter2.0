@@ -25,6 +25,9 @@ function Dashboard() {
 
 
   useEffect(() => {
+    if (!schoolId){
+      return;
+    };
     axios.post('/vinterbash/registeredEvents', { schoolId })
       .then((response) => {
         console.log('InsideDashboard--->', response.data);

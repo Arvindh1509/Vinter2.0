@@ -166,7 +166,7 @@ function Homepage() {
         <Toolbar className="vb-footer-toolbar">
         <Box className="vb-footer-left">
           <Typography className="vb-footer-credit">
-            © Developed by Tech Team Of SriVV OSA
+            © Developed by Tech Team Of श्रीVV OSA
           </Typography>
           {/* <Box className="vb-footer-names-row">
           <Typography className="vb-footer-name">

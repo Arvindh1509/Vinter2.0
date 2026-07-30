@@ -37,10 +37,10 @@ function StaffContact() {
             dispatch({
               type: 'staff',
               payload: {
-                staffName1: res.data.teacher1name,
-                staffName2: res.data.teacher2name,
-                staffNumber1: res.data.teacher1number,
-                staffNumber2: res.data.teacher2number
+                staff1Name: res.data.teacher1name,
+                staff2Name: res.data.teacher2name,
+                staff1Number: res.data.teacher1number,
+                staff2Number: res.data.teacher2number
               }
             });
           }
@@ -48,6 +48,8 @@ function StaffContact() {
         .catch(err => console.error("Error fetching staff contact:", err));      
     }
   },[staffName1,staffName2,staffNumber1,staffNumber2]);
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

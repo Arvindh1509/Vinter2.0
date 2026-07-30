@@ -7,28 +7,41 @@ import { useStateValue } from '../StateProvider';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/srivv_osa_logo.png'
 
-function Navbar({ isSidebarOpen, setSidebarOpen }) {
-  const [{ staffName1, staffName2, schoolName }, dispatch] = useStateValue();
-  const navigate = useNavigate();
+function Navbar({isSidebarOpen, setSidebarOpen }) {
+  const [anchorEl,setAnchorEl]=useState(null);
+  const isOpen=Boolean(anchorEl);
+  const [{staffName1,staffName2,schoolName,organiserId},dispatch]=useStateValue();
+  const navigate=useNavigate();
   const theme = useTheme();
   const isXs = useMediaQuery(theme.breakpoints.down('sm'));
 
-  function handleClose() {
-    if (!staffName1 && !staffName2) {
-      alert("Please fill the staff contact information from the Sidebar")
-    } else {
-      dispatch({ type: 'logout' })
-      navigate("/signIn");
-    }
+  
+  function handleClose(e) {
+     
+      if(!staffName1&&!staffName2 && !organiserId){
+        alert("Please fill the staff contact information from the Sidebar")
+      }else{
+    dispatch({
+      type:'logout'
+    })
+    console.log(e);
+    navigate("/signIn");
+  }  // navigate("/signIn");
+  
+}
+
+
+  function handleClick(e){
+    return setAnchorEl(e.currentTarget);
   }
 
   return (
     <div style={{ padding: 'clamp(10px, 3vw, 20px)', display: 'flex', justifyContent: 'center' }}>
       <Toolbar sx={{
   position: 'relative',
-  display: 'flex',
+        display:'flex',
   flexWrap: 'wrap',
-  justifyContent: "space-between",
+        justifyContent: "space-between",
   alignItems: 'center',
   rowGap: '10px',
   border: '1px solid rgba(255, 255, 255, 0.32)',

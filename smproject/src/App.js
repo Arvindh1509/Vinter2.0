@@ -29,10 +29,13 @@ import Contact from './general/Contact';
 import Navbar from './general/Navbar';
 import Chess from './Events/Chess';
 import Poster2 from './Events/Poster 2';
+import Leaderboard from './general/Leaderboard';
+import OrganiserDashboard from './components/organiserDashboard';
 import Heritage from './Events/Heritage';
 import Auction from './Events/Auction';
 import EnglishLits1 from './Events/EnglishLits1';
 import GroupDance from './Events/GroupDance';
+import EnterResults from './components/EnterResults';
 
 function App() {
   return (
@@ -42,12 +45,15 @@ function App() {
     <Route path='/' element={<Navigate to='/homepage' replace/>}/>
     <Route path='/signIn' element={<SignIn/>} />
     <Route element={<Navbar/>}>
-      <Route path='/homepage' element={<Homepage/>}/>
-      <Route path='/events' element={<Events/>}/>
-      <Route path='/POC' element={<Contact/>}/>
-      </Route>
+  <Route path='/homepage' element={<Homepage/>}/>
+  <Route path='/events' element={<Events/>}/>
+  <Route path='/POC' element={<Contact/>}/>
+  <Route path='/leaderboard' element={<Leaderboard/>}/>
+</Route>
     <Route element={<Layout/>}>
       <Route path='/dashboard' element={<Dashboard/>} />
+      <Route path='/organiserDashboard' element={<OrganiserDashboard/>} />
+      <Route path='/enterResults' element={<EnterResults/>} />
       <Route path='/teacherInfo' element={<StaffContact/>}/>
       <Route path='/classicaldance' element={<ClassicalDance/>}/>
       <Route path='/triquizzard' element={<Triquizzard/>}/>

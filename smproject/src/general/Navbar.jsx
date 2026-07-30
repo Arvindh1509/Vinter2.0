@@ -25,7 +25,8 @@ function Navbar() {
   const isHomepage = location.pathname === "/homepage";
   const isEventsPage = location.pathname === "/events";
   const isContactPage = location.pathname === "/POC";
-  const useHomepageStyle = isHomepage || isEventsPage || isContactPage;
+  const isLeaderboardPage = location.pathname === "/leaderboard";
+  const useHomepageStyle = isHomepage || isEventsPage || isContactPage || isLeaderboardPage;
 
   /* mobile-menu state */
   const [anchorEl, setAnchorEl] = useState(null);
@@ -35,6 +36,7 @@ function Navbar() {
 
   /* nav links */
   const links = [
+    { label: "Leaderboard", to: "/leaderboard" },
     { label: "Events & Venues", to: "/events" },
     {
       label: "2026 Rule Book",
@@ -42,10 +44,6 @@ function Navbar() {
     },
     { label: "Point of Contact", to: "/POC" },
     { label: "Register for Events", to: "/signIn" },
-    // {
-    //   label: "Register for Events",
-    //   href: "https://vinterbash2k26-loading-57ug.vercel.app/",
-    // },
   ];
 
   return (
