@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../axios";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 function Leaderboard() {
@@ -12,7 +12,7 @@ function Leaderboard() {
     setLoading(true);
     try {
       const res = await axios.get(
-        "http://localhost:8000/vinterbash/leaderboard",
+        "/vinterbash/leaderboard",
       );
       console.log(res.data.scores);
       setScores(res.data);
@@ -234,7 +234,7 @@ function Leaderboard() {
                                       : event.position === 2
                                         ? "nd"
                                         : event.position === 3
-                                          ? "rd"
+                                          ? "3rd"
                                           : ""}
                                   </td>
                                 </tr>
