@@ -789,7 +789,10 @@ router.post("/sendToEmcee", async (req, res) => {
 
         const recipients = [
     process.env.EMCEE1,
-    process.env.EMCEE2
+    process.env.EMCEE2,
+    process.env.EMCEE3,
+    process.env.EMCEE4,
+    process.env.EMCEE5
 ];
 
         const sendPromises = recipients.map(phone =>
