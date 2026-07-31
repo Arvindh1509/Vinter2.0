@@ -303,9 +303,9 @@ export default function EnterResults() {
                       size="small"
                       className="input-select"
                     >
-                      <MenuItem value={1}>🥇 1st — 10 pts</MenuItem>
-                      <MenuItem value={2}>🥈 2nd — 7 pts</MenuItem>
-                      <MenuItem value={3}>🥉 3rd — 5 pts</MenuItem>
+                      <MenuItem value={1}> 1st — 10 pts</MenuItem>
+                      <MenuItem value={2}> 2nd — 7 pts</MenuItem>
+                      <MenuItem value={3}> 3rd — 5 pts</MenuItem>
                     </Select>
                   ) : (
                     <Select
@@ -315,9 +315,9 @@ export default function EnterResults() {
                       size="small"
                       className="input-select"
                     >
-                      <MenuItem value={1}>🥇 1st — 7 pts</MenuItem>
-                      <MenuItem value={2}>🥈 2nd — 5 pts</MenuItem>
-                      <MenuItem value={3}>🥉 3rd — 3 pts</MenuItem>
+                      <MenuItem value={1}> 1st — 7 pts</MenuItem>
+                      <MenuItem value={2}> 2nd — 5 pts</MenuItem>
+                      <MenuItem value={3}> 3rd — 3 pts</MenuItem>
                     </Select>
                   )}
                 </Grid>
@@ -397,10 +397,10 @@ export default function EnterResults() {
                         <Grid item xs={6} sm={3}>
                           <Typography variant="body2">
                             {r.position === 1
-                              ? "🥇 1st"
+                              ? " 1st"
                               : r.position === 2
-                                ? "🥈 2nd"
-                                : "🥉 3rd"}
+                                ? " 2nd"
+                                : " 3rd"}
                           </Typography>
                         </Grid>
                         <Grid item xs={6} sm={3}>
