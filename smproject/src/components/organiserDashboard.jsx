@@ -12,6 +12,22 @@ function OrganiserDashboard() {
   const displayId = organiserId || 'Pending';
   const displayRole = role || 'Event Staff';
 
+  // Guard against null assignedEvent (e.g., during logout)
+  if (!assignedEvent) {
+    return (
+      <AnimatedPage>
+        <Box className="organiser-dashboard-page">
+          <Typography variant="h4" className="organiser-dashboard-title" gutterBottom>
+            Organiser Dashboard
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            No event assigned. Please sign in as an organiser.
+          </Typography>
+        </Box>
+      </AnimatedPage>
+    );
+  }
+
   return (
     <AnimatedPage>
       <Box className="organiser-dashboard-page">

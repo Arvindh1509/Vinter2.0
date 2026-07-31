@@ -21,13 +21,16 @@ function Navbar({isSidebarOpen, setSidebarOpen }) {
       if(!staffName1&&!staffName2 && !organiserId){
         alert("Please fill the staff contact information from the Sidebar")
       }else{
-    dispatch({
-      type:'logout'
-    })
     console.log(e);
+    // Navigate first to unmount organiser components, then clear state to avoid concurrent rendering errors
     navigate("/signIn");
-  }  // navigate("/signIn");
-  
+    setTimeout(() => {
+      dispatch({
+        type:'logout'
+      });
+    }, 0);
+  }
+   
 }
 
 
