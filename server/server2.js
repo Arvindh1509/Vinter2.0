@@ -11,18 +11,30 @@ const axios = require("axios");
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-app.use(cors({
-    origin: [
-    //     "http://ec2-184-73-128-194.compute-1.amazonaws.com",
-    //     "http://ec2-184-73-128-194.compute-1.amazonaws.com:3000",
-    //     "http://vinterbash.in:3000", "vinterbash.in:3000",
+const allowedOrigins = [
     "https://vinter2-0-xtdb.vercel.app",
-    //     "https://vinterbash.in", "http://vinterbash.in", "http://localhost:3000/"
-        "https://www.vinterbash.co.in",
-        "https://vinterbash.co.in",
-        "http://localhost:3001",
-        "http://vinterbash-alb-1429442373.us-east-1.elb.amazonaws.com/"
-    ]
+    "https://www.vinterbash.co.in",
+    "https://vinterbash.co.in",
+    "http://localhost:3001",
+    "http://localhost:3000",
+    "http://vinterbash-alb-1429442373.us-east-1.elb.amazonaws.com/"
+];
+
+app.use(cors({
+    origin: function (origin, callback) {
+        // Allow requests with no origin (mobile apps, curl, etc.)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(null, true);
+        }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204
 }));
 app.use(express.json());
 

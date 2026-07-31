@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import axios from "../axios";
 import { useStateValue } from "../StateProvider";
 
@@ -35,13 +35,9 @@ export default function ResultsTable({
   eventId,
   allTeams,
 }) {
-  // const [editingResultId, setEditingResultId] = useState(null);
-  // const [editPosition, setEditPosition]       = useState(1);
   const [{ organiserId }] = useStateValue();
-  const [editingResultId, setEditingResultId] = useState(null);
-  const [editPosition, setEditPosition] = useState(1);
-  const [editSchoolId, setEditSchoolId] = useState("");
-  const [editTeamId, setEditTeamId] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [editData, setEditData] = useState({});
   const [message, setMessage] = useState("");
   const Credit22 = [26, 24, 21, 23, 25, 22, 28, 27, 6];
 
@@ -55,181 +51,95 @@ export default function ResultsTable({
   const schoolOptions = [
     ...new Map(allTeams.map((t) => [t.schoolName, t.schoolName])).keys(),
   ];
-  const teamOptionsForEdit = useMemo(() => {
-    if (!editSchoolId) return [];
-    return allTeams.filter(
-      (t) => t.schoolName?.trim() === editSchoolId?.trim(),
-    );
-  }, [editSchoolId, allTeams]);
 
-  const handleEdit = (r) => {
-    setEditingResultId(r.resultId);
-    setEditPosition(r.position);
-    setEditSchoolId(r.schoolName);
-    setEditTeamId(r.teamId);
-  };
-  const handleEditSchoolChange = (e) => {
-    setEditSchoolId(e.target.value);
-    setEditTeamId("");
+  const startEditing = () => {
+    const data = {};
+    results.forEach((r) => {
+      data[r.position] = {
+        schoolName: r.schoolName,
+        teamId: r.teamId,
+      };
+    });
+    setEditData(data);
+    setIsEditing(true);
+    setMessage("");
   };
 
-  const handleCancel = () => {
-    setEditingResultId(null);
+  const handleEditChange = (position, field, value) => {
+    setEditData((prev) => ({
+      ...prev,
+      [position]: {
+        ...prev[position],
+        [field]: value,
+        ...(field === "schoolName" ? { teamId: "" } : {}),
+      },
+    }));
   };
 
-  // const handleSave = async (r) => {
-  //   const teamId = r.resultId.replace(eventId, '');
-  //   try {
-  //     await axios.post('/vinterbash/enterResults', {
-  //       event_id: eventId,
-  //       team_id:  teamId,
-  //       position: editPosition,
-  //       points:   POSITION_POINTS[editPosition],
-  //     });
+  const handleCancelAll = () => {
+    setIsEditing(false);
+    setEditData({});
+    setMessage("");
+  };
 
-  //     setResults((prev) =>
-  //       prev.map((result) =>
-  //         result.resultId === r.resultId
-  //           ? { ...result, position: editPosition, points: POSITION_POINTS[editPosition] }
-  //           : result
-  //       )
-  //     );
-  //     setEditingResultId(null);
-  //   } catch (err) {
-  //     console.error('Failed to update result:', err);
-  //   }
-  // };
-
-  //   const handleSave = async (r) => {
-  //   // Check if another team already has the selected position
-  //   const positionTaken = results.some(
-  //     (result) =>
-  //       result.resultId !== r.resultId &&
-  //       result.position === editPosition
-  //   );
-
-  //   if (positionTaken) {
-  //     alert(
-  //       `${editPosition === 1 ? '1st' : editPosition === 2 ? '2nd' : '3rd'} position is already assigned to another team.`
-  //     );
-  //     return;
-  //   }
-
-  //   const teamId = r.resultId.replace(eventId, '');
-
-  //   try {
-  //     await axios.post('/vinterbash/enterResults', {
-  //       event_id: eventId,
-  //       team_id: teamId,
-  //       position: editPosition,
-  //       points: POSITION_POINTS[editPosition],
-  //     });
-
-  //     setResults((prev) =>
-  //       prev.map((result) =>
-  //         result.resultId === r.resultId
-  //           ? {
-  //               ...result,
-  //               position: editPosition,
-  //               points: POSITION_POINTS[editPosition],
-  //             }
-  //           : result
-  //       )
-  //     );
-
-  //     setEditingResultId(null);
-  //   } catch (err) {
-  //     console.error('Failed to update result:', err);
-  //     alert('Failed to update result');
-  //   }
-  // };
-  const handleSave = async (r) => {
-    if (!editTeamId) {
-      setMessage("Select a team");
-      return;
+  const handleSaveAll = async () => {
+    // Validate all positions have teams selected
+    for (const [position, data] of Object.entries(editData)) {
+      if (!data.teamId) {
+        setMessage(
+          `Select a team for ${positionLabel(Number(position))} position`,
+        );
+        return;
+      }
     }
 
-    // Check position conflict (excluding the row being edited)
-    const positionTaken = results.some(
-      (result) =>
-        result.resultId !== r.resultId && result.position === editPosition,
-    );
-    if (positionTaken) {
-      setMessage(
-        `${positionLabel(editPosition)} is already assigned to another team`,
-      );
+    // Check for duplicate teams
+    const teamIds = Object.values(editData).map((d) => d.teamId);
+    if (new Set(teamIds).size !== teamIds.length) {
+      setMessage("Each position must have a different team");
       return;
     }
-
-    // Check team conflict (excluding the row being edited)
-    const teamTaken = results.some(
-      (result) =>
-        result.resultId !== r.resultId && result.teamId === editTeamId,
-    );
-    if (teamTaken) {
-      setMessage("This team already has a result entered");
-      return;
-    }
-
-    const teamChanged = editTeamId !== r.teamId;
-    const selectedTeam = teamOptionsForEdit.find(
-      (t) => t.teamId === editTeamId,
-    );
 
     try {
-      if (teamChanged) {
-        // Delete old result, insert new one
-        await axios.delete(`/vinterbash/deleteResult/${r.resultId}`);
-        await axios.post("/vinterbash/enterResults", {
-          event_id: eventId,
-          team_id: editTeamId,
-          position: editPosition,
-          points: POSITION_POINTS[editPosition],
-        });
+      // Delete all existing results
+      await Promise.all(
+        results.map((r) =>
+          axios.delete(`/vinterbash/deleteResult/${r.resultId}`),
+        ),
+      );
 
-        const newResultId = `${eventId}${editTeamId}`;
-        setResults((prev) =>
-          prev.map((result) =>
-            result.resultId === r.resultId
-              ? {
-                  resultId: newResultId,
-                  teamId: editTeamId,
-                  position: editPosition,
-                  points: POSITION_POINTS[editPosition],
-                  schoolName: editSchoolId,
-                  eventName: r.eventName,
-                  members: selectedTeam.members,
-                }
-              : result,
-          ),
-        );
-      } else {
-        // Same team, just position changed
-        await axios.post("/vinterbash/enterResults", {
-          event_id: eventId,
-          team_id: editTeamId,
-          position: editPosition,
-          points: POSITION_POINTS[editPosition],
-        });
+      // Insert all new results
+      await Promise.all(
+        Object.entries(editData).map(([position, data]) =>
+          axios.post("/vinterbash/enterResults", {
+            event_id: eventId,
+            team_id: data.teamId,
+            position: Number(position),
+            points: POSITION_POINTS[Number(position)],
+          }),
+        ),
+      );
 
-        setResults((prev) =>
-          prev.map((result) =>
-            result.resultId === r.resultId
-              ? {
-                  ...result,
-                  position: editPosition,
-                  points: POSITION_POINTS[editPosition],
-                }
-              : result,
-          ),
-        );
-      }
+      // Update local state
+      const newResults = Object.entries(editData).map(([position, data]) => {
+        const selectedTeam = allTeams.find((t) => t.teamId === data.teamId);
+        return {
+          resultId: `${eventId}${data.teamId}`,
+          teamId: data.teamId,
+          position: Number(position),
+          schoolName: data.schoolName,
+          eventName: results[0]?.eventName,
+          members: selectedTeam?.members || [],
+        };
+      });
 
-      setEditingResultId(null);
+      setResults(newResults);
+      setIsEditing(false);
+      setEditData({});
       setMessage("");
     } catch (err) {
-      console.error("Failed to update result:", err);
-      setMessage("Failed to update result");
+      console.error("Failed to update results:", err);
+      setMessage("Failed to update results");
     }
   };
 
@@ -242,40 +152,36 @@ export default function ResultsTable({
     backdropFilter: "blur(6px)",
   };
 
-  const renderPositionField = (r) =>
-    editingResultId === r.resultId ? (
-      <Select
-        value={editPosition}
-        onChange={(e) => setEditPosition(Number(e.target.value))}
-        size="small"
-        sx={{ ...glassSelectSx, minWidth: { xs: 100, sm: 110 }, flexShrink: 0 }}
-      >
-        <MenuItem value={1}> 1st</MenuItem>
-        <MenuItem value={2}> 2nd</MenuItem>
-        <MenuItem value={3}> 3rd</MenuItem>
-      </Select>
-    ) : (
-      <Typography variant="body2" fontWeight={600}>
-        {positionLabel(r.position)}
-      </Typography>
+  const getTeamOptionsForPosition = (position) => {
+    const schoolName = editData[position]?.schoolName;
+    if (!schoolName) return [];
+    return allTeams.filter(
+      (t) => t.schoolName?.trim() === schoolName?.trim(),
     );
+  };
+
+  const renderPositionField = (r) => (
+    <Typography variant="body2" fontWeight={600}>
+      {positionLabel(r.position)}
+    </Typography>
+  );
 
   const renderTeamField = (r) =>
-    editingResultId === r.resultId ? (
+    isEditing ? (
       <Select
-        value={editTeamId}
-        onChange={(e) => setEditTeamId(e.target.value)}
+        value={editData[r.position]?.teamId || ""}
+        onChange={(e) => handleEditChange(r.position, "teamId", e.target.value)}
         size="small"
         displayEmpty
-        disabled={!editSchoolId}
+        disabled={!editData[r.position]?.schoolName}
         fullWidth={isMobile}
         sx={{ ...glassSelectSx, minWidth: { xs: "100%", sm: 220 } }}
         MenuProps={{ PaperProps: { style: { maxHeight: 300 } } }}
       >
         <MenuItem value="">
-          {editSchoolId ? "Select team" : "Select a school first"}
+          {editData[r.position]?.schoolName ? "Select team" : "Select a school first"}
         </MenuItem>
-        {teamOptionsForEdit.map((t) => (
+        {getTeamOptionsForPosition(r.position).map((t) => (
           <MenuItem key={t.teamId} value={t.teamId}>
             {`${t.teamId} — ${t.members.join(", ")}`}
           </MenuItem>
@@ -288,10 +194,10 @@ export default function ResultsTable({
     );
 
   const renderSchoolField = (r) =>
-    editingResultId === r.resultId ? (
+    isEditing ? (
       <Select
-        value={editSchoolId}
-        onChange={handleEditSchoolChange}
+        value={editData[r.position]?.schoolName || ""}
+        onChange={(e) => handleEditChange(r.position, "schoolName", e.target.value)}
         size="small"
         displayEmpty
         fullWidth={isMobile}
@@ -315,18 +221,18 @@ export default function ResultsTable({
       </Typography>
     );
 
-  const renderActions = (r) =>
-    editingResultId === r.resultId ? (
+  const renderActions = () =>
+    isEditing ? (
       <Box display="flex" justifyContent="flex-end" gap={1} sx={{ flexShrink: 0 }}>
-        <IconButton color="success" size="small" onClick={() => handleSave(r)}>
+        <IconButton color="success" size="small" onClick={handleSaveAll}>
           <CheckIcon fontSize={isMobile ? "small" : "medium"} />
         </IconButton>
-        <IconButton color="default" size="small" onClick={handleCancel}>
+        <IconButton color="default" size="small" onClick={handleCancelAll}>
           <CloseIcon fontSize={isMobile ? "small" : "medium"} />
         </IconButton>
       </Box>
     ) : (
-      <IconButton color="primary" size="small" onClick={() => handleEdit(r)}>
+      <IconButton color="primary" size="small" onClick={startEditing}>
         <EditIcon fontSize={isMobile ? "small" : "medium"} />
       </IconButton>
     );
@@ -357,18 +263,29 @@ export default function ResultsTable({
           overflow: "hidden",
         }}
       >
-        <Typography
-          variant="h6"
+        <Box
           sx={{
-            fontWeight: 700,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
             marginBottom: { xs: "12px", sm: "20px" },
-            fontSize: { xs: "1.05rem", sm: "1.25rem" },
-            color: "rgba(15, 23, 42, 0.92)",
-            wordBreak: "break-word",
+            flexWrap: "wrap",
+            gap: 1,
           }}
         >
-          Results — {results[0]?.eventName}
-        </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 700,
+              fontSize: { xs: "1.05rem", sm: "1.25rem" },
+              color: "rgba(15, 23, 42, 0.92)",
+              wordBreak: "break-word",
+            }}
+          >
+            Results — {results[0]?.eventName}
+          </Typography>
+          {renderActions()}
+        </Box>
 
         {isMobile ? (
           // ---- Mobile: stacked glass cards, one per result (no horizontal overflow) ----
@@ -399,9 +316,6 @@ export default function ResultsTable({
                   }}
                 >
                   {renderPositionField(r)}
-                  <Box sx={{ flexShrink: 0, ml: "auto" }}>
-                    {renderActions(r)}
-                  </Box>
                 </Box>
 
                 <Box>
@@ -459,9 +373,6 @@ export default function ResultsTable({
                   <TableCell>
                     <strong>School</strong>
                   </TableCell>
-                  <TableCell align="right" sx={{ whiteSpace: "nowrap" }}>
-                    <strong>Edit</strong>
-                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -481,7 +392,6 @@ export default function ResultsTable({
                     </TableCell>
                     <TableCell>{renderTeamField(r)}</TableCell>
                     <TableCell>{renderSchoolField(r)}</TableCell>
-                    <TableCell align="right">{renderActions(r)}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
