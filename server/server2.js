@@ -255,9 +255,9 @@ GET_LEADERBOARD:
 
 `SELECT
     s.school_name,
-    COALESCE(SUM(tr.points), 0) AS total_points,
     e.event_name,
-    tr.position
+    tr.position,
+    tr.points
 FROM schools s
 LEFT JOIN teams t
     ON s.school_id = t.school_id
@@ -265,12 +265,7 @@ LEFT JOIN team_results tr
     ON t.team_id = tr.team_id
 LEFT JOIN events e
     ON tr.event_id = e.event_id
-GROUP BY
-    s.school_name,
-    e.event_name,
-    tr.position
 ORDER BY
-    total_points DESC,
     s.school_name;
 `,
 GET_RESULTS_FOR_WHATSAPP:`
@@ -355,11 +350,11 @@ function buildEventWithTeams(rows, eventName) {
 const router = express.Router();
 
 router.get("/leaderboard", async (req, res) => {
+  console.log("LEADERBOARD ROUTE HIT - VERSION 2")
     try {
-      
+
         const { rows } = await pool.query(
             Queries.GET_LEADERBOARD
-          
         );
 
         const leaderboardMap = new Map();
@@ -369,20 +364,25 @@ router.get("/leaderboard", async (req, res) => {
             if (!leaderboardMap.has(row.school_name)) {
                 leaderboardMap.set(row.school_name,{
                     school_name: row.school_name,
-                    total_points: Number(row.total_points),
+                    total_points: 0,
                     event_results:[]
                 });
             }
 
-            if(row.event_name){
-                leaderboardMap.get(row.school_name).event_results.push({
+            const entry = leaderboardMap.get(row.school_name);
+
+            if (row.event_name) {
+                entry.event_results.push({
                     event_name: row.event_name,
                     position: row.position
                 });
+                // Sum points ourselves instead of trusting a pre-aggregated column,
+                // so it's correct even if the SQL grouping changes later.
+                entry.total_points += Number(row.points ?? 0);
             }
 
         });
-      
+
         res.json([...leaderboardMap.values()].sort(
             (a,b)=>b.total_points-a.total_points
         ));
