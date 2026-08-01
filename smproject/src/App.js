@@ -82,6 +82,8 @@ function App() {
       <Route path='/shortfilm' element={<GroupDrama/>}/>
       <Route path='/auction' element={<Auction/>}/>
       <Route path='/groupdance' element={<GroupDance/>}/>
+      {/* Catch-all: prevent blank page for unknown/mis-mapped routes */}
+      <Route path='*' element={<Navigate to='/dashboard' replace/>} />
     </Route>
     </Routes>
     </BrowserRouter>

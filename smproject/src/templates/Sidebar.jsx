@@ -24,10 +24,42 @@ import AnimatedPage from "./AnimatedPage";
 const navItems = [
   { text: "Dashboard" },
   { text: "Participants" },
-  {text:"Organiser Dashboard"},
+  { text: "Organiser Dashboard" },
   { text: "Enter Results" },
   { text: "Teacher's Info" }
 ];
+
+// Event name → route path mapping
+const eventRouteMap = {
+  "Chordially yours": "groupmusic",
+  "Acoustic Nirvana": "groupinst",
+  "Sakkarapongalukku vadacurry": "groupdrama",
+  "Draft Final Finally": "groupdrama",
+  "Imitation game": "improv",
+  "Aththinthom!": "classicaldance",
+  "Naa ready dhan varava?": "westerndance",
+  "Arangam Adhiratumae": "groupdance",
+  "Ar(T)elic!": "art1",
+  "Kaapé D Art": "art2",
+  "Brand New Day: The First Frame": "poster1",
+  "Vector VOID": "poster2",
+  "வாயுள்ள பிள்ளை பிழைத்துக் கொள்ளும்": "tamillits1",
+  "முடிவு இங்கே! கதை எங்கே?": "tamillits2",
+  "Screenplay": "screenplay",
+  "Signal & Noise": "elits1",
+  "CIPHER": "elits2",
+  "The Triquizzard Tournament 6.0": "triquizzard",
+  "Vinter CTF – 2026": "code",
+  "Cubing": "cubing",
+  "Vinter Bowl-Out: Turf Cricket": "cricket",
+  "Vinter Kick-Off: 5-A Side Football": "football",
+  "Vinter Goal-Rush: FIFA '25": "football",
+  "The One - Mr and Ms Vinterbash": "titleevent",
+  "Vinter Chess Tournament - 2026": "chess",
+  "Vinter Premiere League - Auction": "auction",
+  "Thirai @180°": "shortfilm",
+  "Heritage Quest - 2026": "heritage",
+};
 
 const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
   const { pathname } = useLocation();
@@ -54,69 +86,20 @@ const Sidebar = ({ drawerWidth, isSidebarOpen, setSidebarOpen }) => {
 
     if (text === "Dashboard") {
       lcText = "dashboard";
-    }
-    else if (text === "Organiser Dashboard") {
+    } else if (text === "Organiser Dashboard") {
       lcText = "organiserDashboard";
-    }
-    else
-    if (text === "Chordially yours") {
-      lcText = "groupmusic";
     } else if (text === "Teacher's Info") {
       lcText = "teacherInfo";
-    } else if (text === "Acoustic Nirvana") {
-      lcText = "groupinst";
-    } else if (text === "Sakkarapongalukku vadacurry") {
-      lcText = "groupdrama";
-    } else if (text === "Imitation game") {
-      lcText = "improv";
-    } else if (text === "Aththinthom!") {
-      lcText = "classicaldance";
-    } else if (text === "Naa ready dhan varava?") {
-      lcText = "westerndance";
-    } else if (text === "Arangam Adhiratumae") {
-      lcText = "groupdance";
-    } else if (text === "Ar(T)elic!") {
-      lcText = "art1";
-    } else if (text === "Kaapé D Art") {
-      lcText = "art2";
-    } else if (text === "Brand New Day: The First Frame") {
-      lcText = "poster1";
-    } else if (text === "Vector VOID") {
-      lcText = "poster2";
-    } else if (text === "வாயுள்ள பிள்ளை பிழைத்துக் கொள்ளும்") {
-      lcText = "tamillits1";
-    } else if (text === "முடிவு இங்கே! கதை எங்கே?") {
-      lcText = "tamillits2";
-    } else if (text === "Screenplay") {
-      lcText = "screenplay";
-    } else if (text === "Signal & Noise") {
-      lcText = "elits1";
-    } else if (text === "CIPHER") {
-      lcText = "elits2";
-    } else if (text === "The Triquizzard Tournament 6.0") {
-      lcText = "triquizzard";
-    } else if (text === "Vinter CTF – 2026") {
-      lcText = "code";
-    } else if (text === "Cubing") {
-      lcText = "cubing";
-    } else if (text === "Vinter Bowl-Out: Turf Cricket") {
-      lcText = "cricket";
-    } else if (text === "Vinter Kick-Off: 5-A Side Football") {
-      lcText = "football";
-    } else if (text === "The One - Mr and Ms Vinterbash") {
-      lcText = "titleevent";
-    } else if (text === "Vinter Chess Tournament - 2026") {
-      lcText = "chess";
-    } else if (text === "Vinter Premiere League - Auction") {
-      lcText = "auction";
-    } else if (text === "Thirai @180°") {
-      lcText = "shortfilm";
-    } else if (text === "Heritage Quest - 2026") {
-      lcText = "heritage";
     } else if (text === "Enter Results") {
       lcText = "enterResults";
+    } else if (eventRouteMap[text]) {
+      lcText = eventRouteMap[text];
     } else {
-      lcText = text.toLowerCase(); // default fallback
+      // Default fallback: use the lowercased event name.
+      // NOTE: This may produce a URL with no matching route in App.js
+      // (e.g. "Draft Final Finally" → "/draft final finally").
+      // Add the event to eventRouteMap above if this happens.
+      lcText = text.toLowerCase();
     }
     const isActive = active === lcText;
 
