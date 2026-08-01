@@ -234,7 +234,7 @@ function Leaderboard() {
                                       : event.position === 2
                                         ? "nd"
                                         : event.position === 3
-                                          ? "3rd"
+                                          ? "rd"
                                           : ""}
                                   </td>
                                 </tr>
