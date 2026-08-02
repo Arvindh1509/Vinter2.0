@@ -132,6 +132,9 @@ function Contact() {
       <div className="contactgrid">
       <ContactCard name="Arvindh Lakshman" number="8300475270" />
         <ContactCard name="Shrihari" number="8220532903" />
+        <ContactCard name="Arun Meyyappan" number="9042649000" />
+        <ContactCard name="Deepak Kumar" number="7904218420" />
+        <ContactCard name="Bharath Srinivas" number="9344563933" />
       </div>
     </div>
     </AnimatedPage>
